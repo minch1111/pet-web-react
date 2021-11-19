@@ -1,0 +1,73 @@
+body main .products .services img{
+    width: 100%;
+}
+body main .products .services .service_introduce{
+    padding-top: 20px;
+    text-align: center;
+}
+body main .products .services .service_introduce span{
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 20px;
+    font-weight: 500;
+}
+body main  .services .service_item{
+    display: flex;
+    min-height: 280px;
+    margin: 20px 0;
+}
+body main  .services .service_item .service_item-img{
+    overflow: hidden;
+    min-width: 300px;
+}
+body main  .services .service_item .service_item-img:hover img{
+    transform: scale(1.2);
+    transition: all .4s ease;
+}
+body main  .services .service_item .service_item-img img{
+    height: 100%;
+    max-width: 300px;
+    transform: scale(1);
+    transition: transform .4s ease;
+
+}
+body main  .services .service_item .service_item-content{
+    padding: 15px 40px;
+}
+body main  .services .service_item .service_item-content .content_name{
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+body main  .services .service_item .service_item-content .content-describe{
+    font-size: 16px;
+    font-weight: 300;
+    margin: 20px 0;
+}
+body main .services .service_item .service_item-content .content_btn{
+    background-color: #ffc107;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 5px;
+}
+body main .services .service_item .service_item-content .content_btn a{
+    width: 100%;
+    font-weight: 600;
+    color: black;
+}
+body main .services .service_item .service_item-content .content_btn i{
+    transform: translateX(-100%);
+    transition: transform .3s ease;
+}
+body main .services .service_item .service_item-content .content_btn:hover{
+    background-color:#c37e0a;
+    color: white;
+}
+body main .services .service_item .service_item-content .content_btn:hover a{
+    color : white;
+}
+body main .services .service_item .service_item-content .content_btn:hover i{
+    transform: translateX(0);
+    transition: transform .5s ease;
+}

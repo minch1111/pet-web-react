@@ -1,0 +1,292 @@
+/* 320- 767 */
+@media (min-width:320px) and (max-width:767px)
+{   
+    .hiden,body header .header_main-find .find_btn-2,
+    body main .header_cart-sidebar{
+        display: block !important;
+    }
+    body .offset_height{
+        height: 100px !important;
+    }
+    body header .header-shipping{
+        display: none;
+    }
+    body header .header_main{
+        justify-content: space-between;
+    }
+    body header .header_main-logo{
+        margin: 0;
+        width: 61px;
+    }
+    body header .header_main-navbar{
+        display: none;
+    }
+    body header .header_main-find{
+        width: 50%;
+        justify-content: flex-end;
+    }
+    body header .header_main-find input{
+        display: none;
+    }
+    body header .header_main-find .find_btn{
+        margin: 0;
+        display: none;
+    }
+    body header .header_main-find .find_btn-2 i,
+    body .header_search .header_search-container .find_btn-3 i,
+    body header .header_main-cart .cart i{
+        font-size: 24px;
+    }
+    body header .header_main-user{
+        display: none;
+    }
+    body header .header_main-cart.hover_cart:hover .hover_cart-content{
+        display: none;
+    }
+    body header .header_main-cart{
+        justify-content: flex-end;
+    margin: 0;
+    }
+    body header .after::after{
+        display: none;
+    }
+    body header .header_main-menuX{
+        width: 40px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+    body header .header_main-menuX .menuX{
+        position: relative;
+        width: 30px;
+        height: 30px;
+        overflow: hidden;
+    }
+    body header .header_main-menuX .menuX span{
+        width: 100%;
+    height: 3px;
+    background-color: black;
+    position: absolute;
+    z-index: 99999;
+    }
+    body header .header_main-menuX .menuX span:nth-child(1){
+        top:25%;
+        transition: all .2s ease;
+    }
+    body header .header_main-menuX .menuX span:nth-child(2){
+        top:50%;
+        transition: all .2s ease;
+    }
+    body header .header_main-menuX .menuX span:nth-child(3){
+        top:75%;
+        transition: all .2s ease;
+    }    
+    body header .header_main-menuX .open span:nth-child(1){
+        top: 50%;
+        /* transition: top 10s ease; */
+        transform: rotate(45deg);
+        transition: transform .2s .1s ease;
+    }
+    body header .header_main-menuX .open span:nth-child(2){
+        transform: rotate(135deg);
+        transition:transform .2s .1s ease;
+    }
+    body header .header_main-menuX .open span:nth-child(3){
+        top: 50%;
+        transform: rotate(135deg);
+        transition:transform .2s .1s ease;
+    }
+    /* Main */
+
+
+    body main .container-sliders {
+    height: 300px;
+    }
+    body main .container-sliders .flickity-viewport{
+        height: 300px;
+    }
+    body main .container-sliders .slider-item .slider-item-content{
+        display: none;
+    }
+    body main .pet-care-choice,
+    body main .pet-care-food,
+    body main .pet-care-product,
+    body main .pet-care-info,
+    body footer .section{
+        margin: 0 5px;
+        justify-content: center;
+        display: flex;
+    }
+    body main .pet-care-choice .care-choice-content,
+    body main .row-small,body footer .row{
+        width: 100%;
+    }
+    body main .pet-care-choice .content-pet h2{
+        font-size: 23px;
+    }
+    body main .pet-care-choice .pet-care-item{
+        padding: 0 10px;
+    }
+    body main .pet-care-choice .pet-care-item .pet-btn{
+        display: none;
+    }
+    body main .pet-care-choice .pet-care-item a{
+        border-radius: 4px;
+        height: 130px;
+    }
+    body main .pet-care-choice .pet-care-item a img{
+        height: 100%;   
+    }
+    body main .pet-care-food .content-food span,
+    body main .pet-care-product .content-product span,
+    body main .pet-care-info .content-info span,
+    body footer .about-footer h3{
+        font-size: 23px;
+    }
+    body main .pet-care-food .content-food a,
+    body main .pet-care-product .content-product a,
+    body footer .about-footer .shop-about-info b,
+    body footer .about-footer .shop-about-social p
+    {
+        font-size: 12px;
+    }
+    body main .pet-care-food .content-food a i,
+    body main .pet-care-product .content-product a i{
+        font-size: 11px;
+    }
+    body main .pet-care-food .food-item,
+    body main .pet-care-product .product-item{
+        min-width: auto;
+    }
+    body main .pet-care-technical{
+        padding: 15px;
+    }
+    body main .pet-care-technical .technical-img img{
+        height: 50%;
+    }
+    body main .pet-care-technical .technical-content h3{
+        font-size: 20px;
+    }
+    body main .pet-care-technical .technical-content p,
+    body main .pet-care-info .info-sliders .info-item .info-item-content .content-title h6,
+    body footer .about-footer .shop-about-info,
+    body footer .about-footer .shop-about-info a,
+    body footer .shop-care .shop-care-customer a{
+        opacity: 1;
+        font-size: 15px;
+    }
+    body main .pet-care-info .info-sliders,
+    body main .pet-care-info .info-sliders .flickity-viewport,
+    body main .pet-care-info .info-sliders .carousel-cell{
+        height: 350px;
+    }
+    body main .pet-care-info .info-sliders .info-item{
+        margin: 0 5px;
+        height: 300px;
+    min-width: 150px;
+    }
+    body main .pet-care-info .info-sliders .info-item .item-content-info,
+    body footer .about-footer .about-footer-af::after,
+    body footer .shop-care .shop-care-customer::after{
+        display: none;
+    }
+    body main .pet-care-info .info_item .info-item-content .item-content-info{
+        transform: translateY(0);
+    }
+
+    /* Footer */
+    body footer .brand-sliders .carousel-cell{
+        padding: 5px 10px;
+    }
+    body footer .brand-sliders .brand-slider-item a img{
+        filter: grayscale(0);
+    }
+    body footer .about-footer,
+    body footer .about-footer .care-footer{
+        padding-top: 30px;
+        background-color: black;
+        text-align: center;
+    }
+    body footer .about-footer .shop-about-social a{
+        width: 24px;
+        height: 24px;
+    }
+    body footer .about-footer .shop-about-social i{
+        font-size: 18px;
+    }
+    body footer .about-footer .shop-about-social p{
+        margin-left: 40px;
+    }
+    body footer .shop-about-social .fb
+    {  
+        color: blue;
+    }
+    body footer .shop-about-social .ins{
+        color: white;
+    background-color: rgb(240, 136, 153);
+    }
+    body footer .shop-about-social .twt{
+        color: #5da9dd;
+    }
+    body footer .shop-about-social .pin{
+        color: #b7081b;
+    }
+    body footer .shop-about-social .ytb{
+        color: red;
+    }
+    body footer .shop-care .shop-care-customer,
+    body footer .row{
+        margin: 0;
+    }
+    body footer .shop-care .col-6,
+    body footer .about-footer .about-footer-af{
+        padding: 0 6px;
+    }
+    body footer .about-footer .about-footer-af,
+    body footer .about-footer .care-footer
+    {
+        padding: 0;
+        text-align: center;
+    }
+    body footer .about-footer .about-footer-af .shop-about,
+    body footer .about-footer .care-footer .shop-care{
+        padding: 0 15%;
+        width: 100%;
+        margin: 0;
+    }
+    body footer .footer-img{
+        height: 1300px;
+        margin-top: -1271px;
+    }
+    body footer .btn-to-Top{
+        margin: 0 25px 70px 0;
+    width: 40px;
+    height: 40px;
+    }
+    body footer .btn-to-Top .btn-container{
+        height: 20px;
+        width: 20px;
+    }
+    body footer .btn-to-Top span:nth-child(1){
+        transform: rotate(-55deg);
+    left: -14px;
+    }
+    body footer .btn-to-Top span:nth-child(2){
+        right: -14px;
+    transform: rotate(55deg);
+    }
+}
+@media (min-width:768px) and (max-width:1024px){
+    body header .header-shipping{
+        display: none;
+    }
+    body header .after::after{
+        display: none;
+    }
+}
+@media (min-width: 1025px) and (max-width: 1299px){
+    body main .header-fix{
+        display: none !important;
+    }
+}

@@ -1,0 +1,18 @@
+body main .payment .payment_title .title {
+    font-size: 30px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+body main .payment .payment_content .content-title--product .product_img {
+    max-width: 126px;
+}
+
+body main .payment .payment_content .content-title--product .product_img img {
+    width: 100%;
+}
+
+body main .payment .payment_content .content-title--btn .btn {
+    width: 150px;
+}

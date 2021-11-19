@@ -1,0 +1,182 @@
+body a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+body main .section {
+    margin: 70px 90px;
+    display: block;
+}
+
+body main .products .products_links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 35px;
+    margin-bottom: 35px
+}
+
+.font-500 {
+    font-weight: 500;
+    color: black;
+}
+
+body main .products .products_links h4 {
+    margin: 0;
+}
+
+body main .products .products_links .products_links-select {
+    height: 100%;
+}
+
+body main .products .products_links .products_links-select select {
+    height: 100%;
+    width: 233px;
+}
+
+body main .products .products_tabs .product_tab-item {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #c9c9c9;
+}
+
+body main .products .products_tabs .product_tab-item .font-500 {
+    font-weight: 400;
+}
+
+body main .products .products_tabs .product_tab-item.active .font-500 {
+    font-weight: 500;
+}
+
+body main .products .product_container .products_tabs .items_follow.active {
+    display: block;
+}
+
+body main .products .products_tabs .items_follow {
+    display: none;
+}
+
+body main .products .products_tabs .items_follow ul {
+    padding-left: 10px;
+    margin-top: 10px;
+}
+
+body main .products .products_tabs .items_follow ul li {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+body main .products .products_tabs .turn {
+    transform: rotate(180deg);
+    transition: all .4s ease;
+}
+
+body main .products .products_tabs i {
+    transition: all .4s ease;
+}
+
+body main .products .product_title span {
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+body main .products .products_tabs .product_tab-item a {
+    height: 100%;
+    flex-basis: 90%;
+    letter-spacing: 2px;
+}
+
+body main .products .products_tabs .items_follow li {
+    position: relative;
+}
+
+body main .after::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 0%;
+    transition: all .7s ease;
+    background-color: black;
+    left: 0;
+    bottom: 0;
+}
+
+body main .after:hover::after {
+    width: 100%;
+    transition: width .7s ease;
+}
+
+body main .products .products_tabs .product_tab-item a .product_tab-item-title, body main .products .product_title {
+    margin: 7px 0;
+}
+
+i {
+    cursor: pointer;
+}
+
+body main .products .products_listitems .product_item {
+    height: auto;
+    margin-top: 10px;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+body main .products .products_listitems .product_item:hover {
+    box-shadow: 0 0 14px -3px #3c3c3c;
+    transition: all .3s ease;
+}
+
+body main .products .products_listitems .product_item:hover .product_item-img img {
+    transform: scale(1.2);
+    transition: all 1s ease;
+}
+
+body main .products .products_listitems .product_item .product_item-img img {
+    width: 100%;
+    transform: scale(1);
+}
+
+body main .products .products_listitems .product_item .product_item-img {
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+body main .products_listitems .product_item .product_item-content {
+    padding: 5px 13px;
+    text-align: center;
+}
+
+body main .products_listitems .product_item .product_item-content .item_kind {
+    font-size: 11px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+body main .products_listitems .product_item .item_content {
+    font-weight: 450;
+}
+
+body main .products .products_listitems #pagin {
+    text-align: center;
+    margin-top: 30px;
+    padding: auto;
+}
+
+body main .products .products_listitems #pagin .prev {
+    margin-right: 30px;
+}
+
+body main .products .products_listitems #pagin .next {
+    margin-left: 30px;
+}
+
+body main .products .products_listitems #pagin li {
+    display: inline-block;
+}
+
+body main .products .products_listitems #pagin li .current {
+    font-weight: 500;
+}

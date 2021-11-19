@@ -1,0 +1,168 @@
+body main .profile .profile_user .user-detail--avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+body main .profile .profile_user .user-detail--avatar img {
+    width: 100%;
+}
+
+body main .profile .profile_user .user-detail--name {
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+body main .profile .profile_user .profile_user-items {
+    flex-direction: column;
+}
+
+body main .profile .profile_user .tab_item {
+    text-transform: capitalize;
+    color: black;
+}
+
+body main .profile .profile_user .tab_item.active {
+    color: #ee4d2d;
+}
+
+/* body main .profile .tab_content .tab_content-item {
+    display: none;
+} */
+
+/* body main .profile .tab_content .tab_content-item.active {
+    display: block;
+} */
+
+body main .profile #account {
+    box-shadow: 0 0px 3px 0px black;
+    padding: 20px;
+}
+
+body main .profile #account .btn {
+    width: 100px;
+    position: relative;
+}
+
+body main .profile #account .account-title {
+    border-bottom: 2px solid #dadada;
+}
+
+body main .profile #account .account-title .title {
+    font-size: 27px;
+    text-transform: capitalize;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+body main .profile #ordered .shadow {
+    box-shadow: 0px 0px 5px -2px black;
+}
+
+body main .profile #ordered .ordered_product {
+    border-bottom: 1px solid;
+}
+
+body main .profile #ordered .ordered_product .ordered_product-img {
+    max-width: 126px;
+    min-width: 100px;
+    flex: 2;
+}
+
+body main .profile #ordered .ordered_product .ordered_product-img img {
+    width: 100%;
+}
+
+body main .profile #ordered .ordered_product .ordered_product-info {
+    flex-direction: column;
+    margin-left: 10px;
+    flex: 6;
+}
+
+body main .profile #ordered .ordered_product .ordered_product-info .name {
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+body main .profile #ordered .ordered_product .ordered_product-money {
+    flex: 2;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+body main .profile #ordered .ordered_total, body main .profile #ordered .ordered_status {
+    height: 50px;
+}
+
+body main .profile #ordered .ordered_title {
+    font-size: 30px;
+    font-weight: 400;
+}
+
+body main .profile #ordered .ordered_status p {
+    text-transform: uppercase;
+    color: orange;
+}
+
+body main .profile #ordered .ordered_total .total_price {
+    font-size: 22px;
+    font-weight: 500;
+    color: orange;
+    margin-left: 10px;
+}
+
+body main .profile #announce .announce_title {
+    font-size: 20px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+body main .profile #announce .announce_item .item_img {
+    max-width: 126px;
+    min-width: 100px;
+}
+
+body main .profile #announce .announce_item .item_img img {
+    width: 100%;
+}
+
+body main .profile #voucher .voucher_title {
+    font-size: 25px;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+body main .profile #voucher .voucher_item {
+    position: relative;
+    cursor: pointer;
+}
+
+body main .profile #voucher .voucher_item .voucher_item-img:hover .voucher_item-icon {
+    transform: translateX(25px) rotate(360deg);
+    transition: all .6s ease;
+}
+
+body main .profile #voucher .voucher_item .voucher_item-img {
+    min-width: 126px;
+    height: 126px;
+}
+
+body main .profile #voucher .voucher_item .voucher_item-img p {
+    text-transform: uppercase;
+    color: white;
+}
+
+body main .profile #voucher .voucher_item .voucher_item-icon {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    color: white;
+    transform: translateX(0);
+    transition: all .6s ease;
+}
+
+body main .profile #voucher .voucher_item .voucher_item-content {
+    font-size: 14px;
+}

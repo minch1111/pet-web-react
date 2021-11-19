@@ -1,0 +1,260 @@
+body footer {
+    margin-top: 200px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+}
+body footer a:hover{
+    text-decoration: none;
+}
+body footer .section{
+    margin: 0 120px;
+}
+body footer .brand-title h3{
+    text-transform: uppercase;
+    color: #e78200;
+}
+.animated-border{
+    overflow: hidden;
+}
+.border-left-right{
+    border-left: 2px solid #33bfde;
+    border-right: 2px solid #33bfde;
+    
+}
+
+body footer .animated-border::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 300px;
+    background-color: #33bfde;
+    animation: run 5s ease infinite;
+}
+body footer .animated-border::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 300px;
+    background-color: #33bfde;
+    animation: runRight 5s ease infinite;
+}
+@keyframes runRight{
+    0%{
+        left: 100%;
+    }
+    100%{
+        left: -25%;
+    }
+}
+@keyframes run{
+    0%{
+        left: -25%;
+    }
+    100%{
+        left: 100%;
+    }
+}
+body footer .title-footer{
+    margin-bottom: 155px;
+}
+body footer .title-footer .footer-logo{
+    margin: 100px 0 30px 0;
+    text-align: center;
+   }
+   body footer .title-footer .footer-slogan{
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+       color: black;
+   }
+   body footer .title-footer .footer-slogan h3{
+       letter-spacing: 2px;
+       text-transform: uppercase;
+   }
+
+
+   body footer .about-footer h3{
+       text-align: center;
+       color:#e78200;
+       margin-bottom: 30px;
+   }
+   body footer .about-footer .shop-care h3{
+       color: #57cbe4;
+   }
+
+   body footer .about-footer .about-footer-af::after{
+    content: "";
+    position: absolute;
+    right: 0;
+    width: 1px;
+    height: 2%;
+    top: 0;
+    background-color: #a7a4a4c9;
+    animation: changeHeight 4s ease infinite;
+    transition: height 4s ease;
+   }
+   @keyframes changeHeight{
+       0%{
+           height: 2%;
+       }
+       50%
+       {
+           height: 100%;
+       }
+       100%
+       {
+           height: 2%;
+       }
+   }
+   body footer .about-footer .shop-about-info{
+    padding: 10px 0;
+   }
+   body footer .about-footer .shop-about-info a{
+    color: #e67d11;
+    font-size: 20px;
+    opacity: .6;
+   }
+   body footer .about-footer .shop-about-info a:hover{
+      opacity: 1; 
+   }
+
+   body footer .shop-care .shop-care-customer{
+    padding: 10px 0;
+    position: relative;
+    margin-bottom: 10px;
+    margin-left: 40px;
+   }
+   body footer .shop-care .shop-care-customer::after{
+       content: "";
+       position: absolute;
+       width: 20%;
+       height: 3px;
+       background-color: #bfc9cf6e;
+       top: 100%;
+       transition: all 1s ease;
+   }
+   body footer .shop-care .shop-care-customer a{
+        text-decoration: none;
+        color:#ebe5e58c;
+        font-weight: 600;
+   }
+   body footer .shop-care .shop-care-customer:hover a{
+       color: white;
+   }
+   body footer .shop-care .shop-care-customer:hover::after{
+       width: 100%;
+       background-color:#fff;
+       transition: all 1s ease;
+   } 
+
+   body footer .about-footer .shop-about-social{
+       display: flex;
+       justify-content: center;
+       align-items: center;
+   }
+   body footer .about-footer .shop-about-social i{
+       font-size: 32px;
+       margin: 0 10px;
+       transition: all 1s ease;
+   }
+   body footer .about-footer .shop-about-social .fab{
+       border-radius: 7px;
+   }
+   body footer .shop-title .shop-about-social p{
+       margin-bottom: .5rem;
+   }
+   body footer .about-footer .shop-about-social a{
+    text-decoration: none;
+    color: #ffffffab;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid;
+    border-radius: 25%;
+    margin: 0 5px;
+    background-color: #6868688f;
+   }
+    body footer .about-footer .shop-about-social .fb:hover{
+       color: rgb(22, 26, 224);
+       transition: all 1s ease;
+    }
+    body footer .about-footer .shop-about-social .twt:hover{
+        color: #5da9dd;
+        transition: all 1s ease;
+    }
+    body footer .about-footer .shop-about-social .pin:hover{
+       color: #b7081b;
+       transition: all 1s ease;
+    }
+    body footer .about-footer .shop-about-social .ytb:hover{
+       color: #fe0000;
+       transition: all 1s ease;
+    }
+    body footer .about-footer .shop-about-social .ins:hover{
+        color: white;
+        background-color: #d65db1;
+        transition: all 1s ease;
+
+    }
+    body footer .footer-img{
+        margin-top: -460px;
+        width: 100%;
+        height: 550px;
+        background-color: black;
+    }
+    body footer .footer-img img{
+        width: 100%;
+    }
+    body footer .fix-to-top {
+        cursor: pointer;
+    }
+    body footer .fix-to-top .fix{
+        display: flex;
+    }   
+    body footer .btn-to-Top{
+        position: fixed;
+        height: 60px;
+        width: 60px;
+        bottom: 0;
+        right: 0;
+        margin: 30px;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        background-color: #e78200f7;
+        border-radius: 50%;
+        opacity: .7;
+    }
+    body footer .btn-to-Top .btn-container{
+         background-color: white;
+         height: 40px;
+         width: 40px;
+         position: absolute;
+         overflow: hidden;
+         background-color: #e78200f7;
+         border-radius: 50%;
+         opacity: .7;
+     }
+    body footer .btn-to-Top span{
+        width: 40px;
+        height: 3px;
+        background-color: #ffffff;
+        position: absolute;
+     }
+    body footer .btn-to-Top span:nth-child(1){
+        transform: rotate(-45deg);
+        top: 3px;
+        left: -5px;
+    }
+    body footer .btn-to-Top span:nth-child(2){
+        transform: rotate(45deg);
+        top: 5px;
+        right: -6px;
+    }

@@ -1,0 +1,92 @@
+body main .cart_title {
+    text-transform: uppercase;
+    letter-spacing: 15px;
+    position: relative;
+}
+
+body main .cart_title::after {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    right: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background-color: #e4e4e4;
+}
+
+body main .cart .cart_ingredient {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+body main .cart .border {
+    margin-top: 10px;
+    width: 100%;
+    height: 3px;
+    background-color: black;
+}
+
+body main .cart .cart_product .check-all {
+    margin-right: 20px;
+}
+
+body main .cart .cart_product .check-all input {
+    width: 18px;
+    height: 18px;
+}
+
+body main .cart .cart_product .select {
+    font-weight: 600;
+}
+
+body main .cart .cart_product .cart_product-info .cart_product-info--select {
+    align-items: center;
+    padding: 30px;
+}
+
+body main .cart .cart_product .cart_product-info .cart_product-info--select input {
+    width: 15px;
+    height: 15px;
+}
+
+body main .cart .cart_product .cart_product-info .cart_product-info--img {
+    min-width: 126px;
+    max-width: 126px;
+}
+
+body main .cart .cart_product .cart_product-info .cart_product-info--img img {
+    width: 100%;
+}
+
+body main .cart .cart_product .cart_product-info .cart_product-info--des {
+    margin-left: 10px;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+body main .cart .cart_product .cart_product-info .cart_product-info--des p {
+    font-weight: 500;
+}
+
+body main .cart .cart_product .cart_product-edit.editcart_number {
+    border: 3px solid black;
+}
+
+body main .cart .cart_product .cart_product-edit.editcart_number .btn {
+    font-weight: 900;
+}
+
+body main .cart .cart_product .cart_product-edit.editcart_number .number {
+    width: 50px;
+    border: none;
+    text-align: center;
+    outline: none;
+}
+body main .cart .cart_product .cart_product-edit.editcart_number .number:focus{
+    border: none;
+} 
+body main .cart .cart_product .cart_product-delete .btn{
+    font-weight: 500;
+}

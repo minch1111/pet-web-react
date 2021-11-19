@@ -1,0 +1,318 @@
+body main .container-sliders{
+    width: 100%;
+    height: 600px;
+}   
+body main .container-sliders img{
+    width: 100%;
+    height: 100%;
+}    
+.carousel-cell{
+height: 100%;
+width: 100%;
+/* margin-right: 10px; */
+}
+.flickity-prev-next-button
+{
+    top: 50%;
+    opacity: 0;
+    position: absolute;
+}
+.flickity-viewport{
+  height: 600px;
+}
+.flickity-page-dots{
+  bottom :22px;
+  z-index: 10;
+}
+.flickity-page-dots .dot{
+  width: 12px;
+  height: 12px;
+  background: transparent;
+  border: 3px solid black;
+}
+.flickity-page-dots .dot.is-selected {
+background: black;
+}
+body main .container-sliders:hover .flickity-prev-next-button{
+  opacity: 1;
+  transition: all 2s linear;
+}
+body main .container-sliders .slider-item .slider-item-content{
+z-index: 141;
+top: 84%;
+left: 48.5%;
+width: 130px;
+height: 60px;
+position: absolute;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+body main .container-sliders .slider-item .cat{
+width: 100%;
+height: 100%;
+/* opacity: 0.3; */
+transform: translateX(-359px);
+animation: left 5s linear infinite;
+}
+body main .container-sliders .slider-item .dog{
+width: 100%;
+height: 100%;
+/* opacity: 0.3; */
+transform: translateX(359px);
+animation: right 5s linear infinite;
+}
+@keyframes left{
+  from{
+    transform: translateX(-359px);
+    opacity: 0;
+  }
+  to{
+      transform: translateX(10px);
+      opacity: 0.5;
+  }
+}
+@keyframes right{
+  from{
+    transform: translateX(359px);    
+    opacity: 0;  
+  }
+  to{
+      transform: translateX(10px);
+      opacity: 0.5;
+  }
+}
+
+/* slider info */
+body main .pet-care-info{
+    display: flex;
+    justify-content: center;
+    margin: 0 120px;
+    width: 100%;
+}
+body main .pet-care-info .row-small{
+    width: 100%;
+}
+body main .pet-care-info .row-small .info-sliders .flickity-viewport{
+    height: 300px;
+}
+body main .pet-care-info .info-sliders .flickity-viewport .flickity-slider {
+    width: 100%;
+}
+body main .pet-care-info .info-sliders .info-slider_item{
+    width: auto;
+    overflow: hidden;
+}
+body main .pet-care-info .info-sliders .info_item{
+    /* max-width: 350px; */
+    width: 340px;
+    margin: 0 10px;
+}
+body main .pet-care-info .info-sliders .info_item .info-item-img{
+    overflow: hidden;
+    border-radius: 15px;
+    margin: 0 10px;
+}
+body main .pet-care-info .info-sliders .info_item .info-item-img img{
+    width: 100%;
+    height: 200px;
+    transform: scale(1);
+    transition: all .7s ease;
+}
+body main .pet-care-info .info-sliders .info_item .info-item-content{
+    margin: 2px 10px;
+    background-color: #ffffff99;
+    transform: translateY(0px);
+    transition: transform .6s ease;
+}
+body main .pet-care-info .info_item .info-item-content .item-content-info{
+    transform: translateY(50px);
+    font-size: 15px;
+    transition: transform .7s ease;
+}
+body main .pet-care-info .info-sliders .info_item:hover .info-item-img img{
+    transform: scale(1.2);
+    transition: all .6s ease;
+}
+body main .pet-care-info .info-sliders .info_item:hover .info-item-content{
+    transform: translateY(-10px);
+    transition: all .6s ease;
+}
+body main .pet-care-info .info-sliders .info_item:hover .info-item-content .item-content-info{
+    transform: translateY(0px);
+    transition: all .6s ease;
+}
+body main .pet-care-info .info-sliders .flickity-prev-next-button{
+    height: 100%;
+border-radius: 0px;
+opacity: 0.2;
+}
+body main .pet-care-info .info-sliders .flickity-prev-next-button.next{
+    right:0 ;
+}
+body main .pet-care-info .info-sliders .flickity-prev-next-button.previous{
+    left: 0;
+}
+body main .pet-care-info .info-sliders .flickity-prev-next-button.next,
+body main .pet-care-info .info-sliders .flickity-prev-next-button.previous{
+    opacity: 1;
+    transition: all .4s ease;
+}
+/* body main .pet-care-info{
+  display: flex;
+  justify-content: center;
+  margin: 0 120px;
+  width: 100%;
+ }
+ body main .pet-care-info .row-small{
+     width: 100%;
+ }
+ body main .pet-care-info .content-info{
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0;
+  border-bottom: 1px solid #ececec;
+ }
+
+ body main .pet-care-info .info-sliders{
+  width: 100%;
+ }   
+ body main .pet-care-info img{
+  width: 100%;
+  height: 100%;
+  }    
+  body main .pet-care-info .info-sliders .carousel-cell{
+      height: 300px;
+      width: 100%;
+  }
+  body main .pet-care-info .info-sliders .flickity-prev-next-button
+  {
+      top: 50%;
+      opacity: 1;
+      position: absolute;
+      height: 100%;
+      background-color: white;
+      border-radius: 0;
+      width: 35px;
+      opacity: 0;
+  }
+
+  body main .pet-care-info .info-sliders .previous{
+      left: 0;
+      transition: all .5s ease;
+  }
+  body main .pet-care-info .info-sliders .next{
+      right: 0;
+      transition: all .5s ease;
+  }
+
+  body main .pet-care-info .info-sliders .flickity-viewport{
+      height: 300px;
+  }
+  body main .pet-care-info .info-sliders .info-sliders-item{
+      width: 80%;
+  }
+
+  body main .pet-care-info .info-sliders .info-item{
+      margin: 0 15px;
+      cursor: pointer;
+  }
+  body main .pet-care-info .info-sliders .info-item .info-item-img{
+      width: 100%;
+      height: 173px;
+      overflow: hidden;
+      border-radius: 11px;  
+  }
+  body main .pet-care-info .info-sliders .info-item .info-item-img img{
+      transform: scale(1);
+      transition: all 1s ease;
+  }
+  body main .pet-care-info .info-sliders .info-item:hover .info-item-img img{
+      transform: scale(1.2);
+      transition: all 1s ease;
+  }
+  body .pet-care-info .info-sliders:hover  .flickity-prev-next-button{
+      opacity: .4;
+      transition: all .5s ease;
+  }
+  body main .pet-care-info .info-sliders .previous:hover{
+      opacity: 1;
+      transition: all .5s ease;
+  }
+  body main .pet-care-info .info-sliders .next:hover{
+      opacity: 1;
+      transition: all .5s ease;
+  }
+  body main .pet-care-info .info-sliders .info-item .info-item-content .content-title{
+      position: relative;
+  }
+  body main .pet-care-info .info-sliders .info-item .info-item-content .content-title::after{
+      content: "";
+      position: absolute;
+      width: 23%;
+      height: 3px;
+      background-color: #dee2e6;
+      transition: width 1s ease;
+      bottom: -5px;
+  }
+  body main .pet-care-info .info-sliders .info-item .item-content-info{
+      transform: translateY(55px);
+      opacity: 0;
+      transition: all 1s ease;
+  }
+  body main .pet-care-info .info-sliders .info-item .item-content-info p{
+      margin: 0;
+      font-size: 15px;
+      line-height: 20px;
+  }
+  body main .pet-care-info .info-sliders .info-item .info-item-content{
+      transition: all 1s ease;
+      background-color: #ffffffd4;
+      padding: 10px 0;
+  }
+  body main .pet-care-info .info-sliders .info-item:hover .info-item-content{
+      transform: translateY(-10px);
+      transition: all 1s ease;
+  }
+  body main .pet-care-info .info-sliders .info-item:hover .item-content-info {
+      transform: translateY(4px);
+      opacity: 1;
+      transition: all 1s ease;
+  }
+  body main .pet-care-info .info-sliders .info-item:hover .info-item-content .content-title::after{
+      width: 50%;
+      transition: width 1s ease;
+  } */
+
+  /* slider brands */
+  body footer .brand-sliders .flickity-viewport{
+    height: 100px;
+}
+body footer .brand-sliders .flickity-slider{
+    width: 90%;
+}
+body footer .brand-sliders .carousel-cell{
+     height: 100px;
+     width: 20%;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     padding: 20px;
+     margin: 0;
+}
+body footer .brand-sliders .brand-slider-item a{
+    cursor: pointer;
+}
+
+body footer .brand-sliders .brand-slider-item img{
+    margin-left: 0;
+    margin-right: 0;
+    width: 120px;
+    height: auto;
+    filter: grayscale(1);
+    transition: filter .5s ease;
+}
+body footer .brand-sliders .brand-slider-item a:hover img{
+    filter: grayscale(0);
+    transition: filter .5s ease;
+}
