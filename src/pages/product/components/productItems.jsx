@@ -1,18 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export default function ProductItem({ title, name, img,data }) {
+export default function ProductItem({data }) {
     return (
-        <div className="col-lg-3 item">
-            <Link to={{pathname:`/shop/${data.id}` ,querry:{data}}} >
+        <div className="col-lg-3 col-5 col-xs-4 item">
+            <Link to={`/shop/detail/${data.slug}`} >
                 <div className="product_item">
                     <div className="product_item-img">
-                        <img src={img} alt="" />
+                        <img src={data.imageRepresent[0].url} alt="" />
                     </div>
                     <div className="product_item-content">
-                        <div className="item_kind">{title}</div>
+                        {/* <div className="item_kind">  </div> */}
                         <div className="item_content">
-                            {name}
+                            {data.name}
                         </div>
                     </div>
                 </div>

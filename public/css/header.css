@@ -377,7 +377,12 @@ body header .header_main-cart .hover_cart-content a:hover .fas {
     transition: all .6s ease;
 }
 
-body header .header_main-user .user-login i, body header .header_main-cart .cart i {
+body header .header_main-cart .hover_cart-content .hover_cart-item .cart-item--img{
+    width: 100px;
+}
+
+body header .header_main-user .user-login i, 
+body header .header_main-cart .cart i {
     font-size: 30px;
 }
 
@@ -397,7 +402,8 @@ body header .header_main-cart .hover_cart-content {
     position: absolute;
     top: 100%;
     right: 0;
-    width: 300px;
+    min-width: 300px;
+    max-width: 1200px;
     height: auto;
     padding: 20px;
     background-color: #ffffffe6;
@@ -688,3 +694,8 @@ body .header_search .header_search-container .find_btn-3 {
 }
 
 /* thêm */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

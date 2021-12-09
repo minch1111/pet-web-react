@@ -1,31 +1,38 @@
-import React, { useContext, useState ,useEffect} from 'react'
+import React, { useContext, useState, useEffect, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, Redirect } from 'react-router-dom'
 import { Context } from '../../App'
+import { CHANGE_NUM_BY_KEY, DECREASE_CART, GET_LIST_ORDER, INCREASE_CART, LOAD_NEW_ORDER, REMOVE_CART, UNCHECKED_ORDER } from '../../store/type'
 
 function Cart() {
-
-  const { user, setDataInCart, removeProductInCart } = useContext(Context);
-  const [cartNumber, setCartNumber] = useState({number:user?.cart?.number})
-
-  const inCrease = ()=>{
-    setCartNumber({number:cartNumber.number+1})
-  }
-  const deCrease = ()=>{
-    setCartNumber({number:cartNumber.number-1})
-  }
-  const onChangeEdit =(ev)=>{
-    let value = parseInt(ev.currentTarget.value);
-    setCartNumber({number:value})
-  }
-  const acceptEdit = ()=>{
-    setDataInCart(cartNumber.number)
-  }
-  const removeProduct =()=>{
-    removeProductInCart()
-  }
-  
+  // const [checked, setChecked] = useState(false)
+  let list = []
+  const { listProduct } = useSelector(store => store.cart)
+  const dispatch = useDispatch()
+  // const [listPay, setListPay] = useState([])
   useEffect(() => {
-   console.log(`cartNumber.number`, cartNumber.number)
-  }, [cartNumber.number])
+    list = []
+    dispatch({ type: LOAD_NEW_ORDER, payload: [] })
+  }, [])
+  const handleSetList = (data) => {
+    list.push(data)
+    dispatch({ type: GET_LIST_ORDER, payload: data })
+    // setChecked(true)
+    //  console.log(list);
+  }
+  const handleSetListUnchecked = (data) => {
+
+    // list.splice(list.indexOf(data), 1)
+    dispatch({ type: UNCHECKED_ORDER, payload: data })
+    // setChecked(false)
+    console.log(`List`, list)
+  }
+  console.log(`list`, list)
+  // console.log(`listPay`, typeof listPay)
+  // console.log(list);
+  // const handleSubmit = () => {
+  //   dispatch({type:GET_LIST_ORDER,payload:list});
+  // }
   return (
     <main>
       <section className="section">
@@ -66,59 +73,26 @@ function Cart() {
                   <div className="offset-lg-8 mbottom-20" />
                   <div className="row">
                     {
-                      typeof user?.cart?.number !== 'undefined' && (
-                        <div className="col-lg-12 mbottom-20">
-                          <div className="row">
-                            <div className="col-lg-4 flex">
-                              <div className="cart_product-info flex">
-                                <div className="cart_product-info--select flex">
-                                  <input type="checkbox" />
-                                </div>
-                                <div className="cart_product-info--img">
-                                  <img src="./img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png" alt="" />
-                                </div>
-                                <div className="cart_product-info--des flex">
-                                  <p> {user.cart?.product?.name} </p>
-                                  <p>Giá : <span>${user.cart?.product?.price} </span></p>
-                                  <p><a href="./productDetail.html"> <i>Xem chi tiết sản
-                                    phẩm</i></a></p>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="col-lg-4 flex justify_evenly align_center">
-                              <div className="cart_product-edit editcart_number">
-                                <div className="form">
-                                  <button type="submit" onClick={deCrease} className="btn btn-minus">-</button>
-                                  <input type="text" onChange={onChangeEdit} className="number" value={cartNumber.number} />
-                                  <button type="submit" onClick={inCrease} className="btn btn-plus">+</button>
-                                </div>
-                              </div>
-                              <div className="cart_product-acceptEdit">
-                                <div className="btn btn-primary" onClick={acceptEdit}>
-                                  Chỉnh sửa
-                                </div>
-                              </div>
-                              <div className="cart_product-delete">
-                                <div className="btn btn-warning" onClick={removeProduct}>
-                                  Xóa khỏi giỏ hàng
-                                </div>
-                              </div>
-                            </div>
-                            <div className="col-lg-4 flex justify_end align_center">
-                              <p><strong>${user.cart?.product?.price * user?.cart?.number}</strong></p>
-                            </div>
-                          </div>
-                        </div>
-                      )
+                      listProduct?.map((o, i) => (
+                        <CartItem
+                          key={i}
+                          data={o}
+                          // setListPayMent={setListPay()}
+                          // listPay={listPay}
+                          setlist={(data) => handleSetList(data)}
+                          setUnchecked={(data) => handleSetListUnchecked(data)}
+                        />
+                      ))
                     }
+                    {/* <CartItem /> */}
                   </div>
                 </div>
                 <div className="offset-lg-8" />
                 <div className="col-lg-4">
                   <div className="btn_group flex justify_evenly">
-                    <div className="btn btn-primary">
+                    <Link to="/cart/payment" className="btn btn-primary">
                       Thanh toán
-                    </div>
+                    </Link>
                     <div className="btn btn-danger">
                       Xóa tất cả
                     </div>
@@ -134,3 +108,78 @@ function Cart() {
 }
 
 export default Cart
+
+export const CartItem = (props) => {
+
+
+  const money = (a) => {
+    return a.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })
+  }
+
+  const dispatch = useDispatch()
+  let inputRef = useRef()
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.value = props.data.num
+    }
+  }, [props.data.num])
+
+  const handleKeyPress = (ev, data) => {
+    if (ev.which === 13) {
+      dispatch({ type: CHANGE_NUM_BY_KEY, payload: { o: data, num: ev.currentTarget.value } })
+    }
+  }
+
+  // console.log(`formatMoney(20)`, formatMoney(20))
+  // console.log(`props.checked`, props.checked)
+
+  return (
+    <div className="col-lg-12 mbottom-20">
+      <div className="row">
+        <div className="col-lg-4 flex">
+          <div className="cart_product-info flex">
+            <div className="cart_product-info--select flex">
+              <input type="checkbox" onClick={(ev) => {
+                ev.currentTarget.checked === true ?
+                  props.setlist(props.data) : props.setUnchecked(props.data)
+                // console.log(`${props?.data?.id}`,ev.currentTarget.checked)
+              }} />
+            </div>
+            <div className="cart_product-info--img">
+              <img src={props?.data?.imageRepresent[0].url} alt="" />
+            </div>
+            <div className="cart_product-info--des flex">
+              <p> {props?.data?.name} </p>
+              <p>Giá : <span> {money(props?.data?.price)}</span></p>
+              <p><a href="./productDetail.html"> <i>Xem chi tiết sản
+                phẩm</i></a></p>
+            </div>
+          </div>
+        </div>
+        <div className="col-lg-4 flex justify_evenly align_center">
+          <div className="cart_product-edit editcart_number">
+            <div className="form">
+              <button className="btn btn-minus" onClick={() => { dispatch({ type: DECREASE_CART, payload: props.data }) }} >-</button>
+              <input type="text" ref={inputRef} className="number" onKeyPress={(ev) => { handleKeyPress(ev, props.data) }} type="number" min={0} />
+              <button className="btn btn-plus" onClick={() => { dispatch({ type: INCREASE_CART, payload: props.data }) }} >+</button>
+            </div>
+          </div>
+          {/* <div className="cart_product-acceptEdit">
+            <div className="btn btn-primary" onClick={acceptEdit}>
+              Chỉnh sửa
+            </div>
+          </div> */}
+          <div className="cart_product-delete">
+            <button className="btn btn-warning" onClick={() => { dispatch({ type: REMOVE_CART, payload: props.data }) }} >
+              Xóa khỏi giỏ hàng
+            </button>
+          </div>
+        </div>
+        <div className="col-lg-4 flex justify_end align_center">
+          <p><strong>{money(props?.data?.num * props?.data?.price)}</strong></p>
+        </div>
+      </div>
+    </div>
+  )
+}

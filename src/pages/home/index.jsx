@@ -242,6 +242,7 @@ export default function Home() {
           </div>
         </section>
         <Advertise />
+        {/* Sản phẩm thức ăn */}
         <ProductList 
           title={"Thức ăn & dinh dưỡng cho chó mèo"}
           data={foodList} 

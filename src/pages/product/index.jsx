@@ -1,53 +1,63 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { useParams } from 'react-router'
 import { Context } from '../../App'
 import Categories from '../../components/categories'
+import shopService from '../../services/shopService'
 import ProductItem from './components/productItems'
 
 export default function Product() {
-  let productItems = [
-    {
-      name:"Pate Tươi rau củ dành cho chó",
-      title:"Thức ăn cho chó",
-      img :"/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png"
-    },
-    {
-      name:"Pate Tươi rau củ dành cho chó",
-      title:"Thức ăn cho chó",
-      img :"/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png"
-    },
-    {
-      name:"Pate Tươi rau củ dành cho chó",
-      title:"Thức ăn cho chó",
-      img :"/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png"
-    },
-    {
-      name:"Pate Tươi rau củ dành cho chó",
-      title:"Thức ăn cho chó",
-      img :"/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png"
-    },
-    {
-      name:"Pate Tươi rau củ dành cho chó",
-      title:"Thức ăn cho chó",
-      img :"/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png"
-    },
-    {
-      name:"Pate Tươi rau củ dành cho chó",
-      title:"Thức ăn cho chó",
-      img :"/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png"
-    },
-    {
-      name:"Pate Tươi rau củ dành cho chó",
-      title:"Thức ăn cho chó",
-      img :"/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png"
-    },
-    {
-      name:"Pate Tươi rau củ dành cho chó",
-      title:"Thức ăn cho chó",
-      img :"/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png"
-    }
+  // let productItems = [
+  //   {
+  //     name:"Pate Tươi rau củ dành cho chó",
+  //     title:"Thức ăn cho chó",
+  //     img :"/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png"
+  //   },
+  //   {
+  //     name:"Pate Tươi rau củ dành cho chó",
+  //     title:"Thức ăn cho chó",
+  //     img :"/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png"
+  //   },
+  //   {
+  //     name:"Pate Tươi rau củ dành cho chó",
+  //     title:"Thức ăn cho chó",
+  //     img :"/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png"
+  //   },
+  //   {
+  //     name:"Pate Tươi rau củ dành cho chó",
+  //     title:"Thức ăn cho chó",
+  //     img :"/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png"
+  //   },
+  //   {
+  //     name:"Pate Tươi rau củ dành cho chó",
+  //     title:"Thức ăn cho chó",
+  //     img :"/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png"
+  //   },
+  //   {
+  //     name:"Pate Tươi rau củ dành cho chó",
+  //     title:"Thức ăn cho chó",
+  //     img :"/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png"
+  //   },
+  //   {
+  //     name:"Pate Tươi rau củ dành cho chó",
+  //     title:"Thức ăn cho chó",
+  //     img :"/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png"
+  //   },
+  //   {
+  //     name:"Pate Tươi rau củ dành cho chó",
+  //     title:"Thức ăn cho chó",
+  //     img :"/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png"
+  //   }
 
-  ]
+  // ]
   const {listProductInfo} = useContext(Context);
+  const [productItems, setproductItems] = useState()
+  let {slug} = useParams()
+  // console.log(`slug`, slug)
+  useEffect(async ()=>{
+    let res=await shopService.getListProductByCategory(slug)
+    await setproductItems(res.product)
+  },[slug])
+  if(!productItems) return <div> Loading... </div>
   return (
     <main>
       <section className="section">
@@ -75,12 +85,12 @@ export default function Product() {
                 <div className="products_listitems">
                   <div className="row">
                     {
-                      listProductInfo.map((value,key)=>(
+                      productItems.map((value,key)=>(
                         <ProductItem 
                         key={key}
-                        title = {value.title}
-                        name={value.name}
-                        img = {value.img}
+                        // title = {value.title}
+                        // name={value.name}
+                        // img = {value.img}
                         data= {value}
                         />
                       ))

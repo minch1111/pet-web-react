@@ -1,26 +1,25 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { useParams } from 'react-router'
+import { useDispatch } from 'react-redux';
 import { Context } from '../../App';
 import Categories from '../../components/categories'
+import { ADD_TO_CART } from '../../store/type';
+import shopService from '../../services/shopService';
 
 export default function ProductDetail(props) {
     let $ = window.$
-    useEffect(() => {
-        // $('.btn-plus').on('click', function () {
-        //     $('.number').val(parseInt($('.number').val()) + 1);
-        // });
-        // $('.btn-minus').on('click', function () {
-        //     $('.number').val(parseInt($('.number').val()) - 1);
-        //     if ($('.number').val() == 0) {
-        //         $('.number').val(1);
-        //     }
-        // });
+    const [ productInfo, setProductInfo ] = useState();
+    const [ number, setNumber ] = useState(1);
+    const dispatch = useDispatch()
+    let {slug} = useParams()
+    console.log(`slug`, slug)
 
+    useEffect(() => {
         const imgTabs = document.querySelectorAll('.imgTab');
         const itemTabs = document.querySelectorAll('.imgItem');
 
         imgTabs.forEach((tab, index) => {
             const itemTab = itemTabs[index];
-
             tab.onclick = function () {
                 $('.imgTab.active').removeClass('active');
                 $('.imgItem.active').removeClass('active');
@@ -46,10 +45,13 @@ export default function ProductDetail(props) {
 
 
     }, [])
+    useEffect(async ()=>{
+        let res = await shopService.getDetailProductBySlug(slug)
+        await setProductInfo(res.product)
+    },[])
 
-    const { data, addCartFromDetail } = useContext(Context);
-    const [ productInfo, setProduct ] = useState(props.location.querry?.data  || {});
-    const [ number, setNumber ] = useState();
+    // const { data, addCartFromDetail } = useContext(Context);
+    
     // const [cart, setCart] = useState({ product: props.location.querry})
 
     const inCrease = () => {
@@ -67,13 +69,50 @@ export default function ProductDetail(props) {
      }
 
     const handleAdd = () => {
-        addCartFromDetail({...productInfo,number:number})
+        // addCartFromDetail({...productInfo,number:number})
+        dispatch({
+            type:ADD_TO_CART,
+            payload:{
+                o:productInfo,
+                num:number
+            }
+        })
+        console.log(`click` )
     }
-    useEffect(async ()=>{
-        setNumber(productInfo?.number)
-    },[productInfo])
+    const money = (a) => {
+        return a.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })
+    }
+    const handleClickChangeImage =()=>{
+        const imgTabs = document.querySelectorAll('.imgTab');
+        const itemTabs = document.querySelectorAll('.imgItem');
 
-    if (!productInfo) return <div>con</div>
+        imgTabs.forEach((tab, index) => {
+            const itemTab = itemTabs[index];
+            tab.onclick = function () {
+                $('.imgTab.active').removeClass('active');
+                $('.imgItem.active').removeClass('active');
+
+                $(tab).addClass('active');
+                $(itemTab).addClass('active')
+            }
+        })
+        const tabs = document.querySelectorAll('.tab_title');
+        const items = document.querySelectorAll('.item');
+
+        tabs.forEach((tab, index) => {
+            const item = items[index];
+
+            tab.onclick = function () {
+                $('.tab_title.active').removeClass('active');
+                $('.item.active').removeClass('active');
+
+                $(tab).addClass('active');
+                $(item).addClass('active')
+            }
+        })
+    }
+
+    if (!productInfo) return <div>Loading...</div>
     return (
         <main>
             <section className="section">
@@ -95,32 +134,32 @@ export default function ProductDetail(props) {
                                                 <div className="col-lg-12">
                                                     <div className="product_info-img">
                                                         <div className="imgItem active">
-                                                            <img src={productInfo?.img} alt="" />
+                                                            <img src={productInfo?.listImage[0].image[0].url} alt="" />
                                                         </div>
                                                         <div className="imgItem">
-                                                            <img src="/img/thuc-an-hat-royal-canin-urinary-so-cho-meo-bi-than-300x300.jpg" alt="" />
+                                                            <img src={productInfo?.listImage[1].image[0].url} alt="" />
                                                         </div>
                                                         <div className="imgItem">
-                                                            <img src="/img/hinh-san-pham-broadline-cho-meo-tu-2-5-kg-toi-7-5-kg-300x300.jpg" alt="" />
+                                                            <img src={productInfo?.listImage[2].image[0].url} alt="" />
                                                         </div>
                                                         <div className="imgItem">
-                                                            <img src="/img/hinh-san-pham-Nutrience-Original-Healthy-Adult-Indoor-300x300.jpg" alt="" />
+                                                            <img src={productInfo?.listImage[3].image[0].url} alt="" />
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="col-lg-12">
                                                     <div className="product_info-imgTab">
-                                                        <div className="imgTab active" onclick="openCity()">
-                                                            <img src={productInfo?.img} alt="" />
+                                                        <div className="imgTab active" onClick={handleClickChangeImage}>
+                                                            <img src={productInfo?.listImage[0].image[0].url} alt="" />
                                                         </div>
-                                                        <div className="imgTab">
-                                                            <img src="/img/thuc-an-hat-royal-canin-urinary-so-cho-meo-bi-than-300x300.jpg" alt="" />
+                                                        <div className="imgTab" onClick={handleClickChangeImage}>
+                                                            <img src={productInfo?.listImage[1].image[0].url} alt="" />
                                                         </div>
-                                                        <div className="imgTab">
-                                                            <img src="/img/hinh-san-pham-broadline-cho-meo-tu-2-5-kg-toi-7-5-kg-300x300.jpg" alt="" />
+                                                        <div className="imgTab" onClick={handleClickChangeImage}>
+                                                            <img src={productInfo?.listImage[2].image[0].url} alt="" />
                                                         </div>
-                                                        <div className="imgTab">
-                                                            <img src="/img/hinh-san-pham-Nutrience-Original-Healthy-Adult-Indoor-300x300.jpg" alt="" />
+                                                        <div className="imgTab" onClick={handleClickChangeImage}>
+                                                            <img src={productInfo?.listImage[3].image[0].url} alt="" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -132,7 +171,7 @@ export default function ProductDetail(props) {
                                                     <p> {productInfo?.name} </p>
                                                 </div>
                                                 <div className="detail_des mbottom-20">
-                                                    <p> {productInfo?.describe} </p>
+                                                    <p> {productInfo?.short_description} </p>
                                                 </div>
                                                 <div className="detail_color mbottom-20">
                                                     <div className="detail_color-title font-20 fweight-700">Màu sắc :</div>
@@ -153,13 +192,13 @@ export default function ProductDetail(props) {
                                                     </div>
                                                 </div>
                                                 <div className="detail_cost font-20 fweight-700 mbottom-20">
-                                                    <p>Giá : $ {productInfo?.price} </p>
+                                                    <p>Giá :  {money(productInfo?.price)} </p>
                                                 </div>
                                                 <div className="addCart mbottom-20">
                                                     <div className="addCart_number">
                                                         <div className="form">
                                                             <button type="submit" onClick={deCrease} className="btn btn-minus">-</button>
-                                                            <input onChange={getNumber} name="numberCart" type="text" className="number" value={number} />
+                                                            <input onChange={getNumber} name="numberCart" type="text"  className="number" value={number} />
                                                             <button type="submit" onClick={inCrease} className="btn btn-plus">+</button>
                                                         </div>
                                                     </div>

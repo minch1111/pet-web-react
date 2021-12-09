@@ -1,11 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import shopService from '../../../services/shopService'
 
 export default function Nav() {
+  const [category, setcategory] = useState()
+  useEffect(async ()=>{
+    let res = await shopService.getAllCategory()
+    await setcategory(res.category)
+  },[])
     return (
         <div className="header_main-navbar">
               <ul>
-                <li className="navbar_item after"><Link to="/shop">Chó<i className="fas fa-angle-down" /></Link>
+                {
+                  category?.map((o,i)=>(
+                    <li key={i} className="navbar_item after"><Link to={`/shop/${o.slug}`}>{o.name}</Link></li>
+                  ))
+                }
+
+                {/* <li className="navbar_item after"><Link to="/shop">Chó</Link>
                   <div id="dog">
                     <div className="navbar_item-menu">
                       <div className="item_menu-pet">
@@ -29,8 +41,8 @@ export default function Nav() {
                       </div>
                     </div>
                   </div>
-                </li>
-                <li className="navbar_item after"><Link to="/shop">Mèo<i className="fas fa-angle-down" /></Link>
+                </li> */}
+                {/* <li className="navbar_item after"><Link to="/shop">Mèo</Link>
                   <div id="cat">
                     <div className="navbar_item-menu">
                       <div className="item_menu-pet">
@@ -55,9 +67,9 @@ export default function Nav() {
                       </div>
                     </div>
                   </div>
-                </li>
-                <li className="navbar_item after"><Link to="/services">Dịch Vụ<i className="fas fa-angle-down" /></Link>
-                  <div id="services">
+                </li> */}
+                <li className="navbar_item after"><Link to="/services">Dịch Vụ</Link>
+                  {/* <div id="services">
                     <div className="navbar_item-menu">
                       <div className="item_menu-pet">
                         <p>Dịch vụ cho thú cưng </p>
@@ -74,10 +86,10 @@ export default function Nav() {
                         </ul>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </li>
-                <li className="navbar_item after"><a href="#">Tin Tức<i className="fas fa-angle-down" /></a>
-                  <div id="news">
+                <li className="navbar_item after"><a href="#">Tin Tức</a>
+                  {/* <div id="news">
                     <div className="navbar_item-menu">
                       <div className="item_menu-pet">
                         <p>Kiến Thức Thú Cưng</p>
@@ -100,7 +112,7 @@ export default function Nav() {
                         </ul>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </li>
               </ul>
             </div>

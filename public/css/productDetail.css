@@ -88,7 +88,8 @@ body main .products .product_info .product_info-img .imgItem {
 }
 
 body main .products .product_info .product_info-img .imgItem.active {
-    display: block
+    display: block;
+    width: 420px;
 }
 
 body main .products .product_info .product_info-img img {

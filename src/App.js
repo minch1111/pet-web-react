@@ -20,7 +20,7 @@ export const Context = createContext();
 
 function App() {
 
-  const [user, setUser] = useState()
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('loginn'))||null)
   const data ={
     username:"Nguyễn Văn A",
     avatar:"https://cdn.dribbble.com/users/19658/screenshots/3576141/media/ca38af59f2434493f8cb9c4229cbfc2e.png?compress=1&resize=400x300",
@@ -131,7 +131,7 @@ function App() {
     setUser(data)
   }
   const logout =()=>{
-    localStorage.removeItem('login1');
+    localStorage.removeItem('loginn');
     setUser()
   }
 
@@ -164,12 +164,12 @@ function App() {
           <LoginModal/>
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/shop" exact component={Product} />
+            <Route path="/shop/:slug" exact component={Product} />
             <PrivateRoute path="/cart" exact component={Cart} />
             <Route path="/cart/payment" component={Payment} />
             <PrivateRoute path="/user-profile" component={Profile} />
             <Route path="/services" component={Services} />
-            <Route path="/shop/:slug" component={ProductDetail} />
+            <Route path="/shop/detail/:slug" component={ProductDetail} />
             <Route component={Page404} />
             {/* <Home /> */}
             {/* <Product /> */}
