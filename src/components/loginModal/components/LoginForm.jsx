@@ -3,11 +3,16 @@ import { Context } from '../../../App';
 import useForm from '../../../hooks/useForm';
 
 export default function LoginForm(props) {
-    const {login} = useContext(Context);
-    const {form,error,handleSubmit,register}=useForm()
-    const submitLogin = ()=>{
+    const { login } = useContext(Context);
+    const { form, error, handleSubmit, register } = useForm()
+    const submitLogin = () => {
         login()
         props.togglePopup()
+    }
+    const openRegister = () => {
+        // document.body.classList.toggle('login-is-show');
+        document.querySelector(".login_form").style.display = 'none'
+        document.querySelector(".register_form").style.display = 'block'
     }
     return (
         <form onSubmit={handleSubmit(submitLogin)} className="login_form pad-20" onClick={(ev) => ev.stopPropagation()}>
@@ -16,16 +21,16 @@ export default function LoginForm(props) {
             </div>
             <div className="form-group">
                 <label htmlFor="username">Tên đăng nhập</label>
-                <input type="text" {...register('username',{required:true})} id="username" className="form-control" placeholder="Nhập tên tài khoản..." aria-describedby="helpId" />
+                <input type="text" {...register('username', { required: true })} id="username" className="form-control" placeholder="Nhập tên tài khoản..." aria-describedby="helpId" />
                 {
-                    error.username&& <small className="text-danger"> {error.username} </small>
+                    error.username && <small className="text-danger"> {error.username} </small>
                 }
             </div>
             <div className="form-group">
                 <label htmlFor="password">Mật khẩu</label>
-                <input type="password" {...register('password',{required:true,min:6,max:32})} id="password" className="form-control" placeholder="Nhập mật khẩu..." aria-describedby="helpId" />
+                <input type="password" {...register('password', { required: true, min: 6, max: 32 })} id="password" className="form-control" placeholder="Nhập mật khẩu..." aria-describedby="helpId" />
                 {
-                    error.password&& <small className="text-danger"> {error.password} </small>
+                    error.password && <small className="text-danger"> {error.password} </small>
                 }
             </div>
             <div className="form-group">
@@ -35,7 +40,7 @@ export default function LoginForm(props) {
                 <button className="btn btn-primary" type="submit">Đăng nhập</button>
                 <p />
                 <p>hoặc</p>
-                <a href="#">Đăng ký</a>
+                <a href="#" onClick={ openRegister}>Đăng ký</a>
             </div>
         </form>
     )

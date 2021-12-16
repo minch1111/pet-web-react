@@ -58,8 +58,11 @@ export default function Home() {
       name:"Pate rau củ tươi dành cho chó",
       img:"/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png"
     },
-    
+
   ]
+  useEffect(()=>{
+    window.scrollTo(0, 0)
+  },[])
     return (
         <main>
         <Sliders />
@@ -243,13 +246,13 @@ export default function Home() {
         </section>
         <Advertise />
         {/* Sản phẩm thức ăn */}
-        <ProductList 
+        <ProductList
           title={"Thức ăn & dinh dưỡng cho chó mèo"}
-          data={foodList} 
+          data={foodList}
         />
-        <Banner />  
+        <Banner />
         {/* Sản phẩm phụ kiện */}
-        <ProductList title={"Sản phẩm dành cho thú cưng"} 
+        <ProductList title={"Sản phẩm dành cho thú cưng"}
           data={foodList}
         />
         <News />
