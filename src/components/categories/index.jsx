@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { Link, useRouteMatch } from 'react-router-dom/cjs/react-router-dom.min'
 import shopService from '../../services/shopService'
 let $ = window.$
+
+
 
 function Categories() {
     const [category, setCategory] = useState()
@@ -8,7 +11,6 @@ function Categories() {
         let res = await shopService.getAllCategory()
         await setCategory(res.category)
     }, [])
-
 
     useEffect(() => {
         // $('#items_dog').on('click', () => {
@@ -32,6 +34,9 @@ function Categories() {
             $('#fashion').toggleClass('turn')
         })
     }, [])
+
+    let { path, url } = useRouteMatch()
+    // console.log(`url`, url)
     return (
         <div className="col-lg-3">
             <div className="product_title">
@@ -135,7 +140,7 @@ export const CategoryItem = ({ data }) => {
         document.querySelector(`.${data.slug}_tab`).classList.toggle('active')
         document.querySelector(`.${data.slug}`).classList.toggle('active')
         document.querySelector(`#items_${data.slug}`).classList.toggle('turn')
-        console.log('click');
+        // console.log('click');
     }
     useEffect(async () => {
         let res = await shopService.getListSubCateGoryByIdCate(data._id)
@@ -145,18 +150,18 @@ export const CategoryItem = ({ data }) => {
     return (
         <div>
             <div className={`product_tab-item ${data.slug}_tab`}>
-                <a href="#">
+                <Link to={`/shop/${data.slug}`}>
                     <div className="product_tab-item-title font-500">
                         <span> {data.name} </span>
                     </div>
-                </a>
+                </Link>
                 <i className="fas fa-chevron-down product_tab-item-follow" id={`items_${data.slug}`} onClick={handleClick} />
             </div>
             <div className={`items_follow ${data.slug}`}>
                 <ul>
                     {
                         listSubcategory?.map((o, i) => (
-                            <li key={i}><a className="after mbottom-10" href="#">{o.name}</a></li>
+                            <li key={i}><Link className="after mbottom-10" to={`/shop/${data.slug}/${o.slug}`}>{o.name}</Link></li>
                         ))
                     }
                     {/* <li><a className="after mbottom-10" href="#">Thức ăn cho Chó</a></li>

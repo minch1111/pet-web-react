@@ -12,6 +12,9 @@ const shopService={
     },
     getDetailProductBySlug(slug){
         return fetch(`${api}/products/${slug}`).then(res=>res.json())
+    },
+    getListProductBySubCategory(slug){
+        return fetch(`${api}/subcategory/search/${slug}`).then(res=>res.json())
     }
 }
 export default shopService

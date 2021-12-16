@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router'
+import { useRouteMatch } from 'react-router-dom/cjs/react-router-dom.min'
 import { Context } from '../../App'
 import Categories from '../../components/categories'
 import shopService from '../../services/shopService'
@@ -49,15 +50,35 @@ export default function Product() {
   //   }
 
   // ]
-  const {listProductInfo} = useContext(Context);
+  const { listProductInfo } = useContext(Context);
   const [productItems, setproductItems] = useState()
-  let {slug} = useParams()
-  // console.log(`slug`, slug)
-  useEffect(async ()=>{
-    let res=await shopService.getListProductByCategory(slug)
-    await setproductItems(res.product)
-  },[slug])
-  if(!productItems) return <div> Loading... </div>
+  let { slug } = useParams()
+  let { url } = useRouteMatch()
+  // console.log((url.match(new RegExp("/","g"))||[]).length);
+  console.log(`url`, url)
+  console.log(`url.charAt(url.length)`, url.charAt(url.length - 1))
+  console.log(`slug`, slug)
+  useEffect(async () => {
+    if (slug !== '') {
+      if ((url.match(new RegExp("/", "g")) || []).length < 3) {
+        let res = await shopService.getListProductByCategory(slug)
+        await setproductItems(res.product)
+      }
+      // await console.log(`res`, res)
+      else {
+        if (url.charAt(url.length - 1) === '/') {
+          let res = await shopService.getListProductByCategory(slug)
+          await setproductItems(res.product)
+        }
+        else {
+          let res1 = await shopService.getListProductBySubCategory(slug)
+          await setproductItems(res1.product)
+        }
+      }
+    }
+
+  }, [slug])
+  if (!productItems) return <div> Loading... </div>
   return (
     <main>
       <section className="section">
@@ -85,13 +106,13 @@ export default function Product() {
                 <div className="products_listitems">
                   <div className="row">
                     {
-                      productItems.map((value,key)=>(
-                        <ProductItem 
-                        key={key}
-                        // title = {value.title}
-                        // name={value.name}
-                        // img = {value.img}
-                        data= {value}
+                      productItems.map((value, key) => (
+                        <ProductItem
+                          key={key}
+                          // title = {value.title}
+                          // name={value.name}
+                          // img = {value.img}
+                          data={value}
                         />
                       ))
                     }

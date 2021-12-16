@@ -165,6 +165,7 @@ function App() {
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/shop/:slug" exact component={Product} />
+            <Route path="/shop/:slug/:slug" component={Product} />
             <PrivateRoute path="/cart" exact component={Cart} />
             <Route path="/cart/payment" component={Payment} />
             <PrivateRoute path="/user-profile" component={Profile} />
