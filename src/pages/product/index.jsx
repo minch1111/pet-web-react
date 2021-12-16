@@ -59,6 +59,7 @@ export default function Product() {
   console.log(`url.charAt(url.length)`, url.charAt(url.length - 1))
   console.log(`slug`, slug)
   useEffect(async () => {
+    window.scrollTo(0, 0)
     if (slug !== '') {
       if ((url.match(new RegExp("/", "g")) || []).length < 3) {
         let res = await shopService.getListProductByCategory(slug)
