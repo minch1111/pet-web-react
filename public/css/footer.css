@@ -19,7 +19,7 @@ body footer .brand-title h3{
 .border-left-right{
     border-left: 2px solid #33bfde;
     border-right: 2px solid #33bfde;
-    
+
 }
 
 body footer .animated-border::after{
@@ -120,7 +120,7 @@ body footer .title-footer .footer-logo{
     opacity: .6;
    }
    body footer .about-footer .shop-about-info a:hover{
-      opacity: 1; 
+      opacity: 1;
    }
 
    body footer .shop-care .shop-care-customer{
@@ -150,7 +150,7 @@ body footer .title-footer .footer-logo{
        width: 100%;
        background-color:#fff;
        transition: all 1s ease;
-   } 
+   }
 
    body footer .about-footer .shop-about-social{
        display: flex;
@@ -207,7 +207,7 @@ body footer .title-footer .footer-logo{
         margin-top: -460px;
         width: 100%;
         height: 550px;
-        background-color: black;
+        background-color: #474646;
     }
     body footer .footer-img img{
         width: 100%;
@@ -217,7 +217,7 @@ body footer .title-footer .footer-logo{
     }
     body footer .fix-to-top .fix{
         display: flex;
-    }   
+    }
     body footer .btn-to-Top{
         position: fixed;
         height: 60px;
