@@ -4,7 +4,7 @@ import Banner from './components/banner'
 import Promo from './components/promo'
 import ProductList from './components/productList'
 import Sliders from './components/sliders'
-import News from './components/news'
+import NewsHome from './components/newsHome'
 
 export default function Home() {
   let foodList =[
@@ -255,7 +255,7 @@ export default function Home() {
         <ProductList title={"Sản phẩm dành cho thú cưng"}
           data={foodList}
         />
-        <News />
+        <NewsHome />
       </main>
     )
 }

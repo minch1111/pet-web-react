@@ -1,0 +1,19 @@
+body main .section-news{
+  margin: 40px 90px;
+}
+body main .news-item{
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 10px;
+}
+body main .news-item img{
+  height: 180px;
+  width: 100%;
+  transform: scale(1);
+  transition: transform .6s ease;
+}
+
+body main .news-item img:hover{
+  transform: scale(1.2);
+  transition: transform .6s ease;
+}
