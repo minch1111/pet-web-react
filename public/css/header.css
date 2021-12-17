@@ -354,7 +354,7 @@ body header .header_main-cart {
     height: 100%;
     display: flex;
     align-items: center;
-    cursor: pointer;
+    /* cursor: pointer; */
     margin-left: 5%;
     position: relative;
 }
@@ -381,7 +381,7 @@ body header .header_main-cart .hover_cart-content .hover_cart-item .cart-item--i
     width: 100px;
 }
 
-body header .header_main-user .user-login i, 
+body header .header_main-user .user-login i,
 body header .header_main-cart .cart i {
     font-size: 30px;
 }

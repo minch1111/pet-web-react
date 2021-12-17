@@ -55,7 +55,11 @@ export default function HeaderCart() {
                         )
                     }
 
-                    <Link to="/cart" className="txt-center"> <span><i>Xem chi tiết</i></span><i className="fas fa-arrow-right" /> </Link>
+                    <div className='txt-center'>
+
+                        <Link to="/cart" className="txt-center" style={{display:'inline-block'}}> <span><i>Xem chi tiết</i></span><i className="fas fa-arrow-right" /> </Link>
+
+                    </div>
                 </p>
                 <span>Các hình thức thanh toán</span>
                 <div className="row mtop-20">
