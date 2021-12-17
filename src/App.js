@@ -7,6 +7,7 @@ import Home from "./pages/home";
 import Payment from "./pages/payment";
 import Product from "./pages/product";
 import Services from "./pages/service";
+import News from "./pages/news/News";
 import {
   BrowserRouter as Router,
   Route,
@@ -119,12 +120,12 @@ function App() {
       img:"/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png",
       number:0
     },
-    
+
   ]
 
   const search = (form) => {
     if(form) console.log(form?.search)
-    
+
   }
   const login =()=>{
     localStorage.setItem('loginn',JSON.stringify(data))
@@ -170,7 +171,8 @@ function App() {
             <Route path="/cart/payment" component={Payment} />
             <PrivateRoute path="/user-profile" component={Profile} />
             <Route path="/services" component={Services} />
-            <Route path="/shop/detail/:slug" component={ProductDetail} />
+            <Route path="/product/detail/:slug" component={ProductDetail} />
+            <Route path='/news' component={News} />
             <Route component={Page404} />
             {/* <Home /> */}
             {/* <Product /> */}
