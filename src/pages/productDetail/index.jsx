@@ -15,6 +15,7 @@ export default function ProductDetail(props) {
     console.log(`slug`, slug)
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         const imgTabs = document.querySelectorAll('.imgTab');
         const itemTabs = document.querySelectorAll('.imgItem');
 
@@ -51,7 +52,7 @@ export default function ProductDetail(props) {
     },[])
 
     // const { data, addCartFromDetail } = useContext(Context);
-    
+
     // const [cart, setCart] = useState({ product: props.location.querry})
 
     const inCrease = () => {
