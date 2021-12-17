@@ -6,28 +6,29 @@ import { CHANGE_NUM_BY_KEY, DECREASE_CART, GET_LIST_ORDER, INCREASE_CART, LOAD_N
 
 function Cart() {
   // const [checked, setChecked] = useState(false)
-  let list = []
+  const [list, setList] = useState([])
   const { listProduct } = useSelector(store => store.cart)
   const dispatch = useDispatch()
   // const [listPay, setListPay] = useState([])
   useEffect(() => {
-    list = []
+    // list = []
     dispatch({ type: LOAD_NEW_ORDER, payload: [] })
   }, [])
   const handleSetList = (data) => {
-    list.push(data)
+    setList([...list,list.push(data)])
     dispatch({ type: GET_LIST_ORDER, payload: data })
     // setChecked(true)
     //  console.log(list);
   }
   const handleSetListUnchecked = (data) => {
 
-    // list.splice(list.indexOf(data), 1)
+    list.splice(list.indexOf(data), 1)
+    // list.push(data)
     dispatch({ type: UNCHECKED_ORDER, payload: data })
     // setChecked(false)
-    console.log(`List`, list)
+    // console.log(`List`, list)
   }
-  console.log(`list`, list)
+  console.log(`list`, list.length)
   // console.log(`listPay`, typeof listPay)
   // console.log(list);
   // const handleSubmit = () => {
@@ -90,9 +91,14 @@ function Cart() {
                 <div className="offset-lg-8" />
                 <div className="col-lg-4">
                   <div className="btn_group flex justify_evenly">
-                    <Link to="/cart/payment" className="btn btn-primary">
+                    {
+                      list.length>0?<Link to="/cart/payment" className="btn btn-primary">
+                      Thanh toán
+                    </Link> :<Link to="#" className="btn btn-primary"  >
                       Thanh toán
                     </Link>
+                    }
+
                     <div className="btn btn-danger">
                       Xóa tất cả
                     </div>
