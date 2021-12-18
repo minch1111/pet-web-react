@@ -1,15 +1,19 @@
 import React, { useContext, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Context } from '../../App'
+import { LOGOUT } from '../../store/type'
 import HeaderCart from './components/headerCart'
 import Nav from './components/nav'
 import Search from './components/search'
+import avatar from '../../assets/img/avatar.png'
 let $ = window.$
 
 
 export default function Header(props) {
 
-
+  const { user } = useSelector(store => store.user)
+  const dispatch = useDispatch()
   const loginBtn = () => {
     document.body.classList.toggle('login-is-show');
     document.querySelector(".login_form").style.display = 'block'
@@ -18,10 +22,11 @@ export default function Header(props) {
     document.body.classList.toggle('login-is-show');
     document.querySelector(".register_form").style.display = 'block'
   }
-  const { user,logout } = useContext(Context);
+  // const { user,logout } = useContext(Context);
 
-  const handleLogout=()=>{
-    logout();
+  const handleLogout = () => {
+    // logout();
+    dispatch({type:LOGOUT})
   }
 
   return (
@@ -61,7 +66,7 @@ export default function Header(props) {
             ) : (
               <div className="header_main-user login pad-10 flex align_center after">
                 <div className="user_avatar">
-                  <img src={user?.avatar} alt="" />
+                  <img src={avatar} alt="" />
                 </div>
                 <div className="user_name pad-10">
                   <p> {user?.username} </p>

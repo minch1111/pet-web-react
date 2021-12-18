@@ -157,3 +157,7 @@ body .border-2-solid{
 body main .section {
     margin: 70px 90px;
 }
+
+body .line-through {
+    text-decoration: line-through;
+}

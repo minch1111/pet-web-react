@@ -15,6 +15,9 @@ const shopService={
     },
     getListProductBySubCategory(slug){
         return fetch(`${api}/subcategory/search/${slug}`).then(res=>res.json())
+    },
+    getVoucher(){
+        return fetch(`${api}/voucher`).then(res=>res.json())
     }
 }
 export default shopService

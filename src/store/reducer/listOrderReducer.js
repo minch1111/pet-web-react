@@ -17,10 +17,10 @@ export const listOrderReducer = (state = initialState, action) => {
                 listOrder
             }
         case GET_LIST_ORDER:
-            console.log(`listOrder`, listOrder)
-            console.log(`action.payload`, action.payload)
+            // console.log(`listOrder`, listOrder)
+            // console.log(`action.payload`, action.payload)
             listOrder.push(action.payload)
-            console.log(`listOrder`, listOrder)
+            // console.log(`listOrder`, listOrder)
             localStorage.setItem('listOrder', JSON.stringify(listOrder));
             // <Redirect to="/cart/payment" />
             return {

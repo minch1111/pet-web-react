@@ -11,6 +11,12 @@ export default function LoginModal() {
         document.querySelector(".register_form").style.display = 'none'
     }
 
+    const togglePopupRegister=()=>{
+        // document.body.classList.toggle('login-is-show');
+        document.querySelector(".register_form").style.display = 'none'
+        document.querySelector(".login_form").style.display = 'block'
+    }
+
     return (
         <Modal>
             <div className="pop-up login" onClick={togglePopup}>
@@ -18,7 +24,7 @@ export default function LoginModal() {
                     togglePopup={togglePopup}
                 />
                 <RegisterForm
-                    togglePopup={togglePopup}
+                    togglePopup={togglePopupRegister}
                 />
             </div>
         </Modal>

@@ -135,32 +135,11 @@ function App() {
     localStorage.removeItem('loginn');
     setUser()
   }
-
-  const addCartFromDetail = (product)=>{
-    setUser({
-      ...data,
-      ...data.cart.push(product)
-    })
-  }
-
-  const setDataInCart = (number) => {
-    setUser({
-      ...data,
-      ...data.cart.number = number
-    })
-  }
-  const removeProductInCart = () => {
-    setUser({
-      ...data,
-      cart: {}
-    })
-  }
-
   // console.log(`data`, data)
   return (
     <div className="App">
       <Router>
-        <Context.Provider value={{ user, search,listProductInfo,login,logout, search, addCartFromDetail, setDataInCart, removeProductInCart }}>
+        <Context.Provider value={{ user, search,listProductInfo,login,logout, search, }}>
           <Header />
           <LoginModal/>
           <Switch>

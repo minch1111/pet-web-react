@@ -7,7 +7,7 @@ export default function useForm(initValue={}) {
     const [form,setForm] = useState(initValue)
     const[error,setError]= useState({})
     const rules=[]
-    
+
     const handleChange = (ev)=>{
         let name = ev.currentTarget.name;
         let value = ev.currentTarget.value;
@@ -49,7 +49,7 @@ export default function useForm(initValue={}) {
         }
         return errObj
     }
-    
+
     function register (name,rule){
         if(rule){
             rules[name]=rule
@@ -76,6 +76,7 @@ export default function useForm(initValue={}) {
         form,
         error,
         handleSubmit,
-        register
+        register,
+        setForm
     }
 }

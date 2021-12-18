@@ -4,7 +4,7 @@ import { Redirect,Route } from 'react-router';
 import {Context} from '../App'
 
 function PrivateRoute(props) {
-    let {user} = useContext(Context)
+    let {user} = useSelector(store=>store.user)
 
     if(!user) return <Redirect to="/" />
 
