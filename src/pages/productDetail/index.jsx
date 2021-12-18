@@ -72,7 +72,11 @@ export default function ProductDetail(props) {
 
     const getNumber = (ev) => {
         let value = ev.currentTarget.value
-        setNumber(parseInt(value))
+        if(productInfo.amountStock- parseInt(value)>=0)
+        {
+            setNumber(parseInt(value))
+        }
+
      }
 
     const handleAdd = () => {
