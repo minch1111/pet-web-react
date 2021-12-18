@@ -56,7 +56,13 @@ export default function ProductDetail(props) {
     // const [cart, setCart] = useState({ product: props.location.querry})
 
     const inCrease = () => {
-        setNumber(number + 1)
+        if(productInfo.amountStock-number>0)
+        {
+            setNumber(number + 1)
+        }
+        else{
+            alert("Oops, Hiện không đủ số lượng hàng cho bạn đặt 🙀")
+        }
         // item.number
     }
     const deCrease = () => {
@@ -66,7 +72,7 @@ export default function ProductDetail(props) {
 
     const getNumber = (ev) => {
         let value = ev.currentTarget.value
-        setNumber(value)
+        setNumber(parseInt(value))
      }
 
     const handleAdd = () => {
@@ -138,29 +144,29 @@ export default function ProductDetail(props) {
                                                             <img src={productInfo?.listImage[0].image[0].url} alt="" />
                                                         </div>
                                                         <div className="imgItem">
-                                                            <img src={productInfo?.listImage[1].image[0].url} alt="" />
+                                                            <img src={productInfo?.listImage[1]?.image[0]?.url} alt="" />
                                                         </div>
                                                         <div className="imgItem">
-                                                            <img src={productInfo?.listImage[2].image[0].url} alt="" />
+                                                            <img src={productInfo?.listImage[2]?.image[0]?.url} alt="" />
                                                         </div>
                                                         <div className="imgItem">
-                                                            <img src={productInfo?.listImage[3].image[0].url} alt="" />
+                                                            <img src={productInfo?.listImage[3]?.image[0]?.url} alt="" />
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="col-lg-12">
                                                     <div className="product_info-imgTab">
                                                         <div className="imgTab active" onClick={handleClickChangeImage}>
-                                                            <img src={productInfo?.listImage[0].image[0].url} alt="" />
+                                                            <img src={productInfo?.listImage[0]?.image[0]?.url} alt="" />
                                                         </div>
                                                         <div className="imgTab" onClick={handleClickChangeImage}>
-                                                            <img src={productInfo?.listImage[1].image[0].url} alt="" />
+                                                            <img src={productInfo?.listImage[1]?.image[0]?.url} alt="" />
                                                         </div>
                                                         <div className="imgTab" onClick={handleClickChangeImage}>
-                                                            <img src={productInfo?.listImage[2].image[0].url} alt="" />
+                                                            <img src={productInfo?.listImage[2]?.image[0]?.url} alt="" />
                                                         </div>
                                                         <div className="imgTab" onClick={handleClickChangeImage}>
-                                                            <img src={productInfo?.listImage[3].image[0].url} alt="" />
+                                                            <img src={productInfo?.listImage[3]?.image[0]?.url} alt="" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -195,11 +201,14 @@ export default function ProductDetail(props) {
                                                 <div className="detail_cost font-20 fweight-700 mbottom-20">
                                                     <p>Giá :  {money(productInfo?.price)} </p>
                                                 </div>
+                                                <div className="detail_cost mbottom-20">
+                                                    <span style={{color:'gray'}}>Số lượng tồn :  {productInfo?.amountStock} </span>
+                                                </div>
                                                 <div className="addCart mbottom-20">
                                                     <div className="addCart_number">
                                                         <div className="form">
                                                             <button type="submit" onClick={deCrease} className="btn btn-minus">-</button>
-                                                            <input onChange={getNumber} name="numberCart" type="text"  className="number" value={number} />
+                                                            <input onChange={getNumber} name="numberCart" type="number"  className="number" value={number} />
                                                             <button type="submit" onClick={inCrease} className="btn btn-plus">+</button>
                                                         </div>
                                                     </div>

@@ -5,11 +5,11 @@ import { Context } from '../../App'
 import { CHANGE_NUM_BY_KEY, DECREASE_CART, GET_LIST_ORDER, INCREASE_CART, LOAD_NEW_ORDER, REMOVE_CART, UNCHECKED_ORDER } from '../../store/type'
 
 function Cart() {
-  // const [checked, setChecked] = useState(false)
   const [list, setList] = useState([])
+  let checkAll = useRef()
+  const [checkAlll, setCheckAlll] = useState()
   const { listProduct } = useSelector(store => store.cart)
   const dispatch = useDispatch()
-  // const [listPay, setListPay] = useState([])
   useEffect(() => {
     // list = []
     dispatch({ type: LOAD_NEW_ORDER, payload: [] })
@@ -23,8 +23,11 @@ function Cart() {
   const handleSetListUnchecked = (data) => {
 
     list.splice(list.indexOf(data), 1)
+    console.log(`list`, list)
+    checkAll.current.checked = false
     // list.push(data)
     dispatch({ type: UNCHECKED_ORDER, payload: data })
+    setCheckAlll(false)
     // setChecked(false)
     // console.log(`List`, list)
   }
@@ -65,7 +68,7 @@ function Cart() {
                 <div className="col-lg-12 cart_product mtop-20">
                   <div className="col-lg-4 flex align_center mbottom-20">
                     <div className="check-all">
-                      <input type="checkbox" />
+                      <input type="checkbox" ref={checkAll} onChange={()=>{setCheckAlll(checkAll.current.checked)}} />
                     </div>
                     <div className="select">
                       <p>Chọn tất cả</p>
@@ -81,6 +84,7 @@ function Cart() {
                           // setListPayMent={setListPay()}
                           // listPay={listPay}
                           setlist={(data) => handleSetList(data)}
+                          all = {checkAlll}
                           setUnchecked={(data) => handleSetListUnchecked(data)}
                         />
                       ))
@@ -124,12 +128,24 @@ export const CartItem = (props) => {
 
   const dispatch = useDispatch()
   let inputRef = useRef()
+  let checkItem = useRef()
 
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.value = props.data.num
     }
   }, [props.data.num])
+  useEffect(()=>{
+    if(props.all===true){
+      checkItem.current.checked=true
+      props.setlist(props.data)
+      // console.log(`checkItem.current.checked`, checkItem.current.checked)
+    }
+    else{
+      checkItem.current.checked=false
+      props.setUnchecked(props.data)
+    }
+  },[props.all])
 
   const handleKeyPress = (ev, data) => {
     if (ev.which === 13) {
@@ -146,7 +162,7 @@ export const CartItem = (props) => {
         <div className="col-lg-4 flex">
           <div className="cart_product-info flex">
             <div className="cart_product-info--select flex">
-              <input type="checkbox" onClick={(ev) => {
+              <input type="checkbox" ref={checkItem}  onClick={(ev) => {
                 ev.currentTarget.checked === true ?
                   props.setlist(props.data) : props.setUnchecked(props.data)
                 // console.log(`${props?.data?.id}`,ev.currentTarget.checked)
