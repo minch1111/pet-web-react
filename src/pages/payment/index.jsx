@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ProductPayment from './component/ProductPayment'
 import PaymentForm from './component/PaymentForm'
 import { Link } from 'react-router-dom'
@@ -15,6 +15,7 @@ const PAYPAL_SECRET = "SECRET";
 function Payment() {
   const [vouchers, setVouchers] = useState()
   const [discount, setDiscount] = useState()
+  const [confirm,setConfirm]= useState(false)
   const { user } = useSelector(store => store.user)
   const dispatch = useDispatch()
   let path = `/`;
@@ -22,7 +23,7 @@ function Payment() {
   let ship = 30000;
   const client = {
     sandbox:
-      "AXMUBOcaszqCzfEOC-r--Rn7rMVoEbH9c6XbmyKb04nURqcLhpFxWwwnaUytaMR9UTaE2vwLfi5tqKbT",
+      "AdtlS3s6WZyr22y4U4H576TH3f73VNae6-y4I7OfSVoaDaAOvX2EduJs0DCLAPl7n2jx4hEuTfhFVLpa",
     production: "aa"
   };
   const { listOrder } = useSelector(store => store.listOrder)
@@ -31,7 +32,7 @@ function Payment() {
     listOrder?.forEach(element => {
       total = total + element.num * element.price
     });
-    return total
+    return total>=500000? total:total+30000
   }
   //  Hàm gửi Back End
   const calTotalPrice = (voucher) => {
@@ -53,9 +54,16 @@ function Payment() {
   const money = (a) => {
     return a.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })
   }
+  // let usd
+
+  const accept =()=>{
+    setConfirm(true)
+    // usd=transVNDtoUSD(form.totalPrice)
+  }
   const submit = async () => {
     // console.log('click');
     // console.log(`form`, form)
+    // setConfirm(true)
     let res = await paymentServices.confirmPay(form);
     if (res.success) {
       alert('⚡ Đặt hàng thành công ⚡ \n 😻😻 PETPARADISE rất cảm ơn quý khách 😻😻')
@@ -64,6 +72,7 @@ function Payment() {
     }
     // //
   }
+  console.log(`error`, error)
   // Hàm hiển thị
   const displayTotal = (discountt) => {
     let total = 0
@@ -91,7 +100,7 @@ function Payment() {
       })
       await setVouchers(listVoucherCondition)
     }
-    setForm({ ...form, id: user._id, name: user.name, phone: user.phone, email: user.email, payments: false, listOrder, totalPrice: calTotal() })
+    setForm({ ...form, id: user._id, name: user.name, phone: user.phone,address:user.address ,email: user.email,voucher:"", payments: false, listOrder, totalPrice: calTotal() })
   }, [])
   const handleChangeVoucher = (ev) => {
     let name = ev.target.name;
@@ -108,6 +117,15 @@ function Payment() {
     // console.log("effect tính tổng")
     setForm({ ...form, totalPrice: calTotalPrice(discount) })
   }, [discount])
+
+  // let disableInput= useRef()
+
+  const choosePay =(a)=>{
+    let check = a.target.checked
+    setForm({...form,payments:check})
+  }
+
+  console.log(`form`, form)
 
   return (
     <main>
@@ -156,7 +174,7 @@ function Payment() {
                         <div className="col-lg-12 mbottom-50">
                           <div className="content-title--price">
                             <div className="price_total fontw-500 fontsz-17">
-                              <p>Tổng tiền sản phẩm : <span> {money(calTotal())} </span></p>
+                              <p>Tổng tiền sản phẩm : <span> {money(calTotal()-30000)} </span></p>
                             </div>
                             <div className="price_shipping fontw-500 fontsz-17">
                               <p>
@@ -184,24 +202,27 @@ function Payment() {
                           </div>
                         </div>
                         <div className="col-lg-12">
-                          <form onSubmit={handleSubmit(submit)} className="content-form-detail pad-20">
+                          <form onSubmit={handleSubmit(accept)} className="content-form-detail pad-20">
                             <div className="form-group">
                               <label className="fontw-500 fontsz-17" >Họ &amp; Tên</label>
-                              <input type="text" {...register('name', { required: true })} className="form-control" placeholder="Nhập tên" />
+                              <input type="text" disabled={confirm&&true} {...register('name', { required: true })} className="form-control" placeholder="Nhập tên" />
                             </div>
                             <div className="form-group">
                               <label className="fontw-500 fontsz-17">Số điện thoại</label>
-                              <input type="text" {...register('phone', { required: true })} className="form-control" placeholder="Nhập số điện thoại" />
+                              <input type="text" disabled={confirm&&true} {...register('phone', { required: true })} className="form-control" placeholder="Nhập số điện thoại" />
                             </div>
                             <div className="form-group">
                               <label className="fontw-500 fontsz-17">Địa chỉ nhận
                                 hàng</label>
-                              <input type="text" {...register('address', { required: false })} className="form-control" placeholder="Nhập địa chỉ" />
+                              <input type="text" disabled={confirm&&true} {...register('address', { required: true })} className="form-control" placeholder="Nhập địa chỉ" />
+                                {
+                                  error.address&& <small className='text-danger'> {error.address} </small>
+                                }
                             </div>
                             <div className="form-group">
                               <label className="fontw-500 fontsz-17" >Chọn mã
                                 khuyến mãi của bạn</label>
-                              <select className="custom-select" name="voucher" onChange={handleChangeVoucher}>
+                              <select disabled={confirm&&true} className="custom-select" name="voucher" onChange={handleChangeVoucher}>
                                 <option value="">Chọn một trong các mã khuyến mãi</option>
                                 {
                                   vouchers?.map((o, i) => (
@@ -215,26 +236,54 @@ function Payment() {
                             </div>
                             <div className="form-group">
                               <label className="fontw-500 fontsz-17">Ghi chú</label>
-                              <textarea className="form-control" {...register('note')} id="note" rows={3} placeholder="Ghi chú..." />
+                              <textarea disabled={confirm&&true} className="form-control" {...register('note')} id="note" rows={3} placeholder="Ghi chú..." />
                             </div>
-                            <div className="col-lg-12">
+                            {
+                              !confirm&&<div className="col-lg-12">
                               <div className="content-title--btn flex justify_evenly align_center">
-                                <PaypalExpressBtn
-                                  client={client}
-                                  currency={"EUR"}
-                                  total={1.0}
-                                  shipping={1}>
-
-                                </PaypalExpressBtn>
                                 <button type="submit" className="btn btn-primary">
-                                  Đặt hàng
+                                  Xác nhận
                                 </button>
                                 <Link to="/cart" className="btn btn-danger">
                                   Hủy
                                 </Link>
                               </div>
                             </div>
+                            }
+
                           </form>
+                          {
+                            confirm&&<div className="col-lg-12 mb-3">
+                              <div class="form-check">
+                                <label class="form-check-label">
+                                  <input type="checkbox" class="form-check-input" onChange={choosePay} name="" id="" />
+                                  Phương thức thanh toán Online (Paypal)
+                                </label>
+                              </div>
+                              <br />
+                            <div className="content-title--btn flex justify_evenly align_center">
+                              {
+                                form.payments===true?<PaypalExpressBtn
+                                client={client}
+                                currency={"USD"}
+                                total={form.totalPrice*0.000044}
+                                shipping={1}
+                                onSuccess={(ev)=>{if(ev.paid===true){submit();}}}
+                                >
+                              </PaypalExpressBtn>:<button onClick={()=>{submit()}} className="btn btn-primary">
+                                Đặt hàng
+                              </button>
+                              }
+
+
+
+                              <Link to="/cart" className="btn btn-danger">
+                                Hủy
+                              </Link>
+                            </div>
+                          </div>
+                          }
+
                         </div>
                       </div>
                     </div>

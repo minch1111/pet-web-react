@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+import React, { useEffect} from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Route, Switch } from 'react-router';
 import { Link, NavLink } from 'react-router-dom';
 import "../../assets/css/profile.css"
@@ -13,7 +14,6 @@ function Profile() {
     $(function () {
       $("#datepicker").datepicker({ dateFormat: 'dd/mm/yy' }).val();
     });
-
     // const tabItems = document.querySelectorAll(".tab_item");
     // const tabContentItems = document.querySelectorAll(".tab_content-item");
 
@@ -29,6 +29,7 @@ function Profile() {
     //   }
     // })
   }, [])
+  const { user } = useSelector(store => store.user)
   return (
     <main>
       <section className="section">
@@ -39,10 +40,10 @@ function Profile() {
               <div className="profile_user ">
                 <div className="profile_user-detail flex align_center justify_center mbottom-50">
                   <div className="user-detail--avatar">
-                    <img src="./img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png" alt="" />
+                    <img src={user?.avatar?.url || user.avatar} alt="" />
                   </div>
                   <div className="user-detail--name">
-                    <p>Minch</p>
+                    <p> {user.username} </p>
                   </div>
                 </div>
                 <div className="profile_user-items flex justify_start">

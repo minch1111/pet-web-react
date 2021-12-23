@@ -15,7 +15,7 @@ function Cart() {
     dispatch({ type: LOAD_NEW_ORDER, payload: [] })
   }, [])
   const handleSetList = (data) => {
-    setList([...list,list.push(data)])
+    setList([...list, list.push(data)])
     dispatch({ type: GET_LIST_ORDER, payload: data })
     // setChecked(true)
     //  console.log(list);
@@ -68,7 +68,7 @@ function Cart() {
                 <div className="col-lg-12 cart_product mtop-20">
                   <div className="col-lg-4 flex align_center mbottom-20">
                     <div className="check-all">
-                      <input type="checkbox" ref={checkAll} onChange={()=>{setCheckAlll(checkAll.current.checked)}} />
+                      <input type="checkbox" ref={checkAll} onChange={() => { setCheckAlll(checkAll.current.checked) }} />
                     </div>
                     <div className="select">
                       <p>Chọn tất cả</p>
@@ -84,7 +84,7 @@ function Cart() {
                           // setListPayMent={setListPay()}
                           // listPay={listPay}
                           setlist={(data) => handleSetList(data)}
-                          all = {checkAlll}
+                          all={checkAlll}
                           setUnchecked={(data) => handleSetListUnchecked(data)}
                         />
                       ))
@@ -96,11 +96,11 @@ function Cart() {
                 <div className="col-lg-4">
                   <div className="btn_group flex justify_evenly">
                     {
-                      list.length>0?<Link to="/cart/payment" className="btn btn-primary">
-                      Thanh toán
-                    </Link> :<Link to="#" className="btn btn-primary"  >
-                      Thanh toán
-                    </Link>
+                      list.length > 0 ? <Link to="/cart/payment" className="btn btn-primary">
+                        Thanh toán
+                      </Link> : <Link to="#" className="btn btn-primary"  >
+                        Thanh toán
+                      </Link>
                     }
 
                     <div className="btn btn-danger">
@@ -120,7 +120,7 @@ function Cart() {
 export default Cart
 
 export const CartItem = (props) => {
-
+  console.log(`props.data`, props.data)
 
   const money = (a) => {
     return a.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })
@@ -135,21 +135,26 @@ export const CartItem = (props) => {
       inputRef.current.value = props.data.num
     }
   }, [props.data.num])
-  useEffect(()=>{
-    if(props.all===true){
-      checkItem.current.checked=true
+  useEffect(() => {
+    if (props.all === true) {
+      checkItem.current.checked = true
       props.setlist(props.data)
       // console.log(`checkItem.current.checked`, checkItem.current.checked)
     }
-    else{
-      checkItem.current.checked=false
+    else {
+      checkItem.current.checked = false
       props.setUnchecked(props.data)
     }
-  },[props.all])
+  }, [props.all])
 
   const handleKeyPress = (ev, data) => {
     if (ev.which === 13) {
-      dispatch({ type: CHANGE_NUM_BY_KEY, payload: { o: data, num: ev.currentTarget.value } })
+      if (props.data.amountStock - inputRef.current.value >= 0) {
+        dispatch({ type: CHANGE_NUM_BY_KEY, payload: { o: data, num: ev.currentTarget.value } })
+      }
+      else{
+        alert("Oops, Hiện không đủ số lượng hàng cho bạn đặt 🙀")
+      }
     }
   }
 
@@ -162,7 +167,7 @@ export const CartItem = (props) => {
         <div className="col-lg-4 flex">
           <div className="cart_product-info flex">
             <div className="cart_product-info--select flex">
-              <input type="checkbox" ref={checkItem}  onClick={(ev) => {
+              <input type="checkbox" ref={checkItem} onClick={(ev) => {
                 ev.currentTarget.checked === true ?
                   props.setlist(props.data) : props.setUnchecked(props.data)
                 // console.log(`${props?.data?.id}`,ev.currentTarget.checked)
@@ -182,9 +187,9 @@ export const CartItem = (props) => {
         <div className="col-lg-4 flex justify_evenly align_center">
           <div className="cart_product-edit editcart_number">
             <div className="form">
-              <button className="btn btn-minus" onClick={() => { dispatch({ type: DECREASE_CART, payload: props.data }) }} >-</button>
+              <button className="btn btn-minus" onClick={() => { dispatch({ type: DECREASE_CART, payload: props.data }) }}>-</button>
               <input type="text" ref={inputRef} className="number" onKeyPress={(ev) => { handleKeyPress(ev, props.data) }} type="number" min={0} />
-              <button className="btn btn-plus" onClick={() => { dispatch({ type: INCREASE_CART, payload: props.data }) }} >+</button>
+              <button className="btn btn-plus" onClick={() => { if (props.data.amountStock - inputRef.current.value <= 0) { alert("Oops, Hiện không đủ số lượng hàng cho bạn đặt 🙀") } else { dispatch({ type: INCREASE_CART, payload: props.data }) } }} >+</button>
             </div>
           </div>
           {/* <div className="cart_product-acceptEdit">

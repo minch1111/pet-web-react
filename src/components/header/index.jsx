@@ -10,6 +10,7 @@ import avatar from '../../assets/img/avatar.png'
 let $ = window.$
 
 
+
 export default function Header(props) {
 
   const { user } = useSelector(store => store.user)
@@ -27,6 +28,12 @@ export default function Header(props) {
   const handleLogout = () => {
     // logout();
     dispatch({type:LOGOUT})
+  }
+  const getLastName =(fullname)=>{
+    // let detail = []
+    let detail = fullname.split(' ');
+    // console.log(`detail`, detail)
+    return detail[detail.length-1]
   }
 
   return (
@@ -66,10 +73,10 @@ export default function Header(props) {
             ) : (
               <div className="header_main-user login pad-10 flex align_center after">
                 <div className="user_avatar">
-                  <img src={avatar} alt="" />
+                  <img src={user?.avatar?.url?user?.avatar?.url:user.avatar||avatar} alt="" />
                 </div>
                 <div className="user_name pad-10">
-                  <p> {user?.username} </p>
+                  <p> {getLastName(user?.name)} </p>
                 </div>
                 <div id="user">
                   <div className="user_container">

@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import useForm from '../../../hooks/useForm'
 import authServices from '../../../services/authServices'
+let avatar = "https://img.favpng.com/18/16/20/user-profile-computer-icons-female-png-favpng-tBBtb6BmiEsyTfD6k9e7Sh2x1.jpg"
+
 
 export default function RegisterForm(props) {
 
-    const { form, error, handleSubmit, register } = useForm()
+    const { form, error, handleSubmit, register,setForm } = useForm()
     const [errorRegister, setErrorRegister] = useState()
     useEffect(()=>{
         setErrorRegister()
+        setForm({...form,avatar})
     },[])
 
     const submit = async () => {
+        console.log(`form`, form)
         let res = await authServices.register(form);
         if (res.success) {
             setErrorRegister()

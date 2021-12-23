@@ -161,3 +161,6 @@ body main .section {
 body .line-through {
     text-decoration: line-through;
 }
+body .img-m0 img{
+    margin: 0;
+}

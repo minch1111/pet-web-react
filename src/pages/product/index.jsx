@@ -5,6 +5,8 @@ import { Context } from '../../App'
 import Categories from '../../components/categories'
 import shopService from '../../services/shopService'
 import ProductItem from './components/productItems'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 export default function Product() {
   // let productItems = [
@@ -54,10 +56,11 @@ export default function Product() {
   const [productItems, setproductItems] = useState()
   let { slug } = useParams()
   let { url } = useRouteMatch()
+  let loader = [0, 1, 2, 3, 4, 5, 6, 7]
   // console.log((url.match(new RegExp("/","g"))||[]).length);
-  console.log(`url`, url)
-  console.log(`url.charAt(url.length)`, url.charAt(url.length - 1))
-  console.log(`slug`, slug)
+  // console.log(`url`, url)
+  // console.log(`url.charAt(url.length)`, url.charAt(url.length - 1))
+  // console.log(`slug`, slug)
   useEffect(async () => {
     window.scrollTo(0, 0)
     if (slug !== '') {
@@ -79,7 +82,8 @@ export default function Product() {
     }
 
   }, [slug])
-  if (!productItems) return <div> Loading... </div>
+  // if (!productItems) return <div> Loading... </div>
+  console.log(`productItems`, productItems)
   return (
     <main>
       <section className="section">
@@ -106,7 +110,7 @@ export default function Product() {
               <div className="col-lg-9">
                 <div className="products_listitems">
                   <div className="row">
-                    {
+                    {productItems ?
                       productItems.map((value, key) => (
                         <ProductItem
                           key={key}
@@ -115,6 +119,26 @@ export default function Product() {
                           // img = {value.img}
                           data={value}
                         />
+                      )) :
+                      loader.map((o, i) => (
+                        <div className="col-lg-3 col-5 col-xs-4 item mb-3" key={i}>
+                          <div className="product_items">
+                            <Skeleton
+                              count={1}
+                              height={200}
+                              className='product_item-img flex justify_center'
+                            />
+                            <div className="product_item-content flex justify-center">
+                              {/* <div className="item_kind">  </div> */}
+                              <div className="item_content" style={{ marginTop: -18 }}>
+                                <Skeleton
+                                  count={1}
+                                  width={200}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       ))
                     }
                   </div>
