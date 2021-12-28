@@ -88,7 +88,7 @@ export default function Nav() {
                     </div>
                   </div> */}
                 </li>
-                <li className="navbar_item after"><a href="#">Tin Tức</a>
+                <li className="navbar_item after"><Link to="/news">Tin Tức</Link>
                   {/* <div id="news">
                     <div className="navbar_item-menu">
                       <div className="item_menu-pet">

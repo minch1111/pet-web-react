@@ -53,8 +53,15 @@ body a:hover {
 }
 
 body .loading {
+    /* height: 110%; */
+    /* position: absolute; */
+    overflow: hidden;
+    top: -150px;
+    bottom: 0;
+    right: 0;
+    left: 0;
     width: 100%;
-    height: 100vh;
+    /* height: 100vh; */
     background-color: #e4dcda;
     position: fixed;
     display: flex;
@@ -246,7 +253,7 @@ body main .pet-care-food .product-item
 }
 
 /* body main .pet-care-food .food-item a, */
-body main .pet-care-food .product-item a 
+body main .pet-care-food .product-item a
 ,body main .pet-care-product .product-item a {
     border-radius: 15px;
     color: #686868;
@@ -384,7 +391,7 @@ body main .pet-care-product .content-product a i {
 /* body main .pet-care-product .product-item a:hover {
     box-shadow: 1px 1px 1px 2px #00000029;
 } */
-/* 
+/*
 body main .pet-care-product .product-item .product-item-content {
     text-align: center;
     padding: 10px;

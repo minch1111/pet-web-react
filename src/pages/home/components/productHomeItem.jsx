@@ -7,7 +7,7 @@ export default function ProductHomeItem({img,type,name}) {
                 <img src={img} alt="" />
             </div>
                 <div className="product-item-content">
-                    <p className="kind-food-pet">{type}</p>
+                    {/* <p className="kind-food-pet">{type}</p> */}
                     <p className="title-food"> {name} </p>
                 </div></a>
         </div>

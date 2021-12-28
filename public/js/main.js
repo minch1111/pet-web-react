@@ -1,8 +1,8 @@
-$(window).on('load', function () {
-  $('.loading').fadeOut(5000, function () {
-    $('.load').fadeOut(2000);
-  });
-})
+// $(window).on('load', function () {
+//   $('.loading').fadeOut(5000, function () {
+//     $('.load').fadeOut(2000);
+//   });
+// })
 AOS.init({
   duration: 1200,
 })

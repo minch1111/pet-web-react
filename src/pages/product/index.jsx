@@ -52,7 +52,8 @@ export default function Product() {
   //   }
 
   // ]
-  const { listProductInfo } = useContext(Context);
+  const { search,formSearch } = useContext(Context);
+  console.log(`search`, formSearch)
   const [productItems, setproductItems] = useState()
   let { slug } = useParams()
   let { url } = useRouteMatch()
@@ -63,7 +64,11 @@ export default function Product() {
   // console.log(`slug`, slug)
   useEffect(async () => {
     window.scrollTo(0, 0)
-    if (slug !== '') {
+    if(formSearch){
+      let res = await shopService.getListProductBySearch(formSearch.search)
+      await setproductItems(res.products)
+    }
+    else if (slug !== '') {
       setproductItems()
       if ((url.match(new RegExp("/", "g")) || []).length < 3) {
         let res = await shopService.getListProductByCategory(slug)
@@ -82,7 +87,7 @@ export default function Product() {
       }
     }
 
-  }, [slug])
+  }, [slug,formSearch.search])
   // if (!productItems) return <div> Loading... </div>
   console.log(`productItems`, productItems)
   return (
@@ -94,7 +99,7 @@ export default function Product() {
               <div className="col-lg-12">
                 <div className="products_links">
                   <div className="products_links-item">
-                    <h4>PARADISE PET SHOP / SHOP CHO CHÓ</h4>
+                    <h4 className='text-uppercase'>PARADISE PET SHOP / SHOP CHO {slug}</h4>
                   </div>
                   <div className="products_links-select">
                     <select id="select_products" name>

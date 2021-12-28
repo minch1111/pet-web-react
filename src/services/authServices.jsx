@@ -27,7 +27,22 @@ const authServices={
       },
       body:JSON.stringify(form)
     }).then(res=>res.json())
-  }
+  },
+  getOrderedById(id){
+    return fetch(`${api}/order/user/all/${id}`).then(res=>res.json())
+  },
+  getOrderedDetailByIdOrder(id){
+    return fetch(`${api}/order/user/detail/${id}`).then(res=>res.json())
+  },
+  sendFeedBack(id,form){
+    return fetch(`${api}/rate/${id}`,{
+      method:"POST",
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify(form)
+    }).then(res=>res.json())
+  },
 
 }
 

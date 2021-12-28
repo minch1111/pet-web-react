@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import AOS from 'aos'
 
 export default function Footer() {
   let $ = window.$;
@@ -18,8 +19,11 @@ export default function Footer() {
           dotted.appendTo(paging);
         }
       }
-    })
 
+    })
+    AOS.init({
+      duration : 2000
+    })
     const btn = document.querySelector('.fix-to-top');
     $(btn).click(function () {
       // window.scrollBy(

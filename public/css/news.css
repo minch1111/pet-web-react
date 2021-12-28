@@ -2,7 +2,7 @@ body main .section-news{
   margin: 40px 90px;
 }
 body main .news-item{
-  border-radius: 10px;
+  /* border-radius: 10px; */
   overflow: hidden;
   margin: 0 10px;
 }

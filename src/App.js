@@ -22,6 +22,7 @@ export const Context = createContext();
 function App() {
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('loginn'))||null)
+  const[formSearch,setFormSearch]=useState()
   const data ={
     username:"Nguyễn Văn A",
     avatar:"https://cdn.dribbble.com/users/19658/screenshots/3576141/media/ca38af59f2434493f8cb9c4229cbfc2e.png?compress=1&resize=400x300",
@@ -124,7 +125,8 @@ function App() {
   ]
 
   const search = (form) => {
-    if(form) console.log(form?.search)
+    if(form) {console.log(form?.search);setFormSearch(form)}
+
 
   }
   const login =()=>{
@@ -139,12 +141,13 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Context.Provider value={{ user, search,listProductInfo,login,logout, search, }}>
+        <Context.Provider value={{ user, search,formSearch,listProductInfo,login,logout, search, }}>
           <Header />
           <LoginModal/>
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/shop/:slug" exact component={Product} />
+            <Route path="/shop" exact component={Product} />
+            <Route path="/shop/:slug" component={Product} />
             <Route path="/shop/:slug/:slug" component={Product} />
             <PrivateRoute path="/cart" exact component={Cart} />
             <Route path="/cart/payment" component={Payment} />
