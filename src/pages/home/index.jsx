@@ -64,11 +64,21 @@ export default function Home() {
     },
 
   ]
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
   let [catfoods, setCatFoods] = useState()
   let [dogfoods, setDogFoods] = useState()
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [catfoods])
+  // useEffect(()=>{
+  //   if(catfoods!==null){
+  //     $(window).on('load', function () {
+  //       $('#loading').fadeOut(6000, function () {
+  //         $('#load').fadeOut(3000);
+  //       });
+  //     })
+  //   }
+  // },[])
+
   useEffect(async () => {
     let res = await shopService.getCatFoods()
     let res1 = await shopService.getDogFoods()
@@ -79,8 +89,10 @@ export default function Home() {
 
   // console.log(`dogfoods`, dogfoods)
   console.log(`catfoods`, catfoods)
-  if (!catfoods) return <Loading data={catfoods} />
+  if (!catfoods) return <Loading />
   return (
+    <>
+    {/* <Loading data={catfoods}/> */}
     <main>
       <Sliders />
       <Promo />
@@ -275,23 +287,16 @@ export default function Home() {
       />
       <NewsHome />
     </main>
+    </>
   )
 }
 
 export const Loading = (props) => {
-  useEffect(function aos() {
-    if (props.data) {
-      $(window).on('load', function () {
-        $('.loading').fadeOut(5000, function () {
-          $('.load').fadeOut(2000);
-        });
-      })
-    }
-  },[])
+
 
   return (
-    <div class="loading">
-      <div class="load">
+    <div class="loading" id='loading'>
+      <div class="load" id='load'>
         <img src={img} alt="" />
       </div>
     </div>

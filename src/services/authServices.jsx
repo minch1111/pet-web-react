@@ -43,6 +43,14 @@ const authServices={
       body:JSON.stringify(form)
     }).then(res=>res.json())
   },
+  cancleOrderById(id){
+    return fetch(`${api}/order/user/cancel/${id}`,{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+    }).then(res=>res.json())
+  }
 
 }
 

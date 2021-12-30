@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import authServices from '../../../../services/authServices'
+import shopService from '../../../../services/shopService'
 
 export default function Ordered() {
   const { user } = useSelector(store => store.user)
@@ -13,6 +14,14 @@ export default function Ordered() {
     let res = await authServices.getOrderedById(user._id);
     res.success && setOrderList(res.orders)
   }, [])
+  const cancleOrder = async(id)=>{
+    let res = await authServices.cancleOrderById(id)
+    if(res.success) {let res1 = await authServices.getOrderedById(user._id);
+      res.success && setOrderList(res1.orders)}
+  }
+  const money = (a) => {
+    return a.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })
+  }
   return (
     <div id="ordered" className="tab_content-item">
       <div className="row">
@@ -40,7 +49,7 @@ export default function Ordered() {
                   </div>
                 </div>
                 <div className="ordered_product-money flex justify_end align_center">
-                  <p className="txt-orange"> Tổng hoá đơn : {o.totalPrice} </p>
+                  <p className="txt-orange"> Tổng hoá đơn : {money(o.totalPrice)} </p>
                 </div>
               </div>
               <div className="row">
@@ -53,7 +62,9 @@ export default function Ordered() {
 
                   <div className="ordered_cancel flex justify_end align_center">
                     <Link to={`/user-profile/order/${o._id}`} className="btn btn-success">Xem chi tiết</Link>
-                    <div className="btn btn-danger ml-2">Hủy đặt hàng</div>
+                    {
+                      o.status==='Chờ xác nhận' || o.status==='Đã xác nhận'?<div className="btn btn-danger ml-2" onClick={()=>cancleOrder(o._id)}>Hủy đặt hàng</div>:null
+                    }
                   </div>
                 </div>
               </div>

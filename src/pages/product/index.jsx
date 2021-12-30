@@ -87,8 +87,21 @@ export default function Product() {
       }
     }
 
-  }, [slug,formSearch.search])
+  }, [slug,formSearch])
   // if (!productItems) return <div> Loading... </div>
+  const filter =(e)=>{
+    console.log(`e.target.value`, e.target.value)
+    if(e.target.value==='2'){
+      let lowestToHighest = productItems.sort((a,b)=>a.price-b.price)
+      console.log(`lowestToHighest`, lowestToHighest)
+      setproductItems([...lowestToHighest])
+    }
+    else if(e.target.value==='3'){
+      let highestToLowest = productItems.sort((a,b)=>b.price-a.price)
+      console.log(`highestToLowest`, highestToLowest)
+      setproductItems([...highestToLowest])
+    }
+  }
   console.log(`productItems`, productItems)
   return (
     <main>
@@ -99,15 +112,15 @@ export default function Product() {
               <div className="col-lg-12">
                 <div className="products_links">
                   <div className="products_links-item">
-                    <h4 className='text-uppercase'>PARADISE PET SHOP / SHOP CHO {slug}</h4>
+                    <h4 className='text-uppercase'>PARADISE PET SHOP</h4>
                   </div>
                   <div className="products_links-select">
-                    <select id="select_products" name>
-                      <option value={0}>Thứ tự mặc định</option>
-                      <option value={1}>Mới nhất</option>
-                      <option value={2}>Theo giá : từ thấp đến cao</option>
-                      <option value={3}>Theo giá : từ cao đến thấp</option>
-                      <option value={4}>Theo đánh giá</option>
+                    <select id="select_products" onChange={filter}>
+                      <option value="0">Thứ tự mặc định</option>
+                      <option value="1">Mới nhất</option>
+                      <option value="2">Theo giá : từ thấp đến cao</option>
+                      <option value="3">Theo giá : từ cao đến thấp</option>
+                      <option value="4">Theo đánh giá</option>
                     </select>
                   </div>
                 </div>
@@ -120,9 +133,6 @@ export default function Product() {
                       productItems.map((value, key) => (
                         <ProductItem
                           key={key}
-                          // title = {value.title}
-                          // name={value.name}
-                          // img = {value.img}
                           data={value}
                         />
                       )) :

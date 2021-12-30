@@ -129,19 +129,19 @@ function App() {
 
 
   }
-  const login =()=>{
-    localStorage.setItem('loginn',JSON.stringify(data))
-    setUser(data)
-  }
-  const logout =()=>{
-    localStorage.removeItem('loginn');
-    setUser()
-  }
+  // const login =()=>{
+  //   localStorage.setItem('loginn',JSON.stringify(data))
+  //   setUser(data)
+  // }
+  // const logout =()=>{
+  //   localStorage.removeItem('loginn');
+  //   setUser()
+  // }
   // console.log(`data`, data)
   return (
     <div className="App">
       <Router>
-        <Context.Provider value={{ user, search,formSearch,listProductInfo,login,logout, search, }}>
+        <Context.Provider value={{ user, search,formSearch,listProductInfo, search, }}>
           <Header />
           <LoginModal/>
           <Switch>
@@ -156,12 +156,6 @@ function App() {
             <Route path="/product/detail/:slug" component={ProductDetail} />
             <Route path='/news' component={News} />
             <Route component={Page404} />
-            {/* <Home /> */}
-            {/* <Product /> */}
-            {/* <Cart /> */}
-            {/* <Payment /> */}
-            {/* <Profile /> */}
-            {/* <Services /> */}
           </Switch>
           <Footer />
         </Context.Provider>

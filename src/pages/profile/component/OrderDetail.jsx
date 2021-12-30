@@ -188,7 +188,7 @@ export const ProductOrderedItem = (props) => {
         </div>
       </div>
       {
-        // props.status !== 'Chờ xác nhận' &&
+        props.status === 'Đã nhận hàng' &&
         (rate === true && props.data.status === "Chưa đánh giá" ?
           // props.status === 'Chờ xác nhận' &&
           (
@@ -219,10 +219,10 @@ export const ProductOrderedItem = (props) => {
             <div className="col-lg-12 mb-3">
               <div className="row">
                 <div className="col-lg-12 mt-1">
-                  Đánh giá : <ReactStar value={form.rateNumber} size={25} edit={false} />
+                  Đánh giá : <ReactStar value={parseInt(props?.data?.rate?.Star) ||form.rateNumber } size={25} edit={false} />
                 </div>
                 <div className="col-lg-12">
-                  Nội dung : {form.rateContent}
+                  Nội dung : {form.rateContent || props?.data?.rate?.content}
                 </div>
               </div>
             </div>
