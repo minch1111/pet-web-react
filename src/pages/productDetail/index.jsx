@@ -5,11 +5,13 @@ import { Context } from '../../App';
 import Categories from '../../components/categories'
 import { ADD_TO_CART } from '../../store/type';
 import shopService from '../../services/shopService';
+import ReactStar from 'react-rating-stars-component'
 let $ = window.$
 
 export default function ProductDetail(props) {
 
     const [productInfo, setProductInfo] = useState();
+    // const [listRate,setListRate]=useState()
     const [number, setNumber] = useState(1);
     const dispatch = useDispatch()
     let { slug } = useParams()
@@ -49,7 +51,7 @@ export default function ProductDetail(props) {
     // }, [])
     useEffect(async () => {
         let res = await shopService.getDetailProductBySlug(slug)
-        await setProductInfo(res.product)
+        await setProductInfo(res)
     }, [])
 
     // const { data, addCartFromDetail } = useContext(Context);
@@ -72,7 +74,7 @@ export default function ProductDetail(props) {
 
     const getNumber = (ev) => {
         let value = ev.currentTarget.value
-        if (productInfo.amountStock - parseInt(value) >= 0) {
+        if (productInfo?.product?.amountStock - parseInt(value) >= 0) {
             setNumber(parseInt(value))
         }
 
@@ -83,7 +85,7 @@ export default function ProductDetail(props) {
         dispatch({
             type: ADD_TO_CART,
             payload: {
-                o: productInfo,
+                o: productInfo.product,
                 num: number
             }
         })
@@ -122,13 +124,13 @@ export default function ProductDetail(props) {
         })
     }
 
-    const showRate =()=>{
+    const showRate = () => {
         document.querySelector('.product_detail-info').classList.remove('active');
         document.querySelector('.item_info').classList.remove('active');
         document.querySelector('.product_detail-comments').classList.add('active');
         document.querySelector('.item_comments').classList.add('active');
     }
-    const showDescription =()=>{
+    const showDescription = () => {
         document.querySelector('.product_detail-comments').classList.remove('active');
         document.querySelector('.item_comments').classList.remove('active');
         document.querySelector('.product_detail-info').classList.add('active');
@@ -157,32 +159,32 @@ export default function ProductDetail(props) {
                                                 <div className="col-lg-12">
                                                     <div className="product_info-img">
                                                         <div className="imgItem active">
-                                                            <img src={productInfo?.listImage[0].image[0].url} alt="" />
+                                                            <img src={productInfo?.product?.listImage[0].image[0].url} alt="" />
                                                         </div>
                                                         <div className="imgItem">
-                                                            <img src={productInfo?.listImage[1]?.image[0]?.url} alt="" />
+                                                            <img src={productInfo?.product?.listImage[1]?.image[0]?.url} alt="" />
                                                         </div>
                                                         <div className="imgItem">
-                                                            <img src={productInfo?.listImage[2]?.image[0]?.url} alt="" />
+                                                            <img src={productInfo?.product?.listImage[2]?.image[0]?.url} alt="" />
                                                         </div>
                                                         <div className="imgItem">
-                                                            <img src={productInfo?.listImage[3]?.image[0]?.url} alt="" />
+                                                            <img src={productInfo?.product?.listImage[3]?.image[0]?.url} alt="" />
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="col-lg-12">
                                                     <div className="product_info-imgTab">
                                                         <div className="imgTab active" onClick={handleClickChangeImage}>
-                                                            <img src={productInfo?.listImage[0]?.image[0]?.url} alt="" />
+                                                            <img src={productInfo?.product?.listImage[0]?.image[0]?.url} alt="" />
                                                         </div>
                                                         <div className="imgTab" onClick={handleClickChangeImage}>
-                                                            <img src={productInfo?.listImage[1]?.image[0]?.url} alt="" />
+                                                            <img src={productInfo?.product?.listImage[1]?.image[0]?.url} alt="" />
                                                         </div>
                                                         <div className="imgTab" onClick={handleClickChangeImage}>
-                                                            <img src={productInfo?.listImage[2]?.image[0]?.url} alt="" />
+                                                            <img src={productInfo?.product?.listImage[2]?.image[0]?.url} alt="" />
                                                         </div>
                                                         <div className="imgTab" onClick={handleClickChangeImage}>
-                                                            <img src={productInfo?.listImage[3]?.image[0]?.url} alt="" />
+                                                            <img src={productInfo?.product?.listImage[3]?.image[0]?.url} alt="" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -194,7 +196,7 @@ export default function ProductDetail(props) {
                                                     <p> {productInfo?.name} </p>
                                                 </div>
                                                 <div className="detail_des mbottom-20">
-                                                    <p> {productInfo?.short_description} </p>
+                                                    <p> {productInfo?.product?.short_description} </p>
                                                 </div>
                                                 <div className="detail_color mbottom-20">
                                                     <div className="detail_color-title font-20 fweight-700">Màu sắc :</div>
@@ -215,10 +217,10 @@ export default function ProductDetail(props) {
                                                     </div>
                                                 </div>
                                                 <div className="detail_cost font-20 fweight-700 mbottom-20">
-                                                    <p>Giá :  {money(productInfo?.price)} </p>
+                                                    <p>Giá :  {money(productInfo?.product?.price)} </p>
                                                 </div>
                                                 <div className="detail_cost mbottom-20">
-                                                    <span style={{ color: 'gray' }}>Số lượng tồn :  {productInfo?.amountStock} </span>
+                                                    <span style={{ color: 'gray' }}>Số lượng tồn :  {productInfo?.product?.amountStock} </span>
                                                 </div>
                                                 <div className="addCart mbottom-20">
                                                     <div className="addCart_number">
@@ -263,68 +265,43 @@ export default function ProductDetail(props) {
                                             <div className="items">
                                                 <div className="item_info item active">
                                                     <div className="item_info-des container">
-                                                        <p><strong>Tên sản phẩm</strong> Lorem ipsum dolor sit amet
-                                                            consectetur adipisicing elit. Debitis eius velit, cupiditate
-                                                            facilis, atque iste tempore harum numquam aliquid dolorum
-                                                            accusantium consectetur. Ut architecto, possimus optio tempora
-                                                            sunt necessitatibus sint!</p>
-                                                        <p><strong>Xuất xứ :</strong> USA</p>
+                                                        <p><strong>Tên sản phẩm</strong> {productInfo?.product?.name} </p>
+                                                        <p><strong>Nhãn Hiệu :</strong> {productInfo?.product?.brand} </p>
+                                                        <p><strong>Mô tả sản phẩm :</strong> {productInfo?.product?.long_description} </p>
                                                         <p><strong>Cửa hàng</strong> Paradise pet</p>
                                                     </div>
                                                 </div>
                                                 <div className="item_comments item">
                                                     <div className="item_comments-title">
-                                                        <span>Đánh giá của khách hàng về <strong>*Tên sản phẩm
+                                                        <span>Đánh giá của khách hàng về <strong> {productInfo?.product.name}
                                                         </strong>:</span>
                                                         <div className="item_comments-info mtop-50">
-                                                            <div className="container mbottom-20 flex">
-                                                                <div className="ava">
-                                                                    <img src="/img/do-cong-nghe-cho-thu-cung-tai-yolo.png" alt="" />
-                                                                </div>
-                                                                <div className="rates">
-                                                                    <p>
-                                                                        <i className="fas fa-star txt-yellow" />
-                                                                        <i className="fas fa-star txt-yellow" />
-                                                                        <i className="fas fa-star txt-yellow" />
-                                                                        <i className="fas fa-star txt-yellow" />
-                                                                        <i className="fas fa-star txt-yellow" />
-                                                                    </p>
-                                                                    <p>
-                                                                        <strong>Tên khách hàng </strong>
-                                                                    </p><p>
-                                                                        Lorem ipsum dolor sit amet consectetur adipisicing
-                                                                        elit. Assumenda voluptas iure alias porro. Eius
-                                                                        harum error deleniti doloremque adipisci, iste neque
-                                                                        odio, vero natus voluptatem voluptatibus modi
-                                                                        reprehenderit, suscipit quo?
-                                                                    </p>
-                                                                    <p />
-                                                                </div>
-                                                            </div>
-                                                            <div className="container mbottom-20 flex">
-                                                                <div className="ava">
-                                                                    <img src="/img/do-cong-nghe-cho-thu-cung-tai-yolo.png" alt="" />
-                                                                </div>
-                                                                <div className="rates">
-                                                                    <p>
-                                                                        <i className="fas fa-star txt-yellow" />
-                                                                        <i className="fas fa-star txt-yellow" />
-                                                                        <i className="fas fa-star txt-yellow" />
-                                                                        <i className="fas fa-star txt-yellow" />
-                                                                        <i className="fas fa-star txt-yellow" />
-                                                                    </p>
-                                                                    <p>
-                                                                        <strong>Tên khách hàng </strong>
-                                                                    </p><p>
-                                                                        Lorem ipsum dolor sit amet consectetur adipisicing
-                                                                        elit. Assumenda voluptas iure alias porro. Eius
-                                                                        harum error deleniti doloremque adipisci, iste neque
-                                                                        odio, vero natus voluptatem voluptatibus modi
-                                                                        reprehenderit, suscipit quo?
-                                                                    </p>
-                                                                    <p />
-                                                                </div>
-                                                            </div>
+                                                            {
+                                                                productInfo?.rate?.map((o, i) => (
+                                                                    <div className="container mbottom-20 flex justify_start" key={i}>
+                                                                        <div className="ava">
+                                                                            <img src="/img/do-cong-nghe-cho-thu-cung-tai-yolo.png" alt="" />
+                                                                        </div>
+                                                                        <div className="rates">
+                                                                            <p>
+                                                                                <ReactStar size={30} edit={false} value={o.star} />
+                                                                                {/* <i className="fas fa-star txt-yellow" />
+                                                                                <i className="fas fa-star txt-yellow" />
+                                                                                <i className="fas fa-star txt-yellow" />
+                                                                                <i className="fas fa-star txt-yellow" />
+                                                                                <i className="fas fa-star txt-yellow" /> */}
+                                                                            </p>
+                                                                            <p>
+                                                                                <strong>{o.customer}     </strong>
+                                                                            </p>
+                                                                            <p>
+                                                                                {o.content}
+                                                                            </p>
+                                                                            <p />
+                                                                        </div>
+                                                                    </div>
+                                                                ))
+                                                            }
                                                         </div>
                                                     </div>
                                                 </div>

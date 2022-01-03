@@ -55,8 +55,8 @@ body .flex.align_center {
     align-items: center;
 }
 
-body .flex.flex.justify_start {
-    justify-content: flex-start;
+body .flex.justify_start {
+    justify-content: flex-start !important;
 }
 
 body .flex.justify_end {

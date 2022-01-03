@@ -42,7 +42,6 @@ export default function Product() {
       // await console.log(`res`, res)
       else {
         if (url.charAt(url.length - 1) === '/') {
-          // console.log("k có sub category")
           let res = await shopService.getListProductByCategory(slug,queryURL.page,queryURL.sort)
           await setproductItems(res)
         }
