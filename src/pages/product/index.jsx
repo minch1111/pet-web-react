@@ -23,8 +23,9 @@ export default function Product() {
 
 
   // console.log((url.match(new RegExp("/","g"))||[]).length);
-  console.log(`url`, url)
+  // console.log(`url`, url)
   // console.log(`url.charAt(url.length)`, url.charAt(url.length - 1))
+  // console.log(`url.match(new RegExp("/", "g"))`, url.match(new RegExp("/", "g")).length)
   // console.log(`slug`, slug)
   useEffect(async () => {
     window.scrollTo(0, 0)
@@ -33,7 +34,7 @@ export default function Product() {
       await setproductItems(res)
     }
     else if (slug !== '') {
-      setproductItems()
+      // setproductItems()
       if ((url.match(new RegExp("/", "g")) || []).length < 3) {
         let res = await shopService.getListProductByCategory(slug,queryURL.page,queryURL.sort)
         await setproductItems(res)
@@ -41,11 +42,13 @@ export default function Product() {
       // await console.log(`res`, res)
       else {
         if (url.charAt(url.length - 1) === '/') {
+          // console.log("k có sub category")
           let res = await shopService.getListProductByCategory(slug,queryURL.page,queryURL.sort)
           await setproductItems(res)
         }
         else {
-          let res1 = await shopService.getListProductBySubCategory(slug)
+          // console.log("có sub");
+          let res1 = await shopService.getListProductBySubCategory(slug,queryURL.page,queryURL.sort)
           await setproductItems(res1)
         }
       }

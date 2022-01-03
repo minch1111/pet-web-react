@@ -24,7 +24,18 @@ const shopService={
     getDetailProductBySlug(slug){
         return fetch(`${api}/products/${slug}`).then(res=>res.json())
     },
-    getListProductBySubCategory(slug){
+    getListProductBySubCategory(slug,page,sort){
+        if(sort){
+            if(page){
+                return fetch(`${api}/subcategory/search/${slug}?page=${page}&&sort=${sort}`).then(res=>res.json())
+            }else{
+                return fetch(`${api}/subcategory/search/${slug}?sort=${sort}`).then(res=>res.json())
+            }
+        }
+        if(page)
+        {
+        return fetch(`${api}/subcategory/search/${slug}?page=${page}`).then(res=>res.json())
+        }
         return fetch(`${api}/subcategory/search/${slug}`).then(res=>res.json())
     },
     getVoucher(){
