@@ -5,13 +5,14 @@ import { Context } from '../../App';
 import Categories from '../../components/categories'
 import { ADD_TO_CART } from '../../store/type';
 import shopService from '../../services/shopService';
+let $ = window.$
 
 export default function ProductDetail(props) {
-    let $ = window.$
-    const [ productInfo, setProductInfo ] = useState();
-    const [ number, setNumber ] = useState(1);
+
+    const [productInfo, setProductInfo] = useState();
+    const [number, setNumber] = useState(1);
     const dispatch = useDispatch()
-    let {slug} = useParams()
+    let { slug } = useParams()
     console.log(`slug`, slug)
 
     useEffect(() => {
@@ -29,71 +30,69 @@ export default function ProductDetail(props) {
                 $(itemTab).addClass('active')
             }
         })
-        const tabs = document.querySelectorAll('.tab_title');
-        const items = document.querySelectorAll('.item');
-
-        tabs.forEach((tab, index) => {
-            const item = items[index];
-
-            tab.onclick = function () {
-                $('.tab_title.active').removeClass('active');
-                $('.item.active').removeClass('active');
-
-                $(tab).addClass('active');
-                $(item).addClass('active')
-            }
-        })
-
-
     }, [])
-    useEffect(async ()=>{
+    // useEffect(() => {
+    //     const tabs = document.querySelectorAll('.tab_title');
+    //     const items = document.querySelectorAll('.item');
+
+    //     tabs.forEach((tabb, index) => {
+    //         const item = items[index];
+
+    //         tabb.onclick = function () {
+    //             $('.tab_title.active').removeClass('active');
+    //             $('.item.active').removeClass('active');
+
+    //             $(tabb).classList.add('active');
+    //             $(item).classList.add('active')
+    //         }
+    //     })
+    // }, [])
+    useEffect(async () => {
         let res = await shopService.getDetailProductBySlug(slug)
         await setProductInfo(res.product)
-    },[])
+    }, [])
 
     // const { data, addCartFromDetail } = useContext(Context);
 
     // const [cart, setCart] = useState({ product: props.location.querry})
 
     const inCrease = () => {
-        if(productInfo.amountStock-number>0)
-        {
+        if (productInfo.amountStock - number > 0) {
             setNumber(number + 1)
         }
-        else{
+        else {
             alert("Oops, Hiện không đủ số lượng hàng cho bạn đặt 🙀")
         }
         // item.number
     }
     const deCrease = () => {
-        if(number<=0)setNumber(0)
-        else setNumber(number-1)
-     }
+        if (number <= 0) setNumber(0)
+        else setNumber(number - 1)
+    }
 
     const getNumber = (ev) => {
         let value = ev.currentTarget.value
-        if(productInfo.amountStock- parseInt(value)>=0)
-        {
+        if (productInfo.amountStock - parseInt(value) >= 0) {
             setNumber(parseInt(value))
         }
 
-     }
+    }
 
     const handleAdd = () => {
         // addCartFromDetail({...productInfo,number:number})
         dispatch({
-            type:ADD_TO_CART,
-            payload:{
-                o:productInfo,
-                num:number
+            type: ADD_TO_CART,
+            payload: {
+                o: productInfo,
+                num: number
             }
         })
-        console.log(`click` )
+        console.log(`click`)
     }
     const money = (a) => {
         return a.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })
     }
-    const handleClickChangeImage =()=>{
+    const handleClickChangeImage = () => {
         const imgTabs = document.querySelectorAll('.imgTab');
         const itemTabs = document.querySelectorAll('.imgItem');
 
@@ -121,6 +120,19 @@ export default function ProductDetail(props) {
                 $(item).addClass('active')
             }
         })
+    }
+
+    const showRate =()=>{
+        document.querySelector('.product_detail-info').classList.remove('active');
+        document.querySelector('.item_info').classList.remove('active');
+        document.querySelector('.product_detail-comments').classList.add('active');
+        document.querySelector('.item_comments').classList.add('active');
+    }
+    const showDescription =()=>{
+        document.querySelector('.product_detail-comments').classList.remove('active');
+        document.querySelector('.item_comments').classList.remove('active');
+        document.querySelector('.product_detail-info').classList.add('active');
+        document.querySelector('.item_info').classList.add('active');
     }
 
     if (!productInfo) return <div>Loading...</div>
@@ -206,13 +218,13 @@ export default function ProductDetail(props) {
                                                     <p>Giá :  {money(productInfo?.price)} </p>
                                                 </div>
                                                 <div className="detail_cost mbottom-20">
-                                                    <span style={{color:'gray'}}>Số lượng tồn :  {productInfo?.amountStock} </span>
+                                                    <span style={{ color: 'gray' }}>Số lượng tồn :  {productInfo?.amountStock} </span>
                                                 </div>
                                                 <div className="addCart mbottom-20">
                                                     <div className="addCart_number">
                                                         <div className="form">
                                                             <button type="submit" onClick={deCrease} className="btn btn-minus">-</button>
-                                                            <input onChange={getNumber} name="numberCart" type="number"  className="number" value={number} />
+                                                            <input onChange={getNumber} name="numberCart" type="number" className="number" value={number} />
                                                             <button type="submit" onClick={inCrease} className="btn btn-plus">+</button>
                                                         </div>
                                                     </div>
@@ -239,10 +251,10 @@ export default function ProductDetail(props) {
                                     <div className="row">
                                         <div className="col-lg-12 ">
                                             <div className="tabs">
-                                                <div className="product_detail-info tab_title active">
+                                                <div className="product_detail-info tab_title active" onClick={showDescription}>
                                                     <p>Mô tả</p>
                                                 </div>
-                                                <div className="product_detail-comments tab_title">
+                                                <div className="product_detail-comments tab_title" onClick={showRate}>
                                                     <p>Đánh giá</p>
                                                 </div>
                                             </div>

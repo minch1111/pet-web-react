@@ -125,9 +125,7 @@ function App() {
   ]
 
   const search = (form) => {
-    if(form) {console.log(form?.search);setFormSearch(form)}
-
-
+    if(form) {setFormSearch(form)}
   }
   // const login =()=>{
   //   localStorage.setItem('loginn',JSON.stringify(data))
@@ -147,7 +145,7 @@ function App() {
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/shop" exact component={Product} />
-            <Route path="/shop/:slug" component={Product} />
+            <Route path="/shop/:slug" exact component={Product} />
             <Route path="/shop/:slug/:slug" component={Product} />
             <PrivateRoute path="/cart" exact component={Cart} />
             <Route path="/cart/payment" component={Payment} />

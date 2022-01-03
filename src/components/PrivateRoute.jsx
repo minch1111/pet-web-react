@@ -6,7 +6,7 @@ import {Context} from '../App'
 function PrivateRoute(props) {
     let {user} = useSelector(store=>store.user)
 
-    if(!user) return <Redirect to="/" />
+    if(!user)  return   <Redirect to="/" />
 
     return <Route {...props}/>
 }

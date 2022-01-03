@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Context } from '../../App'
-import { LOGOUT } from '../../store/type'
+import { LOGOUT, REMOVE_ALL_CART, REMOVE_CART } from '../../store/type'
 import HeaderCart from './components/headerCart'
 import Nav from './components/nav'
 import Search from './components/search'
@@ -28,6 +28,7 @@ export default function Header(props) {
   const handleLogout = () => {
     // logout();
     dispatch({type:LOGOUT})
+    dispatch({type:REMOVE_ALL_CART})
   }
   const getLastName =(fullname)=>{
     // let detail = []

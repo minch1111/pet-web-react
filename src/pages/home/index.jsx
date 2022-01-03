@@ -281,7 +281,7 @@ export default function Home() {
         slug={catfoods.slug}
       />
       <Banner />
-      <ProductList title={"Sản phẩm dành cho thú cưng"}
+      <ProductList title={"Thức ăn & dinh dưỡng cho Chó"}
         data={catfoods.dog.DogFoods}
         slug={catfoods.dog.slug}
       />

@@ -164,3 +164,22 @@ body .line-through {
 body .img-m0 img{
     margin: 0;
 }
+
+body .page-link.page-link-arrow{
+    border: none !important;
+}
+
+body .page-item.active .page-link{
+    background-color: #fda80d !important;
+    color: white !important;
+}
+
+body .page-link{
+    color: orange !important;
+    border: none !important;
+    border-bottom: 1px solid !important;
+}
+
+body .page-item{
+    margin: 0 2px !important;
+}

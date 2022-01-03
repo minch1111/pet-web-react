@@ -7,102 +7,59 @@ import shopService from '../../services/shopService'
 import ProductItem from './components/productItems'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { convertObjectToQuery, convertQueryToObject } from '../../utils'
+import Pagination from '../../components/Pagination'
+import { Link } from 'react-router-dom'
 
 export default function Product() {
-  // let productItems = [
-  //   {
-  //     name:"Pate Tươi rau củ dành cho chó",
-  //     title:"Thức ăn cho chó",
-  //     img :"/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png"
-  //   },
-  //   {
-  //     name:"Pate Tươi rau củ dành cho chó",
-  //     title:"Thức ăn cho chó",
-  //     img :"/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png"
-  //   },
-  //   {
-  //     name:"Pate Tươi rau củ dành cho chó",
-  //     title:"Thức ăn cho chó",
-  //     img :"/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png"
-  //   },
-  //   {
-  //     name:"Pate Tươi rau củ dành cho chó",
-  //     title:"Thức ăn cho chó",
-  //     img :"/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png"
-  //   },
-  //   {
-  //     name:"Pate Tươi rau củ dành cho chó",
-  //     title:"Thức ăn cho chó",
-  //     img :"/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png"
-  //   },
-  //   {
-  //     name:"Pate Tươi rau củ dành cho chó",
-  //     title:"Thức ăn cho chó",
-  //     img :"/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png"
-  //   },
-  //   {
-  //     name:"Pate Tươi rau củ dành cho chó",
-  //     title:"Thức ăn cho chó",
-  //     img :"/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png"
-  //   },
-  //   {
-  //     name:"Pate Tươi rau củ dành cho chó",
-  //     title:"Thức ăn cho chó",
-  //     img :"/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png"
-  //   }
-
-  // ]
-  const { search,formSearch } = useContext(Context);
-  console.log(`search`, formSearch)
+  const { search, formSearch } = useContext(Context);
+  // console.log(`search`, formSearch)
   const [productItems, setproductItems] = useState()
   let { slug } = useParams()
-  let { url } = useRouteMatch()
+  let { url, path } = useRouteMatch()
   let loader = [0, 1, 2, 3, 4, 5, 6, 7]
+  let queryURL = convertQueryToObject()
+  console.log(`queryURL`, queryURL)
+
+
   // console.log((url.match(new RegExp("/","g"))||[]).length);
-  // console.log(`url`, url)
+  console.log(`url`, url)
   // console.log(`url.charAt(url.length)`, url.charAt(url.length - 1))
   // console.log(`slug`, slug)
   useEffect(async () => {
     window.scrollTo(0, 0)
-    if(formSearch){
+    if (formSearch) {
       let res = await shopService.getListProductBySearch(formSearch.search)
-      await setproductItems(res.products)
+      await setproductItems(res)
     }
     else if (slug !== '') {
       setproductItems()
       if ((url.match(new RegExp("/", "g")) || []).length < 3) {
-        let res = await shopService.getListProductByCategory(slug)
-        await setproductItems(res.product)
+        let res = await shopService.getListProductByCategory(slug,queryURL.page,queryURL.sort)
+        await setproductItems(res)
       }
       // await console.log(`res`, res)
       else {
         if (url.charAt(url.length - 1) === '/') {
-          let res = await shopService.getListProductByCategory(slug)
-          await setproductItems(res.product)
+          let res = await shopService.getListProductByCategory(slug,queryURL.page,queryURL.sort)
+          await setproductItems(res)
         }
         else {
           let res1 = await shopService.getListProductBySubCategory(slug)
-          await setproductItems(res1.product)
+          await setproductItems(res1)
         }
       }
     }
 
-  }, [slug,formSearch])
+  }, [slug, formSearch,queryURL.page,queryURL.sort])
   // if (!productItems) return <div> Loading... </div>
-  const filter =(e)=>{
+  const filter = (e) => {
     console.log(`e.target.value`, e.target.value)
-    if(e.target.value==='2'){
-      let lowestToHighest = productItems.sort((a,b)=>a.price-b.price)
-      console.log(`lowestToHighest`, lowestToHighest)
-      setproductItems([...lowestToHighest])
-    }
-    else if(e.target.value==='3'){
-      let highestToLowest = productItems.sort((a,b)=>b.price-a.price)
-      console.log(`highestToLowest`, highestToLowest)
-      setproductItems([...highestToLowest])
-    }
   }
   console.log(`productItems`, productItems)
+  const showDropdownMenu =()=>{
+    document.querySelector('.dropdown-menu').classList.toggle('show')
+}
   return (
     <main>
       <section className="section">
@@ -115,13 +72,26 @@ export default function Product() {
                     <h4 className='text-uppercase'>PARADISE PET SHOP</h4>
                   </div>
                   <div className="products_links-select">
-                    <select id="select_products" onChange={filter}>
+                    <div className="multi-search">
+                      <div className="dropdown">
+                        <button className="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" onClick={showDropdownMenu}>
+                          Lọc tìm kiếm
+                        </button>
+                        <div className="dropdown-menu left--100" aria-labelledby="dropdownMenuButton" style={{left:'-73%'}}>
+                          {/* <a className="dropdown-item" href="#">Theo giá</a>
+                          <a className="dropdown-item" href="#"> Theo số lượng</a> */}
+                          <Link className='dropdown-item' to={`${url}?${convertObjectToQuery({ ...queryURL, sort: 1 })}`}>Theo giá từ cao đến thấp</Link>
+                          <Link onClick={showDropdownMenu} className='dropdown-item' to={`${url}?${convertObjectToQuery({ ...queryURL, sort:- 1 })}`}>Theo giá từ thấp đến cao</Link>
+                        </div>
+                      </div>
+                    </div>
+                    {/* <select id="select_products" onChange={filter}>
                       <option value="0">Thứ tự mặc định</option>
                       <option value="1">Mới nhất</option>
-                      <option value="2">Theo giá : từ thấp đến cao</option>
+
                       <option value="3">Theo giá : từ cao đến thấp</option>
                       <option value="4">Theo đánh giá</option>
-                    </select>
+                    </select> */}
                   </div>
                 </div>
               </div>
@@ -130,7 +100,7 @@ export default function Product() {
                 <div className="products_listitems">
                   <div className="row">
                     {productItems ?
-                      productItems.map((value, key) => (
+                      productItems.product?.map((value, key) => (
                         <ProductItem
                           key={key}
                           data={value}
@@ -158,6 +128,7 @@ export default function Product() {
                       ))
                     }
                   </div>
+                  <Pagination totalPage={parseInt(productItems?.pages)} currentPage={parseInt(queryURL.page) || 1} />
                 </div>
               </div>
             </div>

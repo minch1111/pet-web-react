@@ -25,6 +25,7 @@ export default function ProductList({ title, data,slug }) {
                             key={key}
                             img={value.imageRepresent?.[0].url}
                             name ={value.name}
+                            slug={value.slug}
                             />
                         )):(
                             <LoadingProducts />

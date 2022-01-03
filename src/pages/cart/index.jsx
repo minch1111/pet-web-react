@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
 import { Context } from '../../App'
-import { CHANGE_NUM_BY_KEY, DECREASE_CART, GET_LIST_ORDER, INCREASE_CART, LOAD_NEW_ORDER, REMOVE_CART, UNCHECKED_ORDER } from '../../store/type'
+import { CHANGE_NUM_BY_KEY, DECREASE_CART, GET_LIST_ORDER, INCREASE_CART, LOAD_NEW_ORDER, REMOVE_ALL_CART, REMOVE_CART, UNCHECKED_ORDER } from '../../store/type'
 
 function Cart() {
   const [list, setList] = useState([])
@@ -37,6 +37,9 @@ function Cart() {
   // const handleSubmit = () => {
   //   dispatch({type:GET_LIST_ORDER,payload:list});
   // }
+  const removeAllInCart =()=>{
+    dispatch({type:REMOVE_ALL_CART})
+  }
   return (
     <main>
       <section className="section">
@@ -103,7 +106,7 @@ function Cart() {
                       </Link>
                     }
 
-                    <div className="btn btn-danger">
+                    <div className="btn btn-danger" onClick={removeAllInCart} >
                       Xóa tất cả
                     </div>
                   </div>

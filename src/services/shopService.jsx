@@ -4,7 +4,18 @@ const shopService={
     getAllCategory(){
         return fetch(`${api}/category`).then(res=>res.json())
     },
-    getListProductByCategory(slug){
+    getListProductByCategory(slug,page,sort){
+        if(sort){
+            if(page){
+                return fetch(`${api}/products/sortPrice/${slug}?sort=${sort}&&page=${page}`).then(res=>res.json())
+            }
+            else{
+                return fetch(`${api}/products/sortPrice/${slug}?sort=${sort}`).then(res=>res.json())
+            }
+        }
+        if(page){
+            return fetch(`${api}/category/search/${slug}?page=${page}`).then(res=>res.json())
+        }
         return fetch(`${api}/category/search/${slug}`).then(res=>res.json())
     },
     getListSubCateGoryByIdCate(id){

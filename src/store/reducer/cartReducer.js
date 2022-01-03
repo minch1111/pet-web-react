@@ -1,4 +1,4 @@
-import { ADD_TO_CART, CHANGE_NUM_BY_KEY, DECREASE_CART, INCREASE_CART, REMOVE_CART, REMOVE_WHEN_PAY } from "../type"
+import { ADD_TO_CART, CHANGE_NUM_BY_KEY, DECREASE_CART, INCREASE_CART, REMOVE_ALL_CART, REMOVE_CART, REMOVE_WHEN_PAY } from "../type"
 
 const initialState = {
     listProduct: JSON.parse(localStorage.getItem('cart')) || []
@@ -88,6 +88,13 @@ export const cartReducer = (state = initialState, action) => {
             listProduct = listTemp
             localStorage.setItem('cart',JSON.stringify(listProduct))
             // console.log(`listProductToPay`, listProductToPay)
+            return{
+                ...state,
+                listProduct
+            }
+        case REMOVE_ALL_CART:
+            listProduct=[]
+            localStorage.setItem('cart',JSON.stringify(listProduct))
             return{
                 ...state,
                 listProduct

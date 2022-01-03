@@ -22,7 +22,7 @@ export default function AccountInfo() {
     let { user } = useSelector(store => store.user)
     let { form, error, handleSubmit, register,setForm } = useForm({...user,avatar:null} )
     const dispatch = useDispatch()
-    console.log(`error`, error)
+    // console.log(`error`, error)
     const submit = async () => {
         console.log(`form`, form)
         let res = await authServices.updateInfoUser(user._id, form)
@@ -51,7 +51,7 @@ export default function AccountInfo() {
                                 name="avatar"
                                 uploadURL="http://localhost:3000"
                                 fileType={"image/png" || "image/jpeg"}
-                                defaultImg={user?.avatar?.url || form?.avatar}
+                                defaultImg={user?.avatar?.url || form?.avatar || user?.avatar}
                                 withCredentials={true}
                                 onFinished={(err, res) => err ? setForm({...form,avatar:ava.current.state.currentImage}) : console.log(`res`, res)}
                                 onProgress={function (percentage) { console.log(`percentage`, percentage) }}

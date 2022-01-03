@@ -4,6 +4,7 @@ export const INCREASE_CART ="INCREASE_CART";
 export const DECREASE_CART ="DECREASE_CART";
 export const CHANGE_NUM_BY_KEY ="CHANGE_NUM_BY_KEY"
 export const REMOVE_WHEN_PAY ='REMOVE_WHEN_PAY'
+export const REMOVE_ALL_CART ='REMOVCE_ALL_CART'
 
 // export const CHECKED_CART
 export const GET_LIST_ORDER = "GET_LIST_ORDER"
