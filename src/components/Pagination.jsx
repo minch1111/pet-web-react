@@ -38,7 +38,7 @@ export default function Pagination({ totalPage, currentPage = 1 }) {
             <ul className="pagination pagination-sm text-gray-400">
                 {
                     currentPage > 1 && <li className="page-item">
-                        <Link className="page-link page-link-arrow" to={`${path}?${convertObjectToQuery({ ...objURL, page: currentPage - 1 })}`}>
+                        <Link className="page-link page-link-arrow" to={`${url}?${convertObjectToQuery({ ...objURL, page: currentPage - 1 })}`}>
                             <i class="fas fa-chevron-left"></i>
                         </Link>
                     </li>
@@ -48,7 +48,7 @@ export default function Pagination({ totalPage, currentPage = 1 }) {
                 }
                 {
                     currentPage < totalPage && <li className="page-item">
-                        <Link className="page-link page-link-arrow" to={`${path}?${convertObjectToQuery({ ...objURL, page: currentPage + 1 })}`}>
+                        <Link className="page-link page-link-arrow" to={`${url}?${convertObjectToQuery({ ...objURL, page: currentPage + 1 })}`}>
                             <i className="fa fa-chevron-right" />
                         </Link>
                     </li>
