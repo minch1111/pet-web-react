@@ -80,8 +80,8 @@ export default function Product() {
                         <div className="dropdown-menu left--100" aria-labelledby="dropdownMenuButton" style={{left:'-73%'}}>
                           {/* <a className="dropdown-item" href="#">Theo giá</a>
                           <a className="dropdown-item" href="#"> Theo số lượng</a> */}
-                          <Link className='dropdown-item' to={`${url}?${convertObjectToQuery({ ...queryURL, sort: 1 })}`}>Theo giá từ cao đến thấp</Link>
-                          <Link onClick={showDropdownMenu} className='dropdown-item' to={`${url}?${convertObjectToQuery({ ...queryURL, sort:- 1 })}`}>Theo giá từ thấp đến cao</Link>
+                          <Link onClick={showDropdownMenu} className='dropdown-item' to={`${url}?${convertObjectToQuery({ ...queryURL, sort: -1 })}`}>Theo giá từ cao đến thấp</Link>
+                          <Link onClick={showDropdownMenu} className='dropdown-item' to={`${url}?${convertObjectToQuery({ ...queryURL, sort: 1 })}`}>Theo giá từ thấp đến cao</Link>
                         </div>
                       </div>
                     </div>
