@@ -125,7 +125,9 @@ function App() {
   ]
 
   const search = (form) => {
-    if(form) {setFormSearch(form)}
+    // console.log(`form`, form)
+    if(form && form!=='') {setFormSearch(form)}
+    else setFormSearch()
   }
   // const login =()=>{
   //   localStorage.setItem('loginn',JSON.stringify(data))
@@ -139,7 +141,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Context.Provider value={{ user, search,formSearch,listProductInfo, search, }}>
+        <Context.Provider value={{ user, search,formSearch,listProductInfo, search,setFormSearch }}>
           <Header />
           <LoginModal/>
           <Switch>

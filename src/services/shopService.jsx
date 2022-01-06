@@ -50,7 +50,14 @@ const shopService={
     getDogFoods(){
         return fetch(`${api}/products/getDogFoods`).then(res=>res.json())
     },
-    getListProductBySearch(key,page){
+    getListProductBySearch(key,page,sort){
+        if(sort){
+            if(page){
+                return fetch(`${api}/products/search?keys=${key}&&page=${page}&&sort=${sort}`).then(res=>res.json())
+            }else{
+                return fetch(`${api}/products/search?keys=${key}&&sort=${sort}`).then(res=>res.json())
+            }
+        }
         if(page){
             return fetch(`${api}/products/search?keys=${key}&&page=${page}`).then(res=>res.json())
         }

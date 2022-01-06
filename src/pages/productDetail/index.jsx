@@ -6,6 +6,7 @@ import Categories from '../../components/categories'
 import { ADD_TO_CART } from '../../store/type';
 import shopService from '../../services/shopService';
 import ReactStar from 'react-rating-stars-component'
+import { Link } from 'react-router-dom';
 let $ = window.$
 
 export default function ProductDetail(props) {
@@ -322,7 +323,7 @@ export default function ProductDetail(props) {
                                     {
                                         productsRelated?.map((o, i) => (
                                             <div className="col-lg-3 item_relate" key={i}>
-                                                <a href="./productDetail.html">
+                                                <Link to={`/product/detail/${o.slug}`}>
                                                     <div className="product_item">
                                                         <div className="product_item-img">
                                                             <img src="/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png" alt="" />
@@ -333,7 +334,7 @@ export default function ProductDetail(props) {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </a>
+                                                </Link>
                                             </div>
                                         ))
                                     }

@@ -7,7 +7,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 export default function ProductList({ title, data,slug }) {
     // console.log(`data`, data[0]?.imageRepresent?.[0].url)
-    console.log(`data`, data)
+    // console.log(`data`, data)
     return (
         <section className="section">
             <div className="pet-care-product">

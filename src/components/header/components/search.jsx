@@ -18,7 +18,7 @@ export default function Search(props) {
     }
     const handleSearch =()=>{
         search(form)
-
+        formRef.current.value=""
     }
     // let handleSearch =(form)=>{
     //     console.log(form.search)
@@ -27,7 +27,7 @@ export default function Search(props) {
 
     return (
         <div className="header_main-find">
-            <input type="text" placeholder="Tìm kiếm ..." name="search" ref={formRef}  onChange= {handleChange} />
+            <input type="text" placeholder="Tìm kiếm ..." name="search" ref={formRef}  onChange= {handleChange}  />
             {
                 formRef.current?
                 <Link className="find_btn"  onClick={handleSearch} to="/shop" ><i className="fas fa-search" /></Link>

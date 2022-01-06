@@ -12,7 +12,7 @@ import Pagination from '../../components/Pagination'
 import { Link } from 'react-router-dom'
 
 export default function Product() {
-  const { search, formSearch } = useContext(Context);
+  const { search, formSearch, setFormSearch } = useContext(Context);
   // console.log(`search`, formSearch)
   const [productItems, setproductItems] = useState()
   let { slug } = useParams()
@@ -27,41 +27,46 @@ export default function Product() {
   // console.log(`url.charAt(url.length)`, url.charAt(url.length - 1))
   // console.log(`url.match(new RegExp("/", "g"))`, url.match(new RegExp("/", "g")).length)
   // console.log(`slug`, slug)
+  console.log(`formSearch`, formSearch)
+  console.log(`slug`, slug)
   useEffect(async () => {
     window.scrollTo(0, 0)
-    if (formSearch) {
-      let res = await shopService.getListProductBySearch(formSearch.search,queryURL.page)
-      await setproductItems(res)
-    }
-    else if (slug !== '') {
+    if (slug) {
       // setproductItems()
       if ((url.match(new RegExp("/", "g")) || []).length < 3) {
-        let res = await shopService.getListProductByCategory(slug,queryURL.page,queryURL.sort)
+        let res = await shopService.getListProductByCategory(slug, queryURL.page, queryURL.sort)
         await setproductItems(res)
       }
       // await console.log(`res`, res)
       else {
         if (url.charAt(url.length - 1) === '/') {
-          let res = await shopService.getListProductByCategory(slug,queryURL.page,queryURL.sort)
+          let res = await shopService.getListProductByCategory(slug, queryURL.page, queryURL.sort)
           await setproductItems(res)
         }
         else {
           // console.log("có sub");
-          let res1 = await shopService.getListProductBySubCategory(slug,queryURL.page,queryURL.sort)
+          let res1 = await shopService.getListProductBySubCategory(slug, queryURL.page, queryURL.sort)
           await setproductItems(res1)
         }
       }
     }
+    else if (formSearch) {
+      let res = await shopService.getListProductBySearch(formSearch.search, queryURL.page,queryURL.sort)
+      // await setFormSearch()
+      await setproductItems(res)
 
-  }, [slug, formSearch,queryURL.page,queryURL.sort])
+    }
+
+
+  }, [slug, formSearch, queryURL.page, queryURL.sort])
   // if (!productItems) return <div> Loading... </div>
   const filter = (e) => {
     console.log(`e.target.value`, e.target.value)
   }
   console.log(`productItems`, productItems)
-  const showDropdownMenu =()=>{
+  const showDropdownMenu = () => {
     document.querySelector('.dropdown-menu').classList.toggle('show')
-}
+  }
   return (
     <main>
       <section className="section">
@@ -79,7 +84,7 @@ export default function Product() {
                         <button className="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" onClick={showDropdownMenu}>
                           Lọc tìm kiếm
                         </button>
-                        <div className="dropdown-menu left--100" aria-labelledby="dropdownMenuButton" style={{left:'-73%'}}>
+                        <div className="dropdown-menu left--100" aria-labelledby="dropdownMenuButton" style={{ left: '-73%' }}>
                           {/* <a className="dropdown-item" href="#">Theo giá</a>
                           <a className="dropdown-item" href="#"> Theo số lượng</a> */}
                           <Link onClick={showDropdownMenu} className='dropdown-item' to={`${url}?${convertObjectToQuery({ ...queryURL, sort: -1 })}`}>Theo giá từ cao đến thấp</Link>

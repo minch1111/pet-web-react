@@ -88,7 +88,7 @@ export default function Home() {
 
 
   // console.log(`dogfoods`, dogfoods)
-  console.log(`catfoods`, catfoods)
+  // console.log(`catfoods`, catfoods)
   if (!catfoods) return <Loading />
   return (
     <>
