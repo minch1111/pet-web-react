@@ -198,7 +198,7 @@ export default function ProductDetail(props) {
                                         <div className="col-lg-6">
                                             <div className="product_info-detail">
                                                 <div className="detail_name mbottom-20">
-                                                    <p> {productInfo?.propduct?.name} </p>
+                                                    <p> {productInfo?.product?.name} </p>
                                                 </div>
                                                 <div className="detail_des mbottom-20">
                                                     <p> {productInfo?.product?.short_description} </p>
