@@ -50,8 +50,14 @@ const shopService={
     getDogFoods(){
         return fetch(`${api}/products/getDogFoods`).then(res=>res.json())
     },
-    getListProductBySearch(key){
+    getListProductBySearch(key,page){
+        if(page){
+            return fetch(`${api}/products/search?keys=${key}&&page=${page}`).then(res=>res.json())
+        }
         return fetch(`${api}/products/search?keys=${key}`).then(res=>res.json())
+    },
+    getProductsRelate(slug){
+        return fetch(`${api}/products/getListSame/${slug}`).then(res => res.json())
     }
 }
 export default shopService

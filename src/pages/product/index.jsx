@@ -30,7 +30,7 @@ export default function Product() {
   useEffect(async () => {
     window.scrollTo(0, 0)
     if (formSearch) {
-      let res = await shopService.getListProductBySearch(formSearch.search)
+      let res = await shopService.getListProductBySearch(formSearch.search,queryURL.page)
       await setproductItems(res)
     }
     else if (slug !== '') {

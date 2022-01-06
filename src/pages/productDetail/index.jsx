@@ -11,6 +11,7 @@ let $ = window.$
 export default function ProductDetail(props) {
 
     const [productInfo, setProductInfo] = useState();
+    const [productsRelated, setProductRelated] = useState()
     // const [listRate,setListRate]=useState()
     const [number, setNumber] = useState(1);
     const dispatch = useDispatch()
@@ -19,19 +20,19 @@ export default function ProductDetail(props) {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        const imgTabs = document.querySelectorAll('.imgTab');
-        const itemTabs = document.querySelectorAll('.imgItem');
+        // const imgTabs = document.querySelectorAll('.imgTab');
+        // const itemTabs = document.querySelectorAll('.imgItem');
 
-        imgTabs.forEach((tab, index) => {
-            const itemTab = itemTabs[index];
-            tab.onclick = function () {
-                $('.imgTab.active').removeClass('active');
-                $('.imgItem.active').removeClass('active');
+        // imgTabs.forEach((tab, index) => {
+        //     const itemTab = itemTabs[index];
+        //     tab.onclick = function () {
+        //         $('.imgTab.active').removeClass('active');
+        //         $('.imgItem.active').removeClass('active');
 
-                $(tab).addClass('active');
-                $(itemTab).addClass('active')
-            }
-        })
+        //         $(tab).addClass('active');
+        //         $(itemTab).addClass('active')
+        //     }
+        // })
     }, [])
     // useEffect(() => {
     //     const tabs = document.querySelectorAll('.tab_title');
@@ -52,7 +53,10 @@ export default function ProductDetail(props) {
     useEffect(async () => {
         let res = await shopService.getDetailProductBySlug(slug)
         await setProductInfo(res)
+        let res1 = await shopService.getProductsRelate(slug)
+        await setProductRelated(res1.SameFoods)
     }, [])
+    console.log(`productsRelated`, productsRelated)
 
     // const { data, addCartFromDetail } = useContext(Context);
 
@@ -108,20 +112,20 @@ export default function ProductDetail(props) {
                 $(itemTab).addClass('active')
             }
         })
-        const tabs = document.querySelectorAll('.tab_title');
-        const items = document.querySelectorAll('.item');
+        // const tabs = document.querySelectorAll('.tab_title');
+        // const items = document.querySelectorAll('.item');
 
-        tabs.forEach((tab, index) => {
-            const item = items[index];
+        // tabs.forEach((tab, index) => {
+        //     const item = items[index];
 
-            tab.onclick = function () {
-                $('.tab_title.active').removeClass('active');
-                $('.item.active').removeClass('active');
+        //     tab.onclick = function () {
+        //         $('.tab_title.active').removeClass('active');
+        //         $('.item.active').removeClass('active');
 
-                $(tab).addClass('active');
-                $(item).addClass('active')
-            }
-        })
+        //         $(tab).addClass('active');
+        //         $(item).addClass('active')
+        //     }
+        // })
     }
 
     const showRate = () => {
@@ -241,7 +245,7 @@ export default function ProductDetail(props) {
                                                     </div>
                                                     <div className="detail_more-cate">
                                                         <p className="fweight-700">
-                                                            Danh mục : <span>#Doanchocho</span>
+                                                            Danh mục : <span>#{slug}</span>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -315,7 +319,25 @@ export default function ProductDetail(props) {
                                     <div className="col-lg-12 title">
                                         <p className="fontw-700 fontsz-20 mbottom-20">Sản phẩm liên quan</p>
                                     </div>
-                                    <div className="col-lg-3 item_relate">
+                                    {
+                                        productsRelated?.map((o, i) => (
+                                            <div className="col-lg-3 item_relate" key={i}>
+                                                <a href="./productDetail.html">
+                                                    <div className="product_item">
+                                                        <div className="product_item-img">
+                                                            <img src="/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png" alt="" />
+                                                        </div>
+                                                        <div className="product_item-content">
+                                                            <div className="item_kind">Thức ăn cho chó</div>
+                                                            <div className="item_content">Pate Tươi Bò Rau Củ Pet Choy Dành Cho Chó
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        ))
+                                    }
+                                    {/* <div className="col-lg-3 item_relate">
                                         <a href="./productDetail.html">
                                             <div className="product_item">
                                                 <div className="product_item-img">
@@ -370,7 +392,7 @@ export default function ProductDetail(props) {
                                                 </div>
                                             </div>
                                         </a>
-                                    </div>
+                                    </div> */}
                                     {/* <div class="col-lg-3 item">
                                     <a href="./productDetail.html">
                                         <div class="product_item">
