@@ -56,7 +56,7 @@ export default function ProductDetail(props) {
         await setProductInfo(res)
         let res1 = await shopService.getProductsRelate(slug)
         await setProductRelated(res1.SameFoods)
-    }, [])
+    }, [slug])
     console.log(`productsRelated`, productsRelated)
 
     // const { data, addCartFromDetail } = useContext(Context);
@@ -94,7 +94,7 @@ export default function ProductDetail(props) {
                 num: number
             }
         })
-        console.log(`click`)
+        alert(`Đã thêm ${productInfo?.product?.name} vào giỏ hàng`)
     }
     const money = (a) => {
         return a.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })
@@ -323,14 +323,13 @@ export default function ProductDetail(props) {
                                     {
                                         productsRelated?.map((o, i) => (
                                             <div className="col-lg-3 item_relate" key={i}>
-                                                <Link to={`/product/detail/${o.slug}`}>
+                                                <Link to={`/product/detail/${o?.slug}`}>
                                                     <div className="product_item">
                                                         <div className="product_item-img">
-                                                            <img src="/img/pate-tuoi-bo-rau-cu-pet-choy-danh-cho-cho-300x300.png" alt="" />
+                                                            <img src={o?.imageRepresent?.[0]?.url} alt="" />
                                                         </div>
                                                         <div className="product_item-content">
-                                                            <div className="item_kind">Thức ăn cho chó</div>
-                                                            <div className="item_content">Pate Tươi Bò Rau Củ Pet Choy Dành Cho Chó
+                                                            <div className="item_content"> {o?.name}
                                                             </div>
                                                         </div>
                                                     </div>

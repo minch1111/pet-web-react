@@ -160,6 +160,12 @@ export const CartItem = (props) => {
       }
     }
   }
+  const getNumber =(ev)=>{
+    let value = ev.target.value;
+    if (props.data.amountStock - inputRef.current.value >= 0) {
+        value = parseInt(value)
+    }
+  }
 
   // console.log(`formatMoney(20)`, formatMoney(20))
   // console.log(`props.checked`, props.checked)
@@ -191,7 +197,7 @@ export const CartItem = (props) => {
           <div className="cart_product-edit editcart_number">
             <div className="form">
               <button className="btn btn-minus" onClick={() => { dispatch({ type: DECREASE_CART, payload: props.data }) }}>-</button>
-              <input type="text" ref={inputRef} className="number" onKeyPress={(ev) => { handleKeyPress(ev, props.data) }} type="number" min={0} />
+              <input  ref={inputRef} onChange={getNumber} className="number" onKeyPress={(ev) => { handleKeyPress(ev, props.data) }} type="number" min={0} />
               <button className="btn btn-plus" onClick={() => { if (props.data.amountStock - inputRef.current.value <= 0) { alert("Oops, Hiện không đủ số lượng hàng cho bạn đặt 🙀") } else { dispatch({ type: INCREASE_CART, payload: props.data }) } }} >+</button>
             </div>
           </div>

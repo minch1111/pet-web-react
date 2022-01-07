@@ -56,6 +56,10 @@ export default function Product() {
       await setproductItems(res)
 
     }
+    else{
+      let res = await shopService.getAllProducts(queryURL.page);
+      await setproductItems(res)
+    }
 
 
   }, [slug, formSearch, queryURL.page, queryURL.sort])

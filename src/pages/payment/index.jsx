@@ -23,7 +23,7 @@ function Payment() {
   let ship = 30000;
   const client = {
     sandbox:
-      "AdtlS3s6WZyr22y4U4H576TH3f73VNae6-y4I7OfSVoaDaAOvX2EduJs0DCLAPl7n2jx4hEuTfhFVLpa",
+      "ARLnWuMP7PbGb5UZasdbc2gtB6efyxC9fCx-52pMFur8inqBBq2VoUgXowbky8VS8OQr3WdAhM5Uhp3f",
     production: "aa"
   };
   const { listOrder } = useSelector(store => store.listOrder)

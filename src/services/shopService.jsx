@@ -65,6 +65,14 @@ const shopService={
     },
     getProductsRelate(slug){
         return fetch(`${api}/products/getListSame/${slug}`).then(res => res.json())
-    }
+    },
+    getAllProducts(page){
+        if(!page){
+            return fetch(`${api}/products`).then(res=>res.json())
+        }
+        else{
+            return fetch(`${api}/products?page=${page}`).then(res=>res.json())
+        }
+    },
 }
 export default shopService
