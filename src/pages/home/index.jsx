@@ -82,7 +82,8 @@ export default function Home() {
   useEffect(async () => {
     let res = await shopService.getCatFoods()
     let res1 = await shopService.getDogFoods()
-    await setCatFoods({ ...res, dog: res1 })
+    let res2 = await shopService.getListNews()
+    await setCatFoods({ ...res, dog: res1,news:res2 })
   }, [])
 
 
@@ -285,7 +286,7 @@ export default function Home() {
         data={catfoods.dog.DogFoods}
         slug={catfoods.dog.slug}
       />
-      <NewsHome />
+      <NewsHome data={catfoods?.news?.news} />
     </main>
     </>
   )

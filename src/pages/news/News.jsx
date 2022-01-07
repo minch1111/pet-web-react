@@ -131,7 +131,7 @@ export default function News() {
                   </h4>
                 </div>
                 <div className="col col-6 col-lg-8 mb-5">
-                  <a href="#">
+                  <Link to={`/news/${listNews[0].slug}`}>
                     <div className="news-item" style={{ height: '427px' }}>
                       <img src={listNews[0].image.url} alt="" className='h-100' />
                     </div>
@@ -139,7 +139,7 @@ export default function News() {
                       <p className="title font-weight-bold">{listNews[0].title}</p>
                       {/* <p className="mainContent font-weight-light"> Nội dung </p> */}
                     </div>
-                  </a>
+                  </Link>
                 </div>
                 <div className="col-lg-4">
                   {
@@ -147,14 +147,14 @@ export default function News() {
                       i === 1 || i === 2 ?
                         <div className="row" key={i}>
                           <div className="col col-6 col-lg-12 mb-3">
-                            <a href="#"><div className="news-item">
+                            <Link to={`/news/${o.slug}`}><div className="news-item">
                               <img src={o.image.url} alt="" />
                             </div>
                               <div className="news-item-content text-center ">
                                 <p className="title font-weight-bold"> {o.title} </p>
                                 {/* <p className="mainContent font-weight-light"> Nội dung {i} </p> */}
                               </div>
-                            </a>
+                            </Link>
                           </div>
                         </div> : null
                     ))
@@ -164,14 +164,14 @@ export default function News() {
                 {
                   listNews.map((o, i) => (
                     i > 2 ? <div className="col col-6 col-lg-3 mb-5">
-                      <a href="#"><div className="news-item">
+                      <Link to={`/news/${o.slug}"`}><div className="news-item">
                         <img src={o.image.url} alt="" />
                       </div>
                         <div className="news-item-content text-center ">
                           <p className="title font-weight-bold"> {o.title} </p>
                           {/* <p className="mainContent font-weight-light"> Nội dung </p> */}
                         </div>
-                      </a>
+                      </Link>
                     </div> : null
                   ))
                 }

@@ -1,3 +1,4 @@
+import axios from "axios";
 import  api  from "../config/api";
 
 const shopService={
@@ -74,5 +75,8 @@ const shopService={
             return fetch(`${api}/products?page=${page}`).then(res=>res.json())
         }
     },
+    getNewsDetail(slug){
+        return fetch(`${api}/media/news/${slug}`).then(res=>res.json())
+    }
 }
 export default shopService

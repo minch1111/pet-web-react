@@ -17,3 +17,6 @@ body main .news-item img:hover{
   transform: scale(1.2);
   transition: transform .6s ease;
 }
+body main .news-content img{
+  width: 60% !important;
+}

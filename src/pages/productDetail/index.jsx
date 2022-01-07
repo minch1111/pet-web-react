@@ -283,28 +283,44 @@ export default function ProductDetail(props) {
                                                         <div className="item_comments-info mtop-50">
                                                             {
                                                                 productInfo?.rate?.map((o, i) => (
-                                                                    <div className="container mbottom-20 flex justify_start" key={i}>
-                                                                        <div className="ava">
-                                                                            <img src="/img/do-cong-nghe-cho-thu-cung-tai-yolo.png" alt="" />
+                                                                    <>
+                                                                        <div className="container mbottom-20 flex justify_start" key={i}>
+                                                                            <div className="ava">
+                                                                                <img src={o.avatar} alt="" />
+                                                                            </div>
+                                                                            <div className="rates">
+                                                                                <p>
+                                                                                    <ReactStar size={30} edit={false} value={o.star} />
+                                                                                </p>
+                                                                                <p>
+                                                                                    <strong>{o.customer}</strong>
+                                                                                </p>
+                                                                                <p>
+                                                                                    {o.content}
+                                                                                </p>
+                                                                                <p />
+                                                                            </div>
                                                                         </div>
-                                                                        <div className="rates">
-                                                                            <p>
-                                                                                <ReactStar size={30} edit={false} value={o.star} />
-                                                                                {/* <i className="fas fa-star txt-yellow" />
-                                                                                <i className="fas fa-star txt-yellow" />
-                                                                                <i className="fas fa-star txt-yellow" />
-                                                                                <i className="fas fa-star txt-yellow" />
-                                                                                <i className="fas fa-star txt-yellow" /> */}
-                                                                            </p>
-                                                                            <p>
-                                                                                <strong>{o.customer}     </strong>
-                                                                            </p>
-                                                                            <p>
-                                                                                {o.content}
-                                                                            </p>
-                                                                            <p />
-                                                                        </div>
-                                                                    </div>
+                                                                        {
+                                                                            o?.repRate.map((e, j) => (
+                                                                                <div className="container mbottom-10 flex justify_start" key={j} style={{ marginLeft: '140px' }}>
+                                                                                    <div className="ava">
+                                                                                        <img src="https://res.cloudinary.com/ithuflit/image/upload/v1641545180/249872883_475752247451913_5328439060388669084_n_i96nie.jpg" alt="" />
+                                                                                    </div>
+                                                                                    <div className="rates">
+                                                                                        <p>
+                                                                                            <strong>{e.staff}</strong>
+                                                                                        </p>
+                                                                                        <p>
+                                                                                            {e.content}
+                                                                                        </p>
+                                                                                        <p />
+                                                                                    </div>
+                                                                                </div>
+                                                                            ))
+                                                                        }
+
+                                                                    </>
                                                                 ))
                                                             }
                                                         </div>

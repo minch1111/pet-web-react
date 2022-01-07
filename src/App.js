@@ -8,6 +8,7 @@ import Payment from "./pages/payment";
 import Product from "./pages/product";
 import Services from "./pages/service";
 import News from "./pages/news/News";
+import NewsDetail from "./pages/news/NewsDetail"
 import {
   BrowserRouter as Router,
   Route,
@@ -154,7 +155,8 @@ function App() {
             <PrivateRoute path="/user-profile" component={Profile} />
             <Route path="/services" component={Services} />
             <Route path="/product/detail/:slug" component={ProductDetail} />
-            <Route path='/news' component={News} />
+            <Route path='/news' exact component={News} />
+            <Route path="/news/:slug" component={NewsDetail} />
             <Route component={Page404} />
           </Switch>
           <Footer />

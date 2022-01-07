@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom/cjs/react-router-dom.min'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
-export default function News() {
+export default function News(props) {
     let $ = window.$
+    let array = [1,2,3,4,5,6,7,8]
+    console.log(`props.data`, props.data)
     useEffect(() => {
         $('.info-sliders').flickity({
             cellAlign: 'left',
@@ -29,7 +34,47 @@ export default function News() {
                     </div>
                     <div className="col-12 col-lg-12">
                         <div className="info-sliders">
-                            <div className="info-slider_item carousel-cell">
+                            {
+                                props.data?
+                                props.data?.map((o, i) => (
+                                    <div className="info-slider_item carousel-cell" key={i}>
+                                        <div className="info_item">
+                                            <Link to="#">
+                                                <div className="info-item-img">
+                                                    <img src={o?.image?.url} alt="" />
+                                                </div>
+                                                <div className="info-item-content">
+                                                    <div className="content-title">
+                                                        <h6> {o?.title} </h6>
+                                                    </div>
+                                                    {/* <div className="item-content-info">
+                                                        <p>Một số nghiên cứ đã chỉ ra tinh dầu thiên nhiên có tiềm năng lớn ...</p>
+                                                    </div> */}
+                                                </div>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                )):
+                                array.forEach(e=>(
+                                    <div className="info-slider_item carousel-cell">
+                                    <div className="info_item">
+                                        <a href="#">
+                                            <div className="info-item-img">
+                                                <Skeleton
+                                                    height={130}
+                                                />
+                                            </div>
+                                            <div className="info-item-content">
+                                                <div className="content-title">
+                                                   <Skeleton/>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                ))
+                            }
+                            {/* <div className="info-slider_item carousel-cell">
                                 <div className="info_item">
                                     <a href="#">
                                         <div className="info-item-img">
@@ -141,7 +186,7 @@ export default function News() {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
