@@ -18,7 +18,7 @@ export default function NewsDetail() {
   if (!newsDetail) return <div className="col-lg-12">Loading...</div>
   return (
     <main>
-      <div className="section-news">
+      <div className="section-newsDetail">
         <div className="news-title mb-3">
           <h2> {newsDetail?.title} </h2>
           <span> Tác giả : {newsDetail?.author} </span>

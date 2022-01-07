@@ -32,7 +32,6 @@ export default function Footer() {
       //     behavior: "smooth"
       //   }
       // )
-
       $('html,body').stop().animate({
         scrollTop: -$(this).offset().top
       }, 2000);

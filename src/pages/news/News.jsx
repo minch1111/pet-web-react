@@ -164,7 +164,7 @@ export default function News() {
                 {
                   listNews.map((o, i) => (
                     i > 2 ? <div className="col col-6 col-lg-3 mb-5">
-                      <Link to={`/news/${o.slug}"`}><div className="news-item">
+                      <Link to={`/news/${o.slug}`}><div className="news-item">
                         <img src={o.image.url} alt="" />
                       </div>
                         <div className="news-item-content text-center ">
