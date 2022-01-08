@@ -39,7 +39,7 @@ export default function News(props) {
                                 props.data?.map((o, i) => (
                                     <div className="info-slider_item carousel-cell" key={i}>
                                         <div className="info_item">
-                                            <Link to="#">
+                                            <Link to={`/news/${o.slug}`}>
                                                 <div className="info-item-img">
                                                     <img src={o?.image?.url} alt="" />
                                                 </div>

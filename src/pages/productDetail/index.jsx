@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router'
 import { useDispatch } from 'react-redux';
 import { Context } from '../../App';
@@ -7,6 +7,7 @@ import { ADD_TO_CART } from '../../store/type';
 import shopService from '../../services/shopService';
 import ReactStar from 'react-rating-stars-component'
 import { Link } from 'react-router-dom';
+import NotificationAlert from 'react-notification-alert'
 let $ = window.$
 
 export default function ProductDetail(props) {
@@ -17,6 +18,20 @@ export default function ProductDetail(props) {
     const [number, setNumber] = useState(1);
     const dispatch = useDispatch()
     let { slug } = useParams()
+    let notify = useRef()
+    var options = {};
+    options = {
+        place: 'tr',
+        message: (
+            <div>
+                Đã thêm {productInfo?.product?.name} vào giỏ hàng  😄😄😄
+            </div>
+        ),
+        type: "warning",
+        icon: 'fas fa-cart-arrow-down',
+        autoDismiss: 3,
+        closeButton: false
+    }
     console.log(`slug`, slug)
 
     useEffect(() => {
@@ -94,7 +109,8 @@ export default function ProductDetail(props) {
                 num: number
             }
         })
-        alert(`Đã thêm ${productInfo?.product?.name} vào giỏ hàng`)
+        notify.current.notificationAlert(options)
+        // alert(`Đã thêm ${productInfo?.product?.name} vào giỏ hàng`)
     }
     const money = (a) => {
         return a.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })
@@ -145,6 +161,7 @@ export default function ProductDetail(props) {
     if (!productInfo) return <div>Loading...</div>
     return (
         <main>
+            <NotificationAlert ref={notify} />
             <section className="section">
                 <div className="products">
                     <div className="product_container">

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../../../../hooks/useForm';
 import authServices from '../../../../services/authServices'
 import { LOGIN_SUCCESS } from '../../../../store/type';
+import NotificationAlert from 'react-notification-alert'
 import AvatarUploader from 'react-avatar-uploader'
 // import 'element-theme-default';
 // import { Upload } from 'element-react'
@@ -23,19 +24,34 @@ export default function AccountInfo() {
     let { form, error, handleSubmit, register,setForm } = useForm({...user,avatar:null} )
     const dispatch = useDispatch()
     // console.log(`error`, error)
+    let notify = useRef()
+    var options = {};
+    options = {
+        place: 'tr',
+        message: (
+            <div>
+               Đã cập nhật thông tin thành công 😄😄😄
+            </div>
+        ),
+        type: "success",
+        icon: 'fas fa-user',
+        autoDismiss: 3,
+        closeButton: false
+    }
     const submit = async () => {
         console.log(`form`, form)
         let res = await authServices.updateInfoUser(user._id, form)
         if (res.success) {
-            alert("Đã cập nhật thông tin thành công");
+            notify.current.notificationAlert(options)
             form.avatar?dispatch({ type: LOGIN_SUCCESS, payload: form }):dispatch({type: LOGIN_SUCCESS,payload: {...form,avatar:user.avatar}})
 
         }
     }
-    console.log(`form`, form)
-    console.log(`user`, user)
+    // console.log(`form`, form)
+    // console.log(`user`, user)
     return (
         <div id="account" className="tab_content-item">
+            <NotificationAlert ref={notify} />
             <div className="account-title mbottom-20">
                 <p className="title mbottom-10">Hồ sơ của tôi</p>
                 <p className="sub-title mbottom-20"><i>Quản lí hồ sơ thông tin tài khoản của bạn</i></p>

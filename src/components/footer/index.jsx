@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
-import AOS from 'aos'
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function Footer() {
   let $ = window.$;
@@ -21,9 +22,7 @@ export default function Footer() {
       }
 
     })
-    AOS.init({
-      duration : 2000
-    })
+
     const btn = document.querySelector('.fix-to-top');
     $(btn).click(function () {
       // window.scrollBy(
@@ -38,6 +37,11 @@ export default function Footer() {
     })
 
   }, [])
+  useEffect(()=>{
+    AOS.init({
+      duration : 2000
+    })
+  },[])
   return (
     <footer>
       <section className="section">
@@ -48,54 +52,54 @@ export default function Footer() {
             </div>
           </div>
           <div className="col-12 col-lg-10">
-            <div className="brand-sliders border-left-right animated-border" data-aos="fade-right">
-              <div className="brand-slider-item carousel-cell" data-aos="fade-right" data-aos-duration={5000}>
+            <div className="brand-sliders border-left-right animated-border" data-aos="fade-right" >
+              <div className="brand-slider-item carousel-cell" data-aos="fade-right" >
                 <a href="#"><img src="/img/logo_brand/discus-viet-nam.png" alt="" /></a>
               </div>
-              <div className="brand-slider-item carousel-cell" data-aos="fade-right" data-aos-duration={5000}>
+              <div className="brand-slider-item carousel-cell" data-aos="fade-right" >
                 <a href="#"><img src="/img/logo_brand/hikari-food-logo.png" alt="" /></a>
               </div>
-              <div className="brand-slider-item carousel-cell" data-aos="fade-right" data-aos-duration={5000}>
+              <div className="brand-slider-item carousel-cell" data-aos="fade-right" >
                 <a href="#"><img src="/img/logo_brand/logo-hai-titan.png" alt="" /></a>
               </div>
-              <div className="brand-slider-item carousel-cell" data-aos="fade-right" data-aos-duration={5000}>
+              <div className="brand-slider-item carousel-cell" data-aos="fade-right" >
                 <a href="#"><img src="/img/logo_brand/may-in-theu-hai-trieu-logo.png" alt="" /></a>
               </div>
-              <div className="brand-slider-item carousel-cell" data-aos="fade-right" data-aos-duration={5000}>
+              <div className="brand-slider-item carousel-cell" data-aos="fade-right" >
                 <a href="#"><img src="/img/logo_brand/meo-than-tai-nekko.png" alt="" /></a>
               </div>
-              <div className="brand-slider-item carousel-cell" data-aos="fade-right" data-aos-duration={5000}>
+              <div className="brand-slider-item carousel-cell" data-aos="fade-right" >
                 <a href="#"><img src="/img/logo_brand/mew-pet-shop-logo.png" alt="" /></a>
               </div>
-              <div className="brand-slider-item carousel-cell" data-aos="fade-right" data-aos-duration={5000}>
+              <div className="brand-slider-item carousel-cell" data-aos="fade-right" >
                 <a href="#"><img src="/img/logo_brand/mizuho-logo.png" alt="" /></a>
               </div>
-              <div className="brand-slider-item carousel-cell" data-aos="fade-right" data-aos-duration={5000}>
+              <div className="brand-slider-item carousel-cell" data-aos="fade-right" >
                 <a href="#"><img src="/img/logo_brand/noi-that-thu-cung-petroom.png" alt="" /></a>
               </div>
-              <div className="brand-slider-item carousel-cell" data-aos="fade-right" data-aos-duration={5000}>
+              <div className="brand-slider-item carousel-cell" data-aos="fade-right" >
                 <a href="#"><img src="/img/logo_brand/pet-choy-logo.png" alt="" /></a>
               </div>
-              <div className="brand-slider-item carousel-cell" data-aos="fade-right" data-aos-duration={5000}>
+              <div className="brand-slider-item carousel-cell" data-aos="fade-right" >
                 <a href="#"><img src="/img/logo_brand/pet-tag-by-yolo.png" alt="" /></a>
               </div>
-              <div className="brand-slider-item carousel-cell" data-aos="fade-right" data-aos-duration={5000}>
+              <div className="brand-slider-item carousel-cell" data-aos="fade-right" >
                 <a href="#"><img src="/img/logo_brand/pet-town-logo.png" alt="" /></a>
               </div>
-              <div className="brand-slider-item carousel-cell" data-aos="fade-right" data-aos-duration={5000}>
+              <div className="brand-slider-item carousel-cell" data-aos="fade-right" >
                 <a href="#"><img src="/img/logo_brand/petkit-san-pham-thong-minh-cho-thu-cung.png" alt="" /></a>
               </div>
-              <div className="brand-slider-item carousel-cell" data-aos="fade-right" data-aos-duration={5000}>
+              <div className="brand-slider-item carousel-cell" data-aos="fade-right" >
                 <a href="#"><img src="/img/logo_brand/ranchu-viet-nam-logo.png" alt="" /></a>
               </div>
 
-              <div className="brand-slider-item carousel-cell" data-aos="fade-right" data-aos-duration={5000}>
+              <div className="brand-slider-item carousel-cell" data-aos="fade-right" >
                 <a href="#"><img src="/img/logo_brand/skretting-logo.png" alt="" /></a>
               </div>
-              <div className="brand-slider-item carousel-cell" data-aos="fade-right" data-aos-duration={5000}>
+              <div className="brand-slider-item carousel-cell" data-aos="fade-right" >
                 <a href="#"><img src="/img/logo_brand/sphynx-t-shirt-factory.png" alt="" /></a>
               </div>
-              <div className="brand-slider-item carousel-cell" data-aos="fade-right" data-aos-duration={5000}>
+              <div className="brand-slider-item carousel-cell" data-aos="fade-right" >
                 <a href="#"><img src="/img/logo_brand/yolo-pet-shop-tren-shopee.png" alt="" /></a>
               </div>
             </div>
