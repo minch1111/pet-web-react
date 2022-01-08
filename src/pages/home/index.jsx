@@ -8,6 +8,7 @@ import NewsHome from './components/newsHome'
 import { useState } from 'react'
 import shopService from '../../services/shopService'
 import img from '../../assets/img/loading_2.gif'
+import Loading from '../../components/Loading'
 import { AOS } from 'aos'
 let $ = window.$
 
@@ -293,14 +294,3 @@ export default function Home() {
   )
 }
 
-export const Loading = () => {
-
-
-  return (
-    <div class="loading" id='loading'>
-      <div class="load" id='load'>
-        <img src={img} alt="" />
-      </div>
-    </div>
-  )
-}

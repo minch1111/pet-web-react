@@ -8,6 +8,9 @@ import shopService from '../../services/shopService';
 import ReactStar from 'react-rating-stars-component'
 import { Link } from 'react-router-dom';
 import NotificationAlert from 'react-notification-alert'
+// import { Loading } from 'element-react';
+import ReactLoading from "react-loading";
+
 let $ = window.$
 
 export default function ProductDetail(props) {
@@ -158,7 +161,7 @@ export default function ProductDetail(props) {
         document.querySelector('.item_info').classList.add('active');
     }
 
-    if (!productInfo) return <div>Loading...</div>
+    if (!productInfo) return <div className='flex justify_center'><ReactLoading type='bars' color='#ffa42b' /></div>
     return (
         <main>
             <NotificationAlert ref={notify} />
@@ -450,3 +453,4 @@ export default function ProductDetail(props) {
         </main>
     )
 }
+
