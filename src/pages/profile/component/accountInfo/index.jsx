@@ -67,7 +67,7 @@ export default function AccountInfo() {
                                 name="avatar"
                                 uploadURL="http://localhost:3000"
                                 fileType={"image/png" || "image/jpeg"}
-                                defaultImg={user?.avatar?.url || form?.avatar || user?.avatar}
+                                defaultImg={user.avatar.url || form.avatar || user.avatar}
                                 withCredentials={true}
                                 onFinished={(err, res) => err ? setForm({...form,avatar:ava.current.state.currentImage}) : console.log(`res`, res)}
                                 onProgress={function (percentage) { console.log(`percentage`, percentage) }}
