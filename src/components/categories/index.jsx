@@ -85,7 +85,7 @@ function Categories() {
                         <li><a className="after mbottom-10" href="#">Thuốc tẩy giun, sán cho Mèo</a></li>
                     </ul>
                 </div> */}
-                <div className="product_tab-item fashion_tab">
+                {/* <div className="product_tab-item fashion_tab">
                     <a href="#">
                         <div className="product_tab-item-title font-500">
                             <span>Trang Phục</span>
@@ -100,7 +100,7 @@ function Categories() {
                         <li><a className="after mbottom-10" href="#">Giày Dép</a></li>
                         <li><a className="after mbottom-10" href="#">Kính</a></li>
                     </ul>
-                </div>
+                </div> */}
             </div>
             <div className="product_title">
                 <span>Danh mục Dịch vụ</span>

@@ -5,6 +5,8 @@ import authServices from '../../../../services/authServices'
 import { LOGIN_SUCCESS } from '../../../../store/type';
 import NotificationAlert from 'react-notification-alert'
 import AvatarUploader from 'react-avatar-uploader'
+import avatar from '../../../../assets/img/avatar.png'
+
 // import 'element-theme-default';
 // import { Upload } from 'element-react'
 
@@ -67,7 +69,7 @@ export default function AccountInfo() {
                                 name="avatar"
                                 uploadURL="http://localhost:3000"
                                 fileType={"image/png" || "image/jpeg"}
-                                defaultImg={user.avatar.url || form.avatar || user.avatar}
+                                defaultImg={user?.avatar?.url || form?.avatar || user?.avatar }
                                 withCredentials={true}
                                 onFinished={(err, res) => err ? setForm({...form,avatar:ava.current.state.currentImage}) : console.log(`res`, res)}
                                 onProgress={function (percentage) { console.log(`percentage`, percentage) }}

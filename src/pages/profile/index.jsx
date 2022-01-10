@@ -8,6 +8,7 @@ import AnnouceList from './component/annouceList';
 import Ordered from './component/orderedList';
 import VoucherList from './component/voucherList';
 import OrderDetail from './component/OrderDetail';
+import avatar from '../../assets/img/avatar.png'
 
 function Profile() {
   let $ = window.$
@@ -41,7 +42,7 @@ function Profile() {
               <div className="profile_user ">
                 <div className="profile_user-detail flex align_center justify_center mbottom-50">
                   <div className="user-detail--avatar">
-                    <img src={user?.avatar?.url || user.avatar} alt="" />
+                    <img src={user?.avatar?.url || user.avatar ||avatar} alt="" />
                   </div>
                   <div className="user-detail--name">
                     <p> {user.username} </p>

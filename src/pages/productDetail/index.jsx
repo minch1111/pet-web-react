@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router'
 import { useDispatch } from 'react-redux';
-import { Context } from '../../App';
+// import { Context } from '../../App';
 import Categories from '../../components/categories'
 import { ADD_TO_CART } from '../../store/type';
 import shopService from '../../services/shopService';
@@ -82,7 +82,8 @@ export default function ProductDetail(props) {
     // const [cart, setCart] = useState({ product: props.location.querry})
 
     const inCrease = () => {
-        if (productInfo.amountStock - number > 0) {
+        console.log(`productInfo.amountStock`, productInfo.product.amountStock)
+        if (productInfo.product.amountStock - number > 0) {
             setNumber(number + 1)
         }
         else {

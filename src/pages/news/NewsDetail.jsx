@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
 import shopService from '../../services/shopService'
+import ReactLoading from "react-loading";
 let $ = window.$
 
 export default function NewsDetail() {
@@ -15,7 +16,7 @@ export default function NewsDetail() {
     let htmlObject = document.getElementsByClassName('news-content')
     return htmlObject.innerHTML = data
   }
-  if (!newsDetail) return <div className="col-lg-12">Loading...</div>
+  if (!newsDetail) return <div className='flex justify_center'><ReactLoading type='bars' color='#ffa42b' /></div>
   return (
     <main>
       <div className="section-newsDetail">
