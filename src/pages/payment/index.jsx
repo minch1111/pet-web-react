@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
-import ProductPayment from './component/ProductPayment'
-import PaymentForm from './component/PaymentForm'
+// import ProductPayment from './component/ProductPayment'
+// import PaymentForm from './component/PaymentForm'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import PaypalExpressBtn from 'react-paypal-express-checkout'
@@ -9,30 +9,44 @@ import { REMOVE_WHEN_PAY } from '../../store/type'
 import shopService from '../../services/shopService'
 import paymentServices from '../../services/paymentServices'
 import { useHistory } from 'react-router-dom'
-const PAYPAL_CLIENT = "CLIENT_ID";
-const PAYPAL_SECRET = "SECRET";
+import NotificationAlert from 'react-notification-alert'
 
 function Payment() {
   const [vouchers, setVouchers] = useState()
   const [discount, setDiscount] = useState()
-  const [confirm,setConfirm]= useState(false)
+  const [confirm, setConfirm] = useState(false)
   const { user } = useSelector(store => store.user)
   const dispatch = useDispatch()
   let path = `/`;
   let history = useHistory();
-  let ship = 30000;
+  const ship = 30000;
   const client = {
     sandbox:
-      "ARLnWuMP7PbGb5UZasdbc2gtB6efyxC9fCx-52pMFur8inqBBq2VoUgXowbky8VS8OQr3WdAhM5Uhp3f",
-    production: "aa"
+      "AbCbIrIByizgESF1M7PsdNIXk7dN_T7YYJ-H4JMLy2YEx-7uwRhV-vOt5kd0IFjHujvbufaDvBo1mhmf",
+    production: "aaa"
   };
+  let notify = useRef()
+  var options = {};
+  options = {
+      place: 'tr',
+      message: (
+          <div>
+             ⚡ Đặt hàng thành công ⚡ <br/>
+              😻😻 PETPARADISE rất cảm ơn quý khách 😻😻
+          </div>
+      ),
+      type: "success",
+      // icon: 'fas fa-user',
+      autoDismiss: 3,
+      closeButton: false
+  }
   const { listOrder } = useSelector(store => store.listOrder)
   const calTotal = () => {
     let total = 0
     listOrder?.forEach(element => {
       total = total + element.num * element.price
     });
-    return total>=500000? total:total+30000
+    return total >= 500000 ? total : total + 30000
   }
   //  Hàm gửi Back End
   const calTotalPrice = (voucher) => {
@@ -56,7 +70,7 @@ function Payment() {
   }
   // let usd
 
-  const accept =()=>{
+  const accept = () => {
     setConfirm(true)
     // usd=transVNDtoUSD(form.totalPrice)
   }
@@ -66,13 +80,17 @@ function Payment() {
     // setConfirm(true)
     let res = await paymentServices.confirmPay(form);
     if (res.success) {
-      alert('⚡ Đặt hàng thành công ⚡ \n 😻😻 PETPARADISE rất cảm ơn quý khách 😻😻')
-      dispatch({type:REMOVE_WHEN_PAY,payload:listOrder})
-      history.push(path);
+      // alert('⚡ Đặt hàng thành công ⚡ \n 😻😻 PETPARADISE rất cảm ơn quý khách 😻😻')
+      notify.current.notificationAlert(options)
+      dispatch({ type: REMOVE_WHEN_PAY, payload: listOrder })
+      setTimeout(()=>{
+        history.push(path);
+      },1500)
+
     }
     // //
   }
-  console.log(`error`, error)
+  // console.log(`error`, error)
   // Hàm hiển thị
   const displayTotal = (discountt) => {
     let total = 0
@@ -100,7 +118,7 @@ function Payment() {
       })
       await setVouchers(listVoucherCondition)
     }
-    setForm({ ...form, id: user._id, name: user.name, phone: user.phone,address:user.address ,email: user.email,voucher:"", payments: false, listOrder, totalPrice: calTotal() })
+    setForm({ ...form, id: user._id, name: user.name, phone: user.phone, address: user.address, email: user.email, voucher: "", payments: false, listOrder, totalPrice: calTotal() })
   }, [])
   const handleChangeVoucher = (ev) => {
     let name = ev.target.name;
@@ -120,15 +138,16 @@ function Payment() {
 
   // let disableInput= useRef()
 
-  const choosePay =(a)=>{
+  const choosePay = (a) => {
     let check = a.target.checked
-    setForm({...form,payments:check})
+    setForm({ ...form, payments: check })
   }
 
-  console.log(`form`, form)
+  // console.log(`form`, form.totalPrice)
 
   return (
     <main>
+      <NotificationAlert  ref={notify}/>
       <section className="section">
         <div className="payment">
           <div className="payment_title pad-10">
@@ -174,7 +193,7 @@ function Payment() {
                         <div className="col-lg-12 mbottom-50">
                           <div className="content-title--price">
                             <div className="price_total fontw-500 fontsz-17">
-                              <p>Tổng tiền sản phẩm : <span> {money(calTotal()-30000)} </span></p>
+                              <p>Tổng tiền sản phẩm : <span> {money(calTotal() - 30000)} </span></p>
                             </div>
                             <div className="price_shipping fontw-500 fontsz-17">
                               <p>
@@ -205,24 +224,24 @@ function Payment() {
                           <form onSubmit={handleSubmit(accept)} className="content-form-detail pad-20">
                             <div className="form-group">
                               <label className="fontw-500 fontsz-17" >Họ &amp; Tên</label>
-                              <input type="text" disabled={confirm&&true} {...register('name', { required: true })} className="form-control" placeholder="Nhập tên" />
+                              <input type="text" disabled={confirm && true} {...register('name', { required: true })} className="form-control" placeholder="Nhập tên" />
                             </div>
                             <div className="form-group">
                               <label className="fontw-500 fontsz-17">Số điện thoại</label>
-                              <input type="text" disabled={confirm&&true} {...register('phone', { required: true })} className="form-control" placeholder="Nhập số điện thoại" />
+                              <input type="text" disabled={confirm && true} {...register('phone', { required: true })} className="form-control" placeholder="Nhập số điện thoại" />
                             </div>
                             <div className="form-group">
                               <label className="fontw-500 fontsz-17">Địa chỉ nhận
                                 hàng</label>
-                              <input type="text" disabled={confirm&&true} {...register('address', { required: true })} className="form-control" placeholder="Nhập địa chỉ" />
-                                {
-                                  error.address&& <small className='text-danger'> {error.address} </small>
-                                }
+                              <input type="text" disabled={confirm && true} {...register('address', { required: true })} className="form-control" placeholder="Nhập địa chỉ" />
+                              {
+                                error.address && <small className='text-danger'> {error.address} </small>
+                              }
                             </div>
                             <div className="form-group">
                               <label className="fontw-500 fontsz-17" >Chọn mã
                                 khuyến mãi của bạn</label>
-                              <select disabled={confirm&&true} className="custom-select" name="voucher" onChange={handleChangeVoucher}>
+                              <select disabled={confirm && true} className="custom-select" name="voucher" onChange={handleChangeVoucher}>
                                 <option value="">Chọn một trong các mã khuyến mãi</option>
                                 {
                                   vouchers?.map((o, i) => (
@@ -236,52 +255,53 @@ function Payment() {
                             </div>
                             <div className="form-group">
                               <label className="fontw-500 fontsz-17">Ghi chú</label>
-                              <textarea disabled={confirm&&true} className="form-control" {...register('note')} id="note" rows={3} placeholder="Ghi chú..." />
+                              <textarea disabled={confirm && true} className="form-control" {...register('note')} id="note" rows={3} placeholder="Ghi chú..." />
                             </div>
                             {
-                              !confirm&&<div className="col-lg-12">
+                              !confirm && <div className="col-lg-12">
+                                <div className="content-title--btn flex justify_evenly align_center">
+                                  <button type="submit" className="btn btn-primary">
+                                    Xác nhận
+                                  </button>
+                                  <Link to="/cart" className="btn btn-danger">
+                                    Hủy
+                                  </Link>
+                                </div>
+                              </div>
+                            }
+
+                          </form>
+                          {
+                            confirm && <div className="col-lg-12 mb-3">
+                              <div className="form-check">
+                                <label className="form-check-label">
+                                  <input type="checkbox" className="form-check-input" onChange={choosePay} name="" id="" />
+                                  Phương thức thanh toán Online (Paypal)
+                                </label>
+                              </div>
+                              <br />
                               <div className="content-title--btn flex justify_evenly align_center">
-                                <button type="submit" className="btn btn-primary">
-                                  Xác nhận
-                                </button>
+                                {
+                                  form.payments === true ?
+                                    <PaypalExpressBtn
+                                      client={client}
+                                      currency={"USD"}
+                                      total={form.totalPrice * 4403 / 100000}
+                                      // total={12}
+                                      onSuccess={(ev) => {
+                                        console.log(`ev.paid`, ev.paid);
+                                        if (ev.paid === true) { submit(); }
+                                      }}
+                                    >
+                                    </PaypalExpressBtn> : <button onClick={() => { submit() }} className="btn btn-primary">
+                                      Đặt hàng
+                                    </button>
+                                }
                                 <Link to="/cart" className="btn btn-danger">
                                   Hủy
                                 </Link>
                               </div>
                             </div>
-                            }
-
-                          </form>
-                          {
-                            confirm&&<div className="col-lg-12 mb-3">
-                              <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="checkbox" class="form-check-input" onChange={choosePay} name="" id="" />
-                                  Phương thức thanh toán Online (Paypal)
-                                </label>
-                              </div>
-                              <br />
-                            <div className="content-title--btn flex justify_evenly align_center">
-                              {
-                                form.payments===true?<PaypalExpressBtn
-                                client={client}
-                                currency={"USD"}
-                                total={form.totalPrice*0.000044}
-                                shipping={1}
-                                onSuccess={(ev)=>{if(ev.paid===true){submit();}}}
-                                >
-                              </PaypalExpressBtn>:<button onClick={()=>{submit()}} className="btn btn-primary">
-                                Đặt hàng
-                              </button>
-                              }
-
-
-
-                              <Link to="/cart" className="btn btn-danger">
-                                Hủy
-                              </Link>
-                            </div>
-                          </div>
                           }
 
                         </div>
