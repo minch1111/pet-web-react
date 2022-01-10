@@ -39,7 +39,7 @@ export default function HeaderCart() {
                     {
                         listProduct?.length > 0 ? (
                             listProduct?.map((o, i) => (
-                                <div className="hover_cart-item mbottom-10 flex">
+                                <div className="hover_cart-item mbottom-10 flex" key={i}>
                                     <div className="cart-item--img">
                                         <img src={o.imageRepresent[0].url} alt="" />
                                     </div>

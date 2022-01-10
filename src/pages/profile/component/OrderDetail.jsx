@@ -74,10 +74,10 @@ export default function OrderDetail() {
                         </div>
                         <div className="col-lg-12">
                           Nội dung đánh giá :
-                          <div class="form-group">
+                          <div className="form-group">
                             <label for=""></label>
-                            <textarea cols={3} type="text" class="form-control" />
-                            <small id="helpId" class="text-muted">Help text</small>
+                            <textarea cols={3} type="text" className="form-control" />
+                            <small id="helpId" className="text-muted">Help text</small>
                           </div>
                         </div>
                       </div>
@@ -204,10 +204,10 @@ export const ProductOrderedItem = (props) => {
                 </div>
                 <div className="col-lg-12">
                   Nội dung đánh giá :
-                  <div class="form-group">
+                  <div className="form-group">
                     <label for=""></label>
-                    <textarea cols={3} type="text" class="form-control" disabled={!rate} onChange={e => { setForm({ ...form, rateContent: e.target.value }) }} />
-                    <small id="helpId" class="text-muted">Help text</small>
+                    <textarea cols={3} type="text" className="form-control" disabled={!rate} onChange={e => { setForm({ ...form, rateContent: e.target.value }) }} />
+                    <small id="helpId" className="text-muted">Help text</small>
                   </div>
                 </div>
                 <div className="col-lg-12 mt-1">

@@ -19,7 +19,7 @@ function Services() {
                         <span>
                           <p>Những dịch vụ của chúng tôi đảm bảo chất lượng <i className="fas fa-check" /></p>
                           <p>Mang đến cho thú cưng của bạn những điều tốt đẹp nhất <i className="far fa-smile-beam" /></p>
-                        </span>    
+                        </span>
                       </div>
                     </div>
                     <div className="col-lg-12">
@@ -41,7 +41,7 @@ function Services() {
                             <a href="#">Xem chi tiết</a>
                             <i className="fas fa-arrow-right" />
                           </div>
-                        </div>       
+                        </div>
                       </div>
                     </div>
                     <div className="col-lg-12">
@@ -62,7 +62,7 @@ function Services() {
                             <a href="#">Xem chi tiết</a>
                             <i className="fas fa-arrow-right" />
                           </div>
-                        </div>       
+                        </div>
                       </div>
                     </div>
                     <div className="col-lg-12">
@@ -83,7 +83,7 @@ function Services() {
                             <a href="#">Xem chi tiết</a>
                             <i className="fas fa-arrow-right" />
                           </div>
-                        </div>       
+                        </div>
                       </div>
                     </div>
                   </div>

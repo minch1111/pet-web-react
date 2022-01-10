@@ -39,7 +39,7 @@ export default function Pagination({ totalPage, currentPage = 1 }) {
                 {
                     currentPage > 1 && <li className="page-item">
                         <Link className="page-link page-link-arrow" to={`${url}?${convertObjectToQuery({ ...objURL, page: currentPage - 1 })}`}>
-                            <i class="fas fa-chevron-left"></i>
+                            <i className="fas fa-chevron-left"></i>
                         </Link>
                     </li>
                 }

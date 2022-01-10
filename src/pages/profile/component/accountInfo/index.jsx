@@ -60,7 +60,7 @@ export default function AccountInfo() {
             </div>
             <div className="account-form">
                 <form onSubmit={handleSubmit(submit)}>
-                    <div class="form-group row">
+                    <div className="form-group row">
                         <label className='col-sm-2 form-label'>Ảnh đại diện</label>
                         <div className='col-sm-10 img-m0'>
                             <AvatarUploader
@@ -112,10 +112,10 @@ export default function AccountInfo() {
                             }
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div className="form-group row">
                         <label className='col-sm-2 col-form-label'>Giới tính</label>
                         <div className="col-sm-10">
-                            <select class="form-control" {...register('gender')}>
+                            <select className="form-control" {...register('gender')}>
                                 <option value="Nam">Nam</option>
                                 <option value="Nữ">Nữ</option>
                                 <option value="Khác">Khác</option>
