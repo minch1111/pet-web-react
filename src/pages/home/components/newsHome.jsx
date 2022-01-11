@@ -6,7 +6,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 export default function News(props) {
     let $ = window.$
     let array = [1,2,3,4,5,6,7,8]
-    console.log(`props.data`, props.data)
+    // console.log(`props.data`, props.data)
     useEffect(() => {
         $('.info-sliders').flickity({
             cellAlign: 'left',

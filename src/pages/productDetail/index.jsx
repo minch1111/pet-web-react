@@ -27,11 +27,24 @@ export default function ProductDetail(props) {
         place: 'tr',
         message: (
             <div>
-                Đã thêm {productInfo?.product?.name} vào giỏ hàng  😄😄😄
+                <i className='fas fa-cart-arrow-down mr-2'></i>
+                <span>Đã thêm {productInfo?.product?.name} vào giỏ hàng  😄😄😄</span>
             </div>
         ),
         type: "warning",
-        icon: 'fas fa-cart-arrow-down',
+        autoDismiss: 3,
+        closeButton: false
+    }
+    var optionLimit = {};
+    optionLimit = {
+        place: 'tr',
+        message: (
+            <div>
+                <i className='fas fa-cart-arrow-down mr-2'></i>
+                <span>Oops, Hiện không đủ số lượng hàng cho bạn đặt 🙀</span>
+            </div>
+        ),
+        type: "danger",
         autoDismiss: 3,
         closeButton: false
     }
@@ -87,7 +100,8 @@ export default function ProductDetail(props) {
             setNumber(number + 1)
         }
         else {
-            alert("Oops, Hiện không đủ số lượng hàng cho bạn đặt 🙀")
+            // alert("Oops, Hiện không đủ số lượng hàng cho bạn đặt 🙀")
+            notify.current.notificationAlert(optionLimit)
         }
         // item.number
     }

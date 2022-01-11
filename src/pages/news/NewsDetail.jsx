@@ -8,15 +8,17 @@ export default function NewsDetail() {
   let [newsDetail, setNewsDetail] = useState()
   let { slug } = useParams()
   useEffect(async () => {
+    window.scrollTo(0, 0)
     let res = await shopService.getNewsDetail(slug)
     if (res.success) setNewsDetail(res.news)
   }, [])
+
   console.log(`newsDetail`, newsDetail)
   const convertHTML = (data) => {
     let htmlObject = document.getElementsByClassName('news-content')
     return htmlObject.innerHTML = data
   }
-  if (!newsDetail) return <div className='flex justify_center'><ReactLoading type='bars' color='#ffa42b' /></div>
+  if (!newsDetail) return <div className='flex justify_center'><ReactLoading type='spokes' color='#ffa42b' /></div>
   return (
     <main>
       <div className="section-newsDetail">
